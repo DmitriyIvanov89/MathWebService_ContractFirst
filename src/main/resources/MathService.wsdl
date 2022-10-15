@@ -1,62 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions 
-    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ws="http://www.example.com/webservice"
-    xmlns:dx88="http://model.ws.divanov/xsd"
-    xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
+<wsdl:definitions
+        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
     <wsdl:types>
-        <xs:schema targetNamespace="http://math.ws.divanov" attributeFormDefault="qualified" elementFormDefault="qualified">
-            <xs:import namespace="http://model.ws.divanov/xsd"/>
+        <xs:schema targetNamespace="http://math.ws.divanov" attributeFormDefault="qualified">
             <xs:element name="create">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="request" minOccurs="0" type="dx88:CreateGetSolutionQuadraticEducation">
+                        <xs:element name="request" minOccurs="0" type="ns:CreateGetSolutionQuadraticEducation">
                         </xs:element>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="createResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" minOccurs="0" type="dx88:CreateSolutionResponse"></xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:schema>
-        <xs:schema targetNamespace="http://model.ws.divanov/xsd" attributeFormDefault="qualified" elementFormDefault="qualified">            
             <xs:complexType name="CreateGetSolutionQuadraticEducation">
                 <xs:sequence>
-                    <xs:element name="educationParams" minOccurs="0" type="dx88:EducationParams"></xs:element>
-                </xs:sequence>    
+                    <xs:element name="educationParams" minOccurs="0" type="ns:EducationParams"/>
+                </xs:sequence>
             </xs:complexType>
             <xs:complexType name="EducationParams">
                 <xs:sequence>
-                    <xs:element name="a" type="xs:double" minOccurs="1" maxOccurs="1"></xs:element>
-                    <xs:element name="b" type="xs:double" minOccurs="1" maxOccurs="1"></xs:element>
-                    <xs:element name="c" type="xs:double" minOccurs="1" maxOccurs="1"></xs:element>
+                    <xs:element name="a" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                    <xs:element name="b" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                    <xs:element name="c" type="xs:double" minOccurs="1" maxOccurs="1"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:element name="createResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" minOccurs="0" type="ns:CreateSolutionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:complexType name="CreateSolutionResponse">
                 <xs:sequence>
-                    <xs:element name="solutionActionResult" minOccurs="0" type="dx88:SolutionActionResult"></xs:element>
+                    <xs:element name="solutionActionResult" minOccurs="0" type="ns:SolutionActionResult"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="SolutionActionResult">
                 <xs:sequence>
-                    <xs:element name="Formula" minOccurs="1" maxOccurs="1" type="xs:string"></xs:element>
-                    <xs:element name="D" minOccurs="1" maxOccurs="1" type="xs:double"></xs:element>
-                    <xs:element name="X1" minOccurs="1" maxOccurs="1" type="xs:double"></xs:element>
-                    <xs:element name="X2" minOccurs="0" type="xs:double"></xs:element>
+                    <xs:element name="Formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                    <xs:element name="D" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="X1" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                    <xs:element name="X2" minOccurs="0" type="xs:double"/>
                 </xs:sequence>
             </xs:complexType>
-        </xs:schema>   
+        </xs:schema>
     </wsdl:types>
     <!-- Сообщения процедуры create -->
     <wsdl:message name="sendRequest">
