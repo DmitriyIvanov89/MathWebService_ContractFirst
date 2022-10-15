@@ -6,7 +6,8 @@
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
     <wsdl:types>
-        <xs:schema targetNamespace="http://math.ws.divanov" attributeFormDefault="qualified">
+        <xs:schema 
+            xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://math.ws.divanov">
             <xs:element name="create">
                 <xs:complexType>
                     <xs:sequence>
