@@ -6,15 +6,14 @@
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
     <wsdl:types>
-        <xs:schema 
-            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov"
-            attributeFormDefault="qualified"> 
-            <xs:element name="createGetSolutionQuadraticEducation">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov"> 
+            <xs:element name="createGetSolutionQuadraticEducationRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="a" type="xs:double" minOccurs="1" maxOccurs="1"/>
-                        <xs:element name="b" type="xs:double" minOccurs="1" maxOccurs="1"/>
-                        <xs:element name="c" type="xs:double" minOccurs="1" maxOccurs="1"/>
+                        <xs:element name="A" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                        <xs:element name="B" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                        <xs:element name="C" minOccurs="1" maxOccurs="1" type="xs:double"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -32,7 +31,7 @@
     </wsdl:types>
     <!-- Сообщения процедуры create -->
     <wsdl:message name="sendRequest">
-        <wsdl:part name="Request" element="ns:createGetSolutionQuadraticEducation"/>
+        <wsdl:part name="Request" element="ns:createGetSolutionQuadraticEducationRequest"/>
     </wsdl:message>
     <wsdl:message name="sendResponse">
         <wsdl:part name="Response" element="ns:createResponse"/>
