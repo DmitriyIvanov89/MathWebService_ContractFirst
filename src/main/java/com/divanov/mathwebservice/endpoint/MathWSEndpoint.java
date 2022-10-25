@@ -1,7 +1,7 @@
-package com.divanov.MathWebService.endpoint;
+package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.MathWebService.divanov.ws.math.CreateGetSolutionQuadraticEducationRequest;
-import com.divanov.MathWebService.divanov.ws.math.CreateResponse;
+import com.divanov.mathwebservice.service.CreateResponse;
+import com.divanov.mathwebservice.service.CreateGetSolutionQuadraticEducationRequest;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -39,13 +39,13 @@ public class MathWSEndpoint {
             }
 
             // Complete quadratic education
-            response.setD(Math.pow(request.getB(), 2) - 4 * request.getA() * request.getC());
-            if (response.getD() > 0) {
+            response.setDiscriminant(Math.pow(request.getB(), 2) - 4 * request.getA() * request.getC());
+            if (response.getDiscriminant() > 0) {
                 response.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
-                response.setX1((-request.getB() + Math.sqrt(response.getD())) / (2 * request.getA()));
-                response.setX2((-request.getB() - Math.sqrt(response.getD())) / (2 * request.getA()));
+                response.setX1((-request.getB() + Math.sqrt(response.getDiscriminant())) / (2 * request.getA()));
+                response.setX2((-request.getB() - Math.sqrt(response.getDiscriminant())) / (2 * request.getA()));
                 return response;
-            } else if (response.getD() == 0) {
+            } else if (response.getDiscriminant() == 0) {
                 response.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
                 response.setX1(-request.getB() / (2 * request.getA()));
                 return response;

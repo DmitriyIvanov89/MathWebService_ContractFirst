@@ -1,4 +1,4 @@
-package com.divanov.MathWebService.config;
+package com.divanov.mathwebservice.config;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +37,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchema schema() {
-        return new SimpleXsdSchema(new ClassPathResource("xsd/generalSchema.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("xsd/mathWS.xsd"));
     }
 
 }
