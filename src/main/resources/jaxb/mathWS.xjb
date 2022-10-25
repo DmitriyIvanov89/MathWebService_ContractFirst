@@ -3,17 +3,10 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:ns="http://math.ws.divanov">
-     
-    <!--<jaxb:bindings schemaLocation="../xsd/mathWS.xsd">
-        <jaxb:bindings node="//xs:complexType[@name='createResponse']//xs:element[@name='D']">
-            <jaxb:property name="Discriminant"/>
-        </jaxb:bindings>
-    </jaxb:bindings>-->
     
     <jaxb:bindings schemaLocation="../xsd/mathWS.xsd">
         <jaxb:bindings node="//xs:element[@name='createResponse']//xs:element[@name='D']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
-    </jaxb:bindings>
-    
+    </jaxb:bindings>  
 </jaxb:bindings>
