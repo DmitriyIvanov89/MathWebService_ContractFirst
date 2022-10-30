@@ -1,7 +1,10 @@
 package com.divanov.mathwebservice.endpoint;
 
+import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
+import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.CreateResponse;
 import com.divanov.mathwebservice.service.CreateGetSolutionQuadraticEducationRequest;
+import com.divanov.mathwebservice.service.QuadraticEducationFaultInfo;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -18,7 +21,7 @@ public class MathWSEndpoint {
 
     @PayloadRoot(namespace = "http://math.ws.divanov", localPart = "createGetSolutionQuadraticEducationRequest")
     @ResponsePayload
-    public CreateResponse createQuadraticEducationResult(@RequestPayload CreateGetSolutionQuadraticEducationRequest request) {
+    public CreateResponse createQuadraticEducationResult(@RequestPayload CreateGetSolutionQuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
         CreateResponse response = new CreateResponse();
 
         if (request.getA() != 0) {
@@ -34,7 +37,7 @@ public class MathWSEndpoint {
                     response.setX2(-(Math.sqrt(-(request.getC() / request.getA()))));
                     return response;
                 } else {
-                    throw new ArithmeticException(NO_REAL_ROOTS);
+                    throw new QuadraticEducationNoSolutionException(NO_REAL_ROOTS);
                 }
             }
 
@@ -51,11 +54,14 @@ public class MathWSEndpoint {
                 return response;
             }
 
-            // custom fault message(Formula and value of D)
-            throw new ArithmeticException(ERROR_DISCRIMINANT_VALUE);
+            QuadraticEducationFaultInfo quadraticEducationFaultInfo = new QuadraticEducationFaultInfo();
+            quadraticEducationFaultInfo.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
+            quadraticEducationFaultInfo.setDiscriminant(response.getDiscriminant());
+            throw new QuadraticEducationException(ERROR_DISCRIMINANT_VALUE, quadraticEducationFaultInfo);
 
         } else {
-            throw new ArithmeticException(ERROR_PARAM_A);
+            // Different exception
+            throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
         }
     }
 

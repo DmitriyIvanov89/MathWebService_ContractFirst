@@ -8,5 +8,5 @@
         <jaxb:bindings node="//xs:element[@name='createResponse']//xs:element[@name='D']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
-    </jaxb:bindings>  
+    </jaxb:bindings>
 </jaxb:bindings>
