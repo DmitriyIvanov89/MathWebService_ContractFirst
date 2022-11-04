@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.exception;
 
-import com.divanov.mathwebservice.service.QuadraticEducationFaultInfo;
+import com.divanov.mathwebservice.service.QuadraticEducationFault;
 import org.springframework.ws.soap.SoapFault;
 import org.springframework.ws.soap.SoapFaultDetail;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
@@ -15,10 +15,10 @@ public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMapping
     @Override
     protected void customizeFault(Object endpoint, Exception ex, SoapFault fault) {
         if (ex instanceof QuadraticEducationException) {
-            QuadraticEducationFaultInfo quadraticEducationFaultInfo = ((QuadraticEducationException) ex).getQuadraticEducationFaultInfo();
+            QuadraticEducationFault quadraticEducationFault = ((QuadraticEducationException) ex).getQuadraticEducationFaultInfo();
             SoapFaultDetail soapFaultDetail = fault.addFaultDetail();
-            soapFaultDetail.addFaultDetailElement(FORMULA).addText(quadraticEducationFaultInfo.getFormula());
-            soapFaultDetail.addFaultDetailElement(DISCRIMINANT).addText(String.valueOf(quadraticEducationFaultInfo.getDiscriminant()));
+            soapFaultDetail.addFaultDetailElement(FORMULA).addText(quadraticEducationFault.getFormula());
+            soapFaultDetail.addFaultDetailElement(DISCRIMINANT).addText(String.valueOf(quadraticEducationFault.getDiscriminant()));
         }
     }
 }

@@ -1,31 +1,31 @@
 package com.divanov.mathwebservice.exception;
 
-import com.divanov.mathwebservice.service.QuadraticEducationFaultInfo;
+import com.divanov.mathwebservice.service.QuadraticEducationFault;
 
 public class QuadraticEducationException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-    private QuadraticEducationFaultInfo quadraticEducationFaultInfo;
+    private QuadraticEducationFault quadraticEducationFault;
 
     public QuadraticEducationException(String message) {
         super(message);
     }
 
-    public QuadraticEducationException(String message, QuadraticEducationFaultInfo quadraticEducationFaultInfo) {
+    public QuadraticEducationException(String message, QuadraticEducationFault quadraticEducationFault) {
         super(message);
-        this.quadraticEducationFaultInfo = quadraticEducationFaultInfo;
+        this.quadraticEducationFault = quadraticEducationFault;
     }
 
-    public QuadraticEducationException(String message, Throwable cause, QuadraticEducationFaultInfo quadraticEducationFaultInfo) {
+    public QuadraticEducationException(String message, Throwable cause, QuadraticEducationFault quadraticEducationFault) {
         super(message, cause);
-        this.quadraticEducationFaultInfo = quadraticEducationFaultInfo;
+        this.quadraticEducationFault = quadraticEducationFault;
     }
 
-    public QuadraticEducationFaultInfo getQuadraticEducationFaultInfo() {
-        return quadraticEducationFaultInfo;
+    public QuadraticEducationFault getQuadraticEducationFaultInfo() {
+        return quadraticEducationFault;
     }
 
-    public void setQuadraticEducationFaultInfo(QuadraticEducationFaultInfo quadraticEducationFaultInfo) {
-        this.quadraticEducationFaultInfo = quadraticEducationFaultInfo;
+    public void setQuadraticEducationFaultInfo(QuadraticEducationFault quadraticEducationFault) {
+        this.quadraticEducationFault = quadraticEducationFault;
     }
 }

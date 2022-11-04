@@ -2,9 +2,9 @@ package com.divanov.mathwebservice.endpoint;
 
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
-import com.divanov.mathwebservice.service.CreateResponse;
+import com.divanov.mathwebservice.service.QuadraticEducationResponse;
 import com.divanov.mathwebservice.service.CreateGetSolutionQuadraticEducationRequest;
-import com.divanov.mathwebservice.service.QuadraticEducationFaultInfo;
+import com.divanov.mathwebservice.service.QuadraticEducationFault;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -21,8 +21,8 @@ public class MathWSEndpoint {
 
     @PayloadRoot(namespace = "http://math.ws.divanov", localPart = "createGetSolutionQuadraticEducationRequest")
     @ResponsePayload
-    public CreateResponse createQuadraticEducationResult(@RequestPayload CreateGetSolutionQuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
-        CreateResponse response = new CreateResponse();
+    public QuadraticEducationResponse createQuadraticEducationResult(@RequestPayload CreateGetSolutionQuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
+        QuadraticEducationResponse response = new QuadraticEducationResponse();
 
         if (request.getA() != 0) {
             // Incomplete quadratic education
@@ -54,10 +54,10 @@ public class MathWSEndpoint {
                 return response;
             }
 
-            QuadraticEducationFaultInfo quadraticEducationFaultInfo = new QuadraticEducationFaultInfo();
-            quadraticEducationFaultInfo.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
-            quadraticEducationFaultInfo.setDiscriminant(response.getDiscriminant());
-            throw new QuadraticEducationException(ERROR_DISCRIMINANT_VALUE, quadraticEducationFaultInfo);
+            QuadraticEducationFault quadraticEducationFault = new QuadraticEducationFault();
+            quadraticEducationFault.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
+            quadraticEducationFault.setDiscriminant(response.getDiscriminant());
+            throw new QuadraticEducationException(ERROR_DISCRIMINANT_VALUE, quadraticEducationFault);
 
         } else {
             // Different exception

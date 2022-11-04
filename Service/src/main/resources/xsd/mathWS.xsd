@@ -10,7 +10,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="createResponse">
+    <xs:element name="QuadraticEducationResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
@@ -20,7 +20,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="QuadraticEducationFaultInfo">
+    <xs:element name="QuadraticEducationFault">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
