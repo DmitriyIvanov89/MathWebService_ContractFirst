@@ -1,3 +1,23 @@
+Apache Axis2 wsdl2java
+
+https://axis.apache.org/axis2/java/core/docs/reference.html
+
+Download Apache Axis2 zip file
+
+AXIS2_HOME='/home/jimbojack88/Загрузки/axis2-1.8.2/bin'
+
 project.basedir
 
-wsimport -p com.divanov.mathwebservice.client -s src/main/java -keep http://localhost:8080/services/MathWebService.wsdl
+$AXIS2_HOME/wsdl2java.sh -uri http://localhost:8080/services/MathWebService.wsdl -o src/main/java -p com.divanov.mathwebservice.client
+
+*************************************************************************
+
+Apache CXF
+
+Download Apache CXF Binary distribution
+
+https://www.apache.org/dyn/closer.lua/cxf/3.5.4/apache-cxf-3.5.4.tar.gz
+
+CXF_HOME='/home/jimbojack88/Загрузки/apache-cxf-3.5.4/bin'
+
+$CXF_HOME/wsdl2java
