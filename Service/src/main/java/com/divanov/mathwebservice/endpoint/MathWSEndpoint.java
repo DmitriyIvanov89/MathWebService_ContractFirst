@@ -3,7 +3,7 @@ package com.divanov.mathwebservice.endpoint;
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.QuadraticEducationResponse;
-import com.divanov.mathwebservice.service.CreateGetSolutionQuadraticEducationRequest;
+import com.divanov.mathwebservice.service.QuadraticEducationRequest;
 import com.divanov.mathwebservice.service.QuadraticEducationFault;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -21,7 +21,7 @@ public class MathWSEndpoint {
 
     @PayloadRoot(namespace = "http://math.ws.divanov", localPart = "createGetSolutionQuadraticEducationRequest")
     @ResponsePayload
-    public QuadraticEducationResponse createQuadraticEducationResult(@RequestPayload CreateGetSolutionQuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
+    public QuadraticEducationResponse createQuadraticEducationResult(@RequestPayload QuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
         QuadraticEducationResponse response = new QuadraticEducationResponse();
 
         if (request.getA() != 0) {

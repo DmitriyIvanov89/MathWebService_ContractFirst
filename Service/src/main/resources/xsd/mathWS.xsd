@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
-    <xs:element name="createGetSolutionQuadraticEducationRequest">
+    <xs:element name="QuadraticEducationRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="A" minOccurs="1" maxOccurs="1" type="xs:double"/>

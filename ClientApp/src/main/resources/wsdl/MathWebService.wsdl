@@ -1,12 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions 
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:sch="http://math.ws.divanov" 
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-    xmlns:tns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://math.ws.divanov" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
     <wsdl:types>
         <xs:schema xmlns:ns="http://math.ws.divanov" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://math.ws.divanov">
-            <xs:element name="createGetSolutionQuadraticEducationRequest">
+            <xs:element name="QuadraticEducationRequest">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element maxOccurs="1" minOccurs="1" name="A" type="xs:double"/>
@@ -15,7 +10,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="createResponse">
+            <xs:element name="QuadraticEducationResponse">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element maxOccurs="1" minOccurs="1" name="Formula" type="xs:string"/>
@@ -25,7 +20,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="QuadraticEducationFaultInfo">
+            <xs:element name="QuadraticEducationFault">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element maxOccurs="1" minOccurs="1" name="Formula" type="xs:string"/>
@@ -35,33 +30,35 @@
             </xs:element>
         </xs:schema>
     </wsdl:types>
-    <wsdl:message name="createGetSolutionQuadraticEducationRequest">
-        <wsdl:part element="tns:createGetSolutionQuadraticEducationRequest" name="createGetSolutionQuadraticEducationRequest"> </wsdl:part>
+    <wsdl:message name="QuadraticEducationRequest">
+        <wsdl:part element="tns:QuadraticEducationRequest" name="QuadraticEducationRequest"> </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="createResponse">
-        <wsdl:part element="tns:createResponse" name="createResponse"> </wsdl:part>
+    <wsdl:message name="QuadraticEducationFault">
+        <wsdl:part element="tns:QuadraticEducationFault" name="QuadraticEducationFault"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="QuadraticEducationResponse">
+        <wsdl:part element="tns:QuadraticEducationResponse" name="QuadraticEducationResponse"> </wsdl:part>
     </wsdl:message>
     <wsdl:portType name="MathServiceEndpoint">
-        <wsdl:operation name="createGetSolutionQuadraticEducation">
-            <wsdl:input message="tns:createGetSolutionQuadraticEducationRequest" name="createGetSolutionQuadraticEducationRequest"> </wsdl:input>
-        </wsdl:operation>
-        <wsdl:operation name="create">
-            <wsdl:output message="tns:createResponse" name="createResponse"> </wsdl:output>
+        <wsdl:operation name="QuadraticEducation">
+            <wsdl:input message="tns:QuadraticEducationRequest" name="QuadraticEducationRequest"> </wsdl:input>
+            <wsdl:output message="tns:QuadraticEducationResponse" name="QuadraticEducationResponse"> </wsdl:output>
+            <wsdl:fault message="tns:QuadraticEducationFault" name="QuadraticEducationFault"> </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="MathServiceEndpointSoap11" type="tns:MathServiceEndpoint">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="createGetSolutionQuadraticEducation">
+        <wsdl:operation name="QuadraticEducation">
             <soap:operation soapAction=""/>
-            <wsdl:input name="createGetSolutionQuadraticEducationRequest">
+            <wsdl:input name="QuadraticEducationRequest">
                 <soap:body use="literal"/>
             </wsdl:input>
-        </wsdl:operation>
-        <wsdl:operation name="create">
-            <soap:operation soapAction=""/>
-            <wsdl:output name="createResponse">
+            <wsdl:output name="QuadraticEducationResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="QuadraticEducationFault">
+                <soap:fault name="QuadraticEducationFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="MathWebService">
