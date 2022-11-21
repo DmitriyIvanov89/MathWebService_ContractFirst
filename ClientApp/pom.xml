@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ClientApp</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>ClientApp Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
@@ -43,29 +43,5 @@
     </dependencies>
     <build>
         <finalName>ClientApp</finalName>
-        <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.cxf</groupId>-->
-<!--                <artifactId>cxf-codegen-plugin</artifactId>-->
-<!--                <version>${cxf.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>generate-sources</id>-->
-<!--                        <phase>generate-sources</phase>-->
-<!--                        <configuration>-->
-<!--                            <sourceRoot>${project.basedir}/src/main/java/generated</sourceRoot>-->
-<!--                            <wsdlOptions>-->
-<!--                                <wsdlOption>-->
-<!--                                    <wsdl>${project.basedir}/src/main/resources/wsdl/MathWebService.wsdl</wsdl>-->
-<!--                                </wsdlOption>-->
-<!--                            </wsdlOptions>-->
-<!--                        </configuration>-->
-<!--                        <goals>-->
-<!--                            <goal>wsdl2java</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-        </plugins>
     </build>
 </project>

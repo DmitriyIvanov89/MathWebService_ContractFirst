@@ -26,18 +26,17 @@ public class MathWSConfig extends WsConfigurerAdapter {
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServletServletRegistrationBean(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
-        servlet.setTransformSchemaLocations(true);
+        servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean<>(servlet, "/services/*");
     }
 
-    @Bean(name = "MathWebService")
+    @Bean(name = "MathService")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema generalSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-//        wsdl11Definition.setServiceName("MathWebService");
-        wsdl11Definition.setPortTypeName("MathServicePort");
+        wsdl11Definition.setServiceName("MathService");
+        wsdl11Definition.setPortTypeName("MathPort");
         wsdl11Definition.setTargetNamespace("http://math.ws.divanov");
-//        wsdl11Definition.setLocationUri("http://localhost:8080/services/MathServiceEndpoint");
-        wsdl11Definition.setLocationUri("/services");
+        wsdl11Definition.setLocationUri("/services/MathServiceHttpEndpoint");
         wsdl11Definition.setSchema(schema());
         return wsdl11Definition;
     }

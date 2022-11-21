@@ -18,10 +18,7 @@ Download Apache CXF Binary distribution
 
 https://www.apache.org/dyn/closer.lua/cxf/3.5.4/apache-cxf-3.5.4.tar.gz
 
-CXF_HOME='/home/jimbojack88/Загрузки/apache-cxf-3.5.4/bin'
+$CXF_HOME/wsdl2java -p com.divanov.mathwebservice.generated -d src/main/java http://localhost:8080/services/MathService.wsdl
 
-$CXF_HOME/wsdl2java -p com.divanov.mathwebservice.generated -d src/main/java -client -impl http://localhost:8080/services/MathWebService.wsdl
-
-$CXF_HOME/wsdl2java -p com.divanov.mathwebservice.generated -d src/main/java -client http://localhost:8080/services/MathWebService.wsdl
-
-$CXF_HOME/wsdl2java -p com.divanov.mathwebservice.generated -d src/main/java http://localhost:8080/services/MathWebService.wsdl
+*************************************************************************
+export CXF_HOME="/home/jimbojack88/Загрузки/apache-cxf-3.5.3/bin"

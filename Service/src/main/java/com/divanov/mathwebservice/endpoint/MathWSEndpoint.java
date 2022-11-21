@@ -19,7 +19,7 @@ public class MathWSEndpoint {
     private static final String ERROR_DISCRIMINANT_VALUE = "Discriminant can't be less than 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
 
-    @PayloadRoot(namespace = "http://math.ws.divanov", localPart = "createGetSolutionQuadraticEducationRequest")
+    @PayloadRoot(namespace = "http://math.ws.divanov", localPart = "QuadraticEducationRequest")
     @ResponsePayload
     public QuadraticEducationResponse createQuadraticEducationResult(@RequestPayload QuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
         QuadraticEducationResponse response = new QuadraticEducationResponse();
