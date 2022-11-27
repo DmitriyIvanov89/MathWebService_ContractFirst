@@ -22,3 +22,8 @@ $CXF_HOME/wsdl2java -p com.divanov.mathwebservice.generated -d src/main/java htt
 
 *************************************************************************
 export CXF_HOME="/home/jimbojack88/Загрузки/apache-cxf-3.5.3/bin"
+in etc/environment
+
+*************************************************************************
+mvn clean install
+java -jar target/ClientApp.jar 1 4 -3
