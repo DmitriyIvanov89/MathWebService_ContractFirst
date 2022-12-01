@@ -19,7 +19,7 @@ public class SoapClientConfig {
     @Bean
     public MathClient mathClient(Jaxb2Marshaller marshaller) {
         MathClient mathClient = new MathClient();
-        mathClient.setDefaultUri("http://localhost:8080/services/MathServiceHttpEndpoint");
+        mathClient.setDefaultUri("/http://localhost:8080/api/calc");
         mathClient.setMarshaller(marshaller);
         mathClient.setUnmarshaller(marshaller);
         return mathClient;

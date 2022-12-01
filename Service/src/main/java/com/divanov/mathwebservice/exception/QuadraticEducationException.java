@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.exception;
 
-import com.divanov.mathwebservice.service.QuadraticEducationFault;
+import com.divanov.mathwebservice.dto.QuadraticEducationFault;
 
 public class QuadraticEducationException extends RuntimeException {
 

@@ -4,7 +4,7 @@ import com.divanov.mathwebservice.generated.QuadraticEducationRequest;
 import com.divanov.mathwebservice.generated.QuadraticEducationResponse;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
-import java.util.concurrent.RecursiveTask;
+import javax.xml.bind.JAXBElement;
 
 public class MathClient extends WebServiceGatewaySupport {
 
@@ -17,9 +17,15 @@ public class MathClient extends WebServiceGatewaySupport {
 //
 //        return (QuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
 //
-//        }
-    public Object callWebService(String url, Object request) {
-        return getWebServiceTemplate().marshalSendAndReceive(url, request);
+//    }
+
+//    public Object callWebService(String url, Object request) {
+//        return getWebServiceTemplate().marshalSendAndReceive(url, request);
+//    }
+
+
+    public QuadraticEducationResponse createResult(String url, QuadraticEducationRequest request) {
+        return (QuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(url, request);
     }
 
 }

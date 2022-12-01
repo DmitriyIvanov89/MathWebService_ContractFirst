@@ -18,16 +18,18 @@ public class RunClient {
      * Parameters are passed to the getSolution method
      */
 
-    //        public static void main(String[] args) {
+    public static void main(String[] args) {
+        SpringApplication.run(RunClient.class);
 //        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SoapClientConfig.class);
 //        MathClient client = context.getBean(MathClient.class);
-//        QuadraticEducationResponse response = client.getSolution(1, 4, -3);
+
+//        QuadraticEducationResponse response = client.getSolution(1, 3, -3);
 //        System.out.printf("Response from service:\nx1 = %f\nx2 = %f\ndiscriminant = %f\nformula = %s",
 //                response.getX1(),
 //                response.getX2(),
 //                response.getD(),
 //                response.getFormula());
-//    }
+    }
 
     /**
      * The second way to call the service
@@ -37,32 +39,32 @@ public class RunClient {
      * More information in file commands.txt in resources dir
      */
 
-    public static void main(String[] args) {
-        SpringApplication.run(RunClient.class, args);
-    }
-
-    @Bean
-    CommandLineRunner lookup(MathClient client) {
-        return args -> {
-            double a = 1;
-            double b = 1;
-            double c = 1;
-            if (args.length > 0) {
-                a = Double.parseDouble(args[0]);
-                b = Double.parseDouble(args[1]);
-                c = Double.parseDouble(args[2]);
-            }
-
-            QuadraticEducationRequest request = new QuadraticEducationRequest();
-            request.setA(a);
-            request.setB(b);
-            request.setC(c);
-            QuadraticEducationResponse response = (QuadraticEducationResponse) client.callWebService("http://localhost:8080/services/MathServiceHttpEndpoint", request);
-            System.out.printf("Response from service:\nx1 = %f\nx2 = %f\ndiscriminant = %f\nformula = %s",
-                    response.getX1(),
-                    response.getX2(),
-                    response.getD(),
-                    response.getFormula());
-        };
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(RunClient.class, args);
+//    }
+//
+//    @Bean
+//    CommandLineRunner lookup(MathClient client) {
+//        return args -> {
+//            double a = 1;
+//            double b = 1;
+//            double c = 1;
+//            if (args.length > 0) {
+//                a = Double.parseDouble(args[0]);
+//                b = Double.parseDouble(args[1]);
+//                c = Double.parseDouble(args[2]);
+//            }
+//
+//            QuadraticEducationRequest request = new QuadraticEducationRequest();
+//            request.setA(a);
+//            request.setB(b);
+//            request.setC(c);
+//            QuadraticEducationResponse response = (QuadraticEducationResponse) client.callWebService("http://localhost:8080/services/MathServiceHttpEndpoint", request);
+//            System.out.printf("Response from service:\nx1 = %f\nx2 = %f\ndiscriminant = %f\nformula = %s",
+//                    response.getX1(),
+//                    response.getX2(),
+//                    response.getD(),
+//                    response.getFormula());
+//        };
+//    }
 }
