@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxws:bindings
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    wsdlLocation="http://localhost:8080/services/MathService.wsdl"
+    xmlns="http://java.sun.com/xml/ns/jaxws"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
+    <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+
+    <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://math.ws.divanov']">
+        <jaxb:bindings node="xs:element[@name='QuadraticEducationResponse']//xs:element[@name='D']">
+            <jaxb:property name="Discriminant"/>
+        </jaxb:bindings>
+    </jaxws:bindings>
+</jaxws:bindings>

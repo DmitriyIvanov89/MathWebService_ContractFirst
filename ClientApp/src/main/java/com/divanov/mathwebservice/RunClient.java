@@ -2,13 +2,10 @@ package com.divanov.mathwebservice;
 
 import com.divanov.mathwebservice.client.MathClient;
 import com.divanov.mathwebservice.config.SoapClientConfig;
-import com.divanov.mathwebservice.generated.QuadraticEducationRequest;
-import com.divanov.mathwebservice.generated.QuadraticEducationResponse;
-import org.springframework.boot.CommandLineRunner;
+import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class RunClient {
@@ -20,15 +17,13 @@ public class RunClient {
 
     public static void main(String[] args) {
         SpringApplication.run(RunClient.class);
-//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SoapClientConfig.class);
-//        MathClient client = context.getBean(MathClient.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SoapClientConfig.class);
+        MathClient mathClient = context.getBean(MathClient.class);
 
-//        QuadraticEducationResponse response = client.getSolution(1, 3, -3);
-//        System.out.printf("Response from service:\nx1 = %f\nx2 = %f\ndiscriminant = %f\nformula = %s",
-//                response.getX1(),
-//                response.getX2(),
-//                response.getD(),
-//                response.getFormula());
+        QuadraticEducationResponse response = mathClient.createResult(5, 1, -1);
+
+        System.out.printf("Service response:\nFormula: %s\nDiscriminant : %f\nx1 : %f\nx2 : %f\n",
+                response.getFormula(), response.getDiscriminant(), response.getX1(), response.getX2());
     }
 
     /**

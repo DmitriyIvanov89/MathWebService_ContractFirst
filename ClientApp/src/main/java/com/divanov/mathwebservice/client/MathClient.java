@@ -1,31 +1,28 @@
 package com.divanov.mathwebservice.client;
+;
+import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import com.divanov.mathwebservice.generated.QuadraticEducationRequest;
-import com.divanov.mathwebservice.generated.QuadraticEducationResponse;
-import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
+public class MathClient {
 
-import javax.xml.bind.JAXBElement;
+    @Autowired
+    WebClient webClient;
 
-public class MathClient extends WebServiceGatewaySupport {
+    public QuadraticEducationResponse createResult(double a, double b, double c) {
 
-//    public QuadraticEducationResponse getSolution(double a, double b, double c) {
-//
-//        QuadraticEducationRequest request = new QuadraticEducationRequest();
-//        request.setA(a);
-//        request.setB(b);
-//        request.setC(c);
-//
-//        return (QuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
-//
-//    }
-
-//    public Object callWebService(String url, Object request) {
-//        return getWebServiceTemplate().marshalSendAndReceive(url, request);
-//    }
-
-
-    public QuadraticEducationResponse createResult(String url, QuadraticEducationRequest request) {
-        return (QuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(url, request);
+        return webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/api/calc")
+                        .queryParam("a", a)
+                        .queryParam("b", b)
+                        .queryParam("c", c)
+                        .build())
+                .retrieve()
+//                .onStatus(HttpStatus.NOT_FOUND::equals,
+//                        clientResponse -> Mono.empty())
+                .bodyToMono(QuadraticEducationResponse.class)
+                .block();
     }
-
 }

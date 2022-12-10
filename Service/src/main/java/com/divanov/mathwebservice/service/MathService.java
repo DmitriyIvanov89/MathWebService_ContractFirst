@@ -55,6 +55,7 @@ public class MathService {
             throw new QuadraticEducationException(ERROR_DISCRIMINANT_VALUE, quadraticEducationFault);
 
         } else {
+
             // Different exception
             throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
         }
@@ -63,9 +64,9 @@ public class MathService {
     private static String generateEducationFormula(double a, double b, double c) {
         if (b == 0 && c == 0) {
             return String.format("%.1fx^2 = 0", a);
-        } else if (b == 0 && c != 0) {
+        } else if (b == 0) {
             return String.format("%.1fx^2 + %.1f = 0", a, c);
-        } else if (b != 0 && c == 0) {
+        } else if (c == 0) {
             return String.format("%.1fx^2 + %.1fx = 0", a, b);
         }
         return String.format("%.1fx^2 + %.1fx + %.1f = 0", a, b, c);
