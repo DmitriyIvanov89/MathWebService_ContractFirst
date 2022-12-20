@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class SoapClientConfig {
+    private static final String BASE_URL = "http://localhost:8080";
 
     @Bean
     public Jaxb2Marshaller marshaller() {
@@ -24,6 +25,6 @@ public class SoapClientConfig {
 
     @Bean
     public WebClient webClient() {
-        return WebClient.create("http://localhost:8080");
+        return WebClient.create(BASE_URL);
     }
 }
