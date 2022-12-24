@@ -28,7 +28,6 @@ public class MathWSConfig extends WsConfigurerAdapter {
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean<>(servlet, "/services/*");
-//        return new ServletRegistrationBean<>(servlet, "/api/*");
     }
 
     @Bean(name = "MathService")
@@ -38,7 +37,6 @@ public class MathWSConfig extends WsConfigurerAdapter {
         wsdl11Definition.setPortTypeName("MathPort");
         wsdl11Definition.setTargetNamespace("http://math.ws.divanov");
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
-//        wsdl11Definition.setLocationUri("/api/calc");
         wsdl11Definition.setSchema(schema());
         return wsdl11Definition;
     }
