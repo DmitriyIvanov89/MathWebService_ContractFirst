@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import reactor.core.publisher.Mono;
 
 public class MathClient {
-    private final static String CALC_URL = "/api/calc";
+    private final static String QUADRATIC_EDUCATION_RESOURCE= "/api/calc";
 
     @Autowired
     WebClient webClient;
@@ -19,7 +19,7 @@ public class MathClient {
             return webClient
                     .get()
                     .uri(uriBuilder -> uriBuilder
-                            .path(CALC_URL)
+                            .path(QUADRATIC_EDUCATION_RESOURCE)
                             .queryParam("a", a)
                             .queryParam("b", b)
                             .queryParam("c", c)

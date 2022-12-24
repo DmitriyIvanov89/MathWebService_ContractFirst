@@ -2,15 +2,10 @@ package com.divanov.mathwebservice;
 
 import com.divanov.mathwebservice.client.MathClient;
 import com.divanov.mathwebservice.config.SoapClientConfig;
-import com.divanov.mathwebservice.dto.ObjectFactory;
-import com.divanov.mathwebservice.dto.QuadraticEducationRequest;
 import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 public class RunClient {

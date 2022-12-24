@@ -1,7 +1,7 @@
 package com.divanov.mathwebservice.exception;
 
 public class ServiceException extends RuntimeException {
-//    private static final long serialVersionUID = -7661881974219233311L;
+    private static final long serialVersionUID = -7661881974219233311L;
     private int statusCode;
 
     public ServiceException() {
