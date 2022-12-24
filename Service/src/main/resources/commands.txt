@@ -1,3 +1,5 @@
 project.basedir
-
 xjc -d src/main/java -p com.divanov.mathwebservice.dto ./src/main/resources/xsd/mathWS.xsd -b ./src/main/resources/jaxb/mathWS.xjb
+
+testing service:
+curl --header "content-type: text/xml" -d @./src/main/resources/reference/request.xml http://localhost:8080/services/MathServiceEndpoint
