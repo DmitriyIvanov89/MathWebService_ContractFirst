@@ -6,7 +6,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ClientApp</artifactId>
+    <artifactId>RESTService</artifactId>
     <packaging>jar</packaging>
     <name>ClientApp Maven Webapp</name>
     <url>http://maven.apache.org</url>
