@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>Service</module>
-        <module>ClientApp</module>
+        <module>SoapService</module>
+        <module>RESTService</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
