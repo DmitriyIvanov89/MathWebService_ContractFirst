@@ -5,7 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>SoapService</module>
-        <module>RESTService</module>
+        <module>RESTClient</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
