@@ -4,7 +4,6 @@ import com.divanov.mathwebservice.client.MathClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class SoapClientConfig {
@@ -19,12 +18,11 @@ public class SoapClientConfig {
     }
 
     @Bean
-    public MathClient clientTest() {
-        return new MathClient();
-    }
-
-    @Bean
-    public WebClient webClient() {
-        return WebClient.create(BASE_URL);
+    public MathClient mathClient(Jaxb2Marshaller marshaller) {
+        MathClient mathClient = new MathClient();
+        mathClient.setDefaultUri("http://localhost:8080/services/MathServiceEndpoint");
+        mathClient.setMarshaller(marshaller);
+        mathClient.setUnmarshaller(marshaller);
+        return mathClient;
     }
 }
