@@ -1,6 +1,7 @@
 package com.divanov.mathwebservice.config;
 
 import com.divanov.mathwebservice.client.MathClient;
+import com.google.gson.Gson;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -24,5 +25,10 @@ public class SoapClientConfig {
         mathClient.setMarshaller(marshaller);
         mathClient.setUnmarshaller(marshaller);
         return mathClient;
+    }
+
+    @Bean
+    public Gson gson() {
+        return new Gson();
     }
 }
