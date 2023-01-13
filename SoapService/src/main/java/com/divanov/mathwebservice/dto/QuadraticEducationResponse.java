@@ -13,13 +13,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -34,15 +35,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "formula",
-    "discriminant",
-    "x1",
-    "x2"
+        "formula",
+        "discriminant",
+        "x1",
+        "x2"
 })
 @XmlRootElement(name = "QuadraticEducationResponse")
 public class QuadraticEducationResponse {
@@ -58,11 +57,9 @@ public class QuadraticEducationResponse {
 
     /**
      * Gets the value of the formula property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getFormula() {
         return formula;
@@ -70,11 +67,9 @@ public class QuadraticEducationResponse {
 
     /**
      * Sets the value of the formula property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFormula(String value) {
         this.formula = value;
@@ -82,7 +77,6 @@ public class QuadraticEducationResponse {
 
     /**
      * Gets the value of the discriminant property.
-     * 
      */
     public double getDiscriminant() {
         return discriminant;
@@ -90,7 +84,6 @@ public class QuadraticEducationResponse {
 
     /**
      * Sets the value of the discriminant property.
-     * 
      */
     public void setDiscriminant(double value) {
         this.discriminant = value;
@@ -98,7 +91,6 @@ public class QuadraticEducationResponse {
 
     /**
      * Gets the value of the x1 property.
-     * 
      */
     public double getX1() {
         return x1;
@@ -106,7 +98,6 @@ public class QuadraticEducationResponse {
 
     /**
      * Sets the value of the x1 property.
-     * 
      */
     public void setX1(double value) {
         this.x1 = value;
@@ -114,11 +105,9 @@ public class QuadraticEducationResponse {
 
     /**
      * Gets the value of the x2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     *
+     * @return possible object is
+     * {@link Double }
      */
     public Double getX2() {
         return x2;
@@ -126,14 +115,36 @@ public class QuadraticEducationResponse {
 
     /**
      * Sets the value of the x2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Double }
      */
     public void setX2(Double value) {
         this.x2 = value;
     }
 
+    /**
+     * Methods equals(), hashCode() and toString()
+     * overridden for unit tests
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof QuadraticEducationResponse)) return false;
+        QuadraticEducationResponse response = (QuadraticEducationResponse) o;
+        return Double.compare(response.discriminant, discriminant) == 0
+                && Double.compare(response.x1, x1) == 0
+                && Objects.equals(formula, response.formula)
+                && Objects.equals(x2, response.x2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(formula, discriminant, x1, x2);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("QuadraticEducationResponse: Formula %s, Discriminant %f, x1 %f, x2 %f", formula, discriminant, x1, x2);
+    }
 }
