@@ -17,6 +17,7 @@ public class MathService {
         QuadraticEducationResponse response = new QuadraticEducationResponse();
 
         if (request.getA() != 0) {
+
             // Incomplete quadratic education
             if (request.getB() == 0 && request.getC() == 0) {
                 response.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
@@ -24,13 +25,18 @@ public class MathService {
                 return response;
             } else if (request.getB() == 0 && request.getC() != 0) {
                 response.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
-                if (-(request.getC() / request.getA()) > 0) {
+                if (-(request.getC() / request.getA()) >= 0) {
                     response.setX1(Math.sqrt(-(request.getC() / request.getA())));
                     response.setX2(-(Math.sqrt(-(request.getC() / request.getA()))));
                     return response;
                 } else {
                     throw new QuadraticEducationNoSolutionException(NO_REAL_ROOTS);
                 }
+            } else if (request.getC() == 0 && request.getB() != 0) {
+                response.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
+                response.setX1(0.0);
+                response.setX2(-(request.getB() / request.getA()));
+                return response;
             }
 
             // Complete quadratic education

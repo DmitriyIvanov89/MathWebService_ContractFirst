@@ -33,8 +33,7 @@ class MathServiceTest {
     }
 
     @Test
-    void should_return_full_response() throws QuadraticEducationNoSolutionException {
-
+    void shouldReturnResponseWithAllElements() throws QuadraticEducationNoSolutionException {
         request.setA(2);
         request.setB(-3);
         request.setC(1);
@@ -43,6 +42,68 @@ class MathServiceTest {
         expectedResponse.setDiscriminant(1);
         expectedResponse.setX1(1);
         expectedResponse.setX2(0.5);
+
+        assertEquals(expectedResponse, service.solveQuadraticEducation(request));
+    }
+
+    @Test
+    void shouldReturnResponseWithOneRoot() throws QuadraticEducationNoSolutionException {
+        request.setA(1);
+        request.setB(-6);
+        request.setC(9);
+
+        expectedResponse.setFormula("1,0x^2 + -6,0x + 9,0 = 0");
+        expectedResponse.setDiscriminant(0.0);
+        expectedResponse.setX1(3.0);
+
+        assertEquals(expectedResponse, service.solveQuadraticEducation(request));
+    }
+
+    @Test
+    void shouldThrowQuadraticEducationExceptionDiscriminantLessThanZero() {
+        request.setA(5);
+        request.setB(3);
+        request.setC(7);
+
+        Exception expectedException = assertThrows(QuadraticEducationException.class, () -> {
+            service.solveQuadraticEducation(request);
+        });
+
+        assertEquals("Discriminant can't be less than 0", expectedException.getMessage());
+    }
+
+    @Test
+    void shouldThrowQuadraticEducationNoRealRots() {
+        request.setA(4);
+        request.setC(30);
+
+        Exception expectedException = assertThrows(QuadraticEducationNoSolutionException.class, () -> {
+            service.solveQuadraticEducation(request);
+        });
+
+        assertEquals("The education has no real roots", expectedException.getMessage());
+    }
+
+    @Test
+    void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationNoSolutionException {
+        request.setA(4);
+        request.setB(-7);
+
+        expectedResponse.setFormula("4,0x^2 + -7,0x = 0");
+        expectedResponse.setX1(0.0);
+        expectedResponse.setX2(1.75);
+
+        assertEquals(expectedResponse, service.solveQuadraticEducation(request));
+    }
+
+    @Test
+    void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationNoSolutionException {
+        request.setA(4);
+        request.setC(-9);
+
+        expectedResponse.setFormula("4,0x^2 + -9,0 = 0");
+        expectedResponse.setX1(1.5);
+        expectedResponse.setX2(-1.5);
 
         assertEquals(expectedResponse, service.solveQuadraticEducation(request));
     }
