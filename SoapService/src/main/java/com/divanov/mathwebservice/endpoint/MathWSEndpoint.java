@@ -13,9 +13,12 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 public class MathWSEndpoint {
     private static final String NAME_SPACE = "http://math.ws.divanov";
+    private final MathService mathService;
 
     @Autowired
-    MathService mathService;
+    public MathWSEndpoint(MathService mathService) {
+        this.mathService = mathService;
+    }
 
     @PayloadRoot(namespace = NAME_SPACE, localPart = "QuadraticEducationRequest")
     @ResponsePayload

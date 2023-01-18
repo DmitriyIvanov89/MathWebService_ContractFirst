@@ -13,13 +13,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -32,13 +33,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "formula",
-    "discriminant"
+        "formula",
+        "discriminant"
 })
 @XmlRootElement(name = "QuadraticEducationFault")
 public class QuadraticEducationFault {
@@ -50,11 +49,9 @@ public class QuadraticEducationFault {
 
     /**
      * Gets the value of the formula property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getFormula() {
         return formula;
@@ -62,11 +59,9 @@ public class QuadraticEducationFault {
 
     /**
      * Sets the value of the formula property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFormula(String value) {
         this.formula = value;
@@ -74,7 +69,6 @@ public class QuadraticEducationFault {
 
     /**
      * Gets the value of the discriminant property.
-     * 
      */
     public double getDiscriminant() {
         return discriminant;
@@ -82,10 +76,21 @@ public class QuadraticEducationFault {
 
     /**
      * Sets the value of the discriminant property.
-     * 
      */
     public void setDiscriminant(double value) {
         this.discriminant = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof QuadraticEducationFault)) return false;
+        QuadraticEducationFault fault = (QuadraticEducationFault) o;
+        return Double.compare(fault.discriminant, discriminant) == 0 && Objects.equals(formula, fault.formula);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(formula, discriminant);
+    }
 }

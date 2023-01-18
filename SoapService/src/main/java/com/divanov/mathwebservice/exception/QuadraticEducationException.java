@@ -21,7 +21,7 @@ public class QuadraticEducationException extends RuntimeException {
         this.quadraticEducationFault = quadraticEducationFault;
     }
 
-    public QuadraticEducationFault getQuadraticEducationFaultInfo() {
+    public QuadraticEducationFault getQuadraticEducationFault() {
         return quadraticEducationFault;
     }
 
