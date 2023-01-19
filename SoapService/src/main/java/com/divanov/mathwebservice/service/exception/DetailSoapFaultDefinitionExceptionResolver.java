@@ -1,4 +1,4 @@
-package com.divanov.mathwebservice.exception;
+package com.divanov.mathwebservice.service.exception;
 
 import com.divanov.mathwebservice.dto.QuadraticEducationFault;
 import org.springframework.ws.soap.SoapFault;

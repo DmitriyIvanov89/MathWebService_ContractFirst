@@ -2,7 +2,7 @@ package com.divanov.mathwebservice.endpoint;
 
 import com.divanov.mathwebservice.dto.QuadraticEducationRequest;
 import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
-import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;;
+import com.divanov.mathwebservice.service.exception.QuadraticEducationNoSolutionException;;
 import com.divanov.mathwebservice.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;

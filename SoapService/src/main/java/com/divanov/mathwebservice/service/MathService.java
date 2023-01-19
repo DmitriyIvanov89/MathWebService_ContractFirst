@@ -3,9 +3,16 @@ package com.divanov.mathwebservice.service;
 import com.divanov.mathwebservice.dto.QuadraticEducationFault;
 import com.divanov.mathwebservice.dto.QuadraticEducationRequest;
 import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
-import com.divanov.mathwebservice.exception.QuadraticEducationException;
-import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
+import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.service.exception.QuadraticEducationNoSolutionException;
 import org.springframework.stereotype.Component;
+
+/**
+ * TO DO refactor this method
+ * break the method solveQuadraticEducation() into separate methods
+ * separate method for Incomplete quadratic education
+ * and separate method for Complete quadratic education
+ */
 
 @Component
 public class MathService {
@@ -51,15 +58,13 @@ public class MathService {
                 response.setX1(-request.getB() / (2 * request.getA()));
                 return response;
             }
-
+            // if discriminant < 0
             QuadraticEducationFault quadraticEducationFault = new QuadraticEducationFault();
             quadraticEducationFault.setFormula(generateEducationFormula(request.getA(), request.getB(), request.getC()));
             quadraticEducationFault.setDiscriminant(response.getDiscriminant());
             throw new QuadraticEducationException(ERROR_DISCRIMINANT_VALUE, quadraticEducationFault);
 
         } else {
-
-            // Different exception
             throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
         }
     }
