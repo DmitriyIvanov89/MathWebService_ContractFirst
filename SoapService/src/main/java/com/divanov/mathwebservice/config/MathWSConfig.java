@@ -1,8 +1,8 @@
 package com.divanov.mathwebservice.config;
 
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
-import com.divanov.mathwebservice.service.exception.DetailSoapFaultDefinitionExceptionResolver;
-import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
+import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;

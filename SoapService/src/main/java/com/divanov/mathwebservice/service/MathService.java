@@ -3,8 +3,8 @@ package com.divanov.mathwebservice.service;
 import com.divanov.mathwebservice.dto.QuadraticEducationFault;
 import com.divanov.mathwebservice.dto.QuadraticEducationRequest;
 import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
-import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
-import com.divanov.mathwebservice.service.exception.QuadraticEducationNoSolutionException;
+import com.divanov.mathwebservice.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
 import org.springframework.stereotype.Component;
 
 /**
