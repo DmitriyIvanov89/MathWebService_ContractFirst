@@ -6,19 +6,13 @@ import com.divanov.mathwebservice.dto.QuadraticEducationRequest;
 import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;;
+import com.divanov.mathwebservice.exception.RequestValidationException;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * create private methods
- * createRequest() -> check tests with null params!!!
- * createExpectedResponse()
- */
 
 @SpringJUnitConfig
 @ContextConfiguration(classes = MathWSEndpointTestTestConfig.class)
@@ -29,50 +23,22 @@ class MathWSEndpointTest {
     @Autowired
     ObjectFactory objectFactory;
 
-    QuadraticEducationRequest request;
-    QuadraticEducationResponse expectedResponse;
-
-    @BeforeEach
-    void init() {
-        request = objectFactory.createQuadraticEducationRequest();
-        expectedResponse = objectFactory.createQuadraticEducationResponse();
-    }
-
     @Test
     void shouldReturnResultWithDiscriminantGreaterThanZero() throws QuadraticEducationNoSolutionException {
-        request.setA(2);
-        request.setB(-3);
-        request.setC(1);
-
-        expectedResponse.setFormula("2,0x^2 + -3,0x + 1,0 = 0");
-        expectedResponse.setDiscriminant(1.0);
-        expectedResponse.setX1(1.0);
-        expectedResponse.setX2(0.5);
-
-        assertEquals(expectedResponse, mathWSEndpoint.getQuadraticEducationSolution(request));
+        assertEquals(createResponse("2,0x^2 + -3,0x + 1,0 = 0", 1.0, 1.0, 0.5),
+                mathWSEndpoint.getQuadraticEducationSolution(createRequest(2, -3, 1)));
     }
 
     @Test
     void shouldReturnResponseWithOneRoot() throws QuadraticEducationNoSolutionException {
-        request.setA(1);
-        request.setB(-6);
-        request.setC(9);
-
-        expectedResponse.setFormula("1,0x^2 + -6,0x + 9,0 = 0");
-        expectedResponse.setDiscriminant(0.0);
-        expectedResponse.setX1(3.0);
-
-        assertEquals(expectedResponse, mathWSEndpoint.getQuadraticEducationSolution(request));
+        assertEquals(createResponse("1,0x^2 + -6,0x + 9,0 = 0", 0.0, 3.0, null),
+                mathWSEndpoint.getQuadraticEducationSolution(createRequest(1, -6, 9)));
     }
 
     @Test
     void shouldThrowQuadraticEducationExceptionDiscriminantLessThanZero() {
-        request.setA(5);
-        request.setB(3);
-        request.setC(7);
-
         QuadraticEducationException expectedException = assertThrows(QuadraticEducationException.class, () -> {
-            mathWSEndpoint.getQuadraticEducationSolution(request);
+            mathWSEndpoint.getQuadraticEducationSolution(createRequest(5, 3, 7));
         });
 
         assertEquals("Discriminant can't be less than 0", expectedException.getMessage());
@@ -80,12 +46,8 @@ class MathWSEndpointTest {
 
     @Test
     void shouldReturnQuadraticEducationFault() {
-        request.setA(5);
-        request.setB(3);
-        request.setC(7);
-
         QuadraticEducationException expectedException = assertThrows(QuadraticEducationException.class, () -> {
-            mathWSEndpoint.getQuadraticEducationSolution(request);
+            mathWSEndpoint.getQuadraticEducationSolution(createRequest(5, 3, 7));
         });
 
         QuadraticEducationFault expectedFault = objectFactory.createQuadraticEducationFault();
@@ -97,11 +59,8 @@ class MathWSEndpointTest {
 
     @Test
     void shouldThrowQuadraticEducationNoRealRots() {
-        request.setA(4);
-        request.setC(30);
-
         QuadraticEducationNoSolutionException expectedException = assertThrows(QuadraticEducationNoSolutionException.class, () -> {
-            mathWSEndpoint.getQuadraticEducationSolution(request);
+            mathWSEndpoint.getQuadraticEducationSolution(createRequest(4, 0, 30));
         });
 
         assertEquals("The education has no real roots", expectedException.getMessage());
@@ -109,12 +68,8 @@ class MathWSEndpointTest {
 
     @Test
     void shouldReturnExceptionLeadingCoefficientEqualsZero() {
-        request.setA(0);
-        request.setB(4);
-        request.setC(3);
-
         QuadraticEducationNoSolutionException expectedException = assertThrows(QuadraticEducationNoSolutionException.class, () -> {
-            mathWSEndpoint.getQuadraticEducationSolution(request);
+            mathWSEndpoint.getQuadraticEducationSolution(createRequest(0, 4, 3));
         });
 
         assertEquals("The leading coefficient can't be equals 0", expectedException.getMessage());
@@ -122,25 +77,39 @@ class MathWSEndpointTest {
 
     @Test
     void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationNoSolutionException {
-        request.setA(4);
-        request.setB(-7);
-
-        expectedResponse.setFormula("4,0x^2 + -7,0x = 0");
-        expectedResponse.setX1(0.0);
-        expectedResponse.setX2(1.75);
-
-        assertEquals(expectedResponse, mathWSEndpoint.getQuadraticEducationSolution(request));
+        assertEquals(createResponse("4,0x^2 + -7,0x = 0", 0, 0.0, 1.75),
+                mathWSEndpoint.getQuadraticEducationSolution(createRequest(4, -7, 0)));
     }
 
     @Test
     void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationNoSolutionException {
-        request.setA(4);
-        request.setC(-9);
+        assertEquals(createResponse("4,0x^2 + -9,0 = 0", 0, 1.5, -1.5),
+                mathWSEndpoint.getQuadraticEducationSolution(createRequest(4, 0, -9)));
+    }
 
-        expectedResponse.setFormula("4,0x^2 + -9,0 = 0");
-        expectedResponse.setX1(1.5);
-        expectedResponse.setX2(-1.5);
+//    @Test
+//    void shouldReturnValidationException() {
+//        RequestValidationException expectedException = assertThrows(RequestValidationException.class, () ->
+//                mathWSEndpoint.getQuadraticEducationSolution(createRequest()));
+//
+//        assertEquals("Xsd schema validation errors: [-1, -1]: cvc-datatype-valid.1.2.1: 'as$' is not a valid value for 'double'. -- [-1, -1]: cvc-type.3.1.3: The value 'as$' of element 'math:B' is not valid.",
+//                expectedException.getMessage());
+//    }
 
-        assertEquals(expectedResponse, mathWSEndpoint.getQuadraticEducationSolution(request));
+    private QuadraticEducationRequest createRequest(double a, double b, double c) {
+        QuadraticEducationRequest request = objectFactory.createQuadraticEducationRequest();
+        request.setA(a);
+        request.setB(b);
+        request.setC(c);
+        return request;
+    }
+
+    private QuadraticEducationResponse createResponse(String formula, double discriminant, double x1, Double x2) {
+        QuadraticEducationResponse response = objectFactory.createQuadraticEducationResponse();
+        response.setFormula(formula);
+        response.setDiscriminant(discriminant);
+        response.setX1(x1);
+        response.setX2(x2);
+        return response;
     }
 }
