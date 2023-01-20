@@ -14,6 +14,12 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * create private methods
+ * createRequest() -> check tests with null params!!!
+ * createExpectedResponse()
+ */
+
 @SpringJUnitConfig
 @ContextConfiguration(classes = MathWSEndpointTestTestConfig.class)
 class MathWSEndpointTest {
