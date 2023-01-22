@@ -23,6 +23,6 @@ public class MathWSEndpoint {
     @PayloadRoot(namespace = NAME_SPACE, localPart = "QuadraticEducationRequest")
     @ResponsePayload
     public QuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload QuadraticEducationRequest request) throws QuadraticEducationNoSolutionException {
-        return mathServiceImpl.solveQuadraticEducation(request);
+        return mathServiceImpl.solveQuadraticEducation(request.getA(), request.getB(), request.getC());
     }
 }

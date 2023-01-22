@@ -1,5 +1,6 @@
 package com.divanov.mathwebservice.config;
 
+import com.divanov.mathwebservice.dto.ObjectFactory;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
@@ -56,6 +57,11 @@ public class MathWSConfig extends WsConfigurerAdapter {
     @Bean
     public XsdSchema schema() {
         return new SimpleXsdSchema(new ClassPathResource("xsd/mathWS.xsd"));
+    }
+
+    @Bean
+    public ObjectFactory objectFactory() {
+        return new ObjectFactory();
     }
 
     @Bean
