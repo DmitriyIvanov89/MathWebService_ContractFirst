@@ -14,6 +14,11 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * create test with invalid validation request params
+ */
+
+
 @SpringJUnitConfig
 @ContextConfiguration(classes = MathWSEndpointTestTestConfig.class)
 class MathWSEndpointTest {
