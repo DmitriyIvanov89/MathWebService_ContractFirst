@@ -26,9 +26,4 @@ public class SoapClientConfig {
         mathClient.setUnmarshaller(marshaller);
         return mathClient;
     }
-
-    @Bean
-    public Gson gson() {
-        return new Gson();
-    }
 }
