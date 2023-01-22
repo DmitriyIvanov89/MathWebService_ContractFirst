@@ -1,7 +1,7 @@
 package com.divanov.mathwebservice.endpoint;
 
 import com.divanov.mathwebservice.dto.ObjectFactory;
-import com.divanov.mathwebservice.service.MathService;
+import com.divanov.mathwebservice.service.MathServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class MathWSEndpointTestTestConfig {
 
     @Bean
-    public MathWSEndpoint mathWSEndpoint(MathService mathService) {
-        return new MathWSEndpoint(mathService);
+    public MathWSEndpoint mathWSEndpoint(MathServiceImpl mathServiceImpl) {
+        return new MathWSEndpoint(mathServiceImpl);
     }
 
     @Bean
