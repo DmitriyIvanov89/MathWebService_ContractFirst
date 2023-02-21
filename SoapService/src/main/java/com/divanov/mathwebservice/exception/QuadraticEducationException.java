@@ -4,7 +4,7 @@ import com.divanov.mathwebservice.dto.QuadraticEducationFault;
 
 import javax.xml.ws.WebFault;
 
-@WebFault(name = "quadraticEducationFault", targetNamespace = "http://math.ws.divanov")
+@WebFault(name = "QuadraticEducationException", targetNamespace = "http://math.ws.divanov")
 public class QuadraticEducationException extends Exception {
 
     private static final long serialVersionUID = -6647544772732631037L;

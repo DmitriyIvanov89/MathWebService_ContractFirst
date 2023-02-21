@@ -27,9 +27,10 @@ public class MathServiceImpl implements MathService {
     @Override
     public QuadraticEducationResponse solveQuadraticEducation(double param_A, double param_B, double param_C) throws QuadraticEducationException {
         QuadraticEducationResponse response = objectFactory.createQuadraticEducationResponse();
-        if (param_A == 0)
+        if (param_A == 0) {
+            System.err.println("Throw new QuadraticEducationNoSolutionException");
             throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
-
+        }
         if (param_B == 0 || param_C == 0) {
             solveIncompleteQuadraticEducation(response, param_A, param_B, param_C);
         } else {
@@ -51,6 +52,7 @@ public class MathServiceImpl implements MathService {
                 response.setX1(Math.sqrt(-(param_C / param_A)));
                 response.setX2(-(Math.sqrt(-(param_C / param_A))));
             } else {
+                System.err.println("Throw new QuadraticEducationNoSolutionException");
                 throw new QuadraticEducationNoSolutionException(NO_REAL_ROOTS);
             }
         } else {
@@ -75,6 +77,7 @@ public class MathServiceImpl implements MathService {
             response.setX1(-param_B / (2 * param_A));
             return;
         }
+        System.err.println("Throw new QuadraticEducationException");
         QuadraticEducationFault quadraticEducationFault = objectFactory.createQuadraticEducationFault();
         quadraticEducationFault.setFormula(generateEducationFormula(param_A, param_B, param_C));
         quadraticEducationFault.setDiscriminant(response.getDiscriminant());

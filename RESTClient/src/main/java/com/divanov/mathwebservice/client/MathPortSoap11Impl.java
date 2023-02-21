@@ -47,15 +47,15 @@ public class MathPortSoap11Impl implements MathPort {
     public QuadraticEducationResponse quadraticEducation(QuadraticEducationRequest request) throws QuadraticEducationFault_Exception {
         QuadraticEducationResponse response = new QuadraticEducationResponse();
 
-        try {
+//        try {
             response = getService().getMathPortSoap11().quadraticEducation(request);
-        } catch (QuadraticEducationFault_Exception ex) {
-            System.err.println(ex.getMessage());
-            System.err.println(ex.getFaultInfo().getFormula());
-            System.err.println(ex.getFaultInfo().getD());
-        } catch (Exception exception) {
-            System.err.println(exception.getMessage());
-        }
+//        } catch (QuadraticEducationFault_Exception ex) {
+//            System.err.println(ex.getMessage());
+//            System.err.println(ex.getFaultInfo().getFormula());
+//            System.err.println(ex.getFaultInfo().getD());
+//        } catch (Exception exception) {
+//            System.err.println(exception.getMessage());
+//        }
         return response;
     }
 
