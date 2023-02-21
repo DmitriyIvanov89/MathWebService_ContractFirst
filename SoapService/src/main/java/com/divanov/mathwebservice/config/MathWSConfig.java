@@ -1,6 +1,7 @@
 package com.divanov.mathwebservice.config;
 
 import com.divanov.mathwebservice.dto.ObjectFactory;
+import com.divanov.mathwebservice.endpoint.MathWSEndpoint;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
@@ -48,7 +49,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setServiceName("MathService");
         wsdl11Definition.setPortTypeName("MathPort");
-        wsdl11Definition.setTargetNamespace("http://math.ws.divanov");
+        wsdl11Definition.setTargetNamespace(MathWSEndpoint.NAME_SPACE);
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
         wsdl11Definition.setSchema(schema());
         return wsdl11Definition;

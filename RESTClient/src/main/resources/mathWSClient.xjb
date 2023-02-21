@@ -9,7 +9,7 @@
     <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
 
     <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://math.ws.divanov']">
-        <jaxb:bindings node="xs:element[@name='QuadraticEducationResponse']//xs:element[@name='D']">
+        <jaxb:bindings node="xs:element[@name='quadraticEducationResponse']//xs:element[@name='d']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
     </jaxws:bindings>

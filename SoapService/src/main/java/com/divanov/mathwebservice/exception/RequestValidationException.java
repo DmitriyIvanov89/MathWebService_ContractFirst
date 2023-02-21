@@ -3,7 +3,7 @@ package com.divanov.mathwebservice.exception;
 import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 
-@SoapFault(faultCode = FaultCode.CUSTOM, customFaultCode = "{" + RequestValidationException.NAMESPACE_URI + "}RequestValidationException")
+@SoapFault(faultCode = FaultCode.CUSTOM, customFaultCode = "{" + RequestValidationException.NAMESPACE_URI + "}VALIDATION_ERROR")
 public class RequestValidationException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;

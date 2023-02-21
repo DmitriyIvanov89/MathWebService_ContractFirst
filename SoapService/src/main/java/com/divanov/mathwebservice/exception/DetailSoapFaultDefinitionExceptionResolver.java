@@ -9,8 +9,8 @@ import javax.xml.namespace.QName;
 
 public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMappingExceptionResolver {
 
-    private static final QName FORMULA = new QName("Formula");
-    private static final QName DISCRIMINANT = new QName("Discriminant");
+    private static final QName FORMULA = new QName("formula");
+    private static final QName DISCRIMINANT = new QName("discriminant");
 
     @Override
     protected void customizeFault(Object endpoint, Exception ex, SoapFault fault) {

@@ -18,10 +18,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Formula" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="D" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
- *         &lt;element name="X1" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
- *         &lt;element name="X2" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="formula" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="d" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="x1" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="x2" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,16 +37,14 @@ import javax.xml.bind.annotation.XmlType;
     "x1",
     "x2"
 })
-@XmlRootElement(name = "QuadraticEducationResponse")
+@XmlRootElement(name = "quadraticEducationResponse")
 public class QuadraticEducationResponse {
 
-    @XmlElement(name = "Formula", required = true)
+    @XmlElement(required = true)
     protected String formula;
-    @XmlElement(name = "D")
+    @XmlElement(name = "d")
     protected double discriminant;
-    @XmlElement(name = "X1")
     protected double x1;
-    @XmlElement(name = "X2")
     protected Double x2;
 
     /**

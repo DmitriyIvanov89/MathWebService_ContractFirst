@@ -2,13 +2,20 @@ package com.divanov.mathwebservice.exception;
 
 import com.divanov.mathwebservice.dto.QuadraticEducationFault;
 
-public class QuadraticEducationException extends RuntimeException {
+import javax.xml.ws.WebFault;
 
-    private static final long serialVersionUID = 1L;
+@WebFault(name = "quadraticEducationFault", targetNamespace = "http://math.ws.divanov")
+public class QuadraticEducationException extends Exception {
+
+    private static final long serialVersionUID = -6647544772732631037L;
     private QuadraticEducationFault quadraticEducationFault;
 
     public QuadraticEducationException(String message) {
         super(message);
+    }
+
+    public QuadraticEducationException(QuadraticEducationFault quadraticEducationFault) {
+        this.quadraticEducationFault = quadraticEducationFault;
     }
 
     public QuadraticEducationException(String message, QuadraticEducationFault quadraticEducationFault) {
@@ -25,7 +32,7 @@ public class QuadraticEducationException extends RuntimeException {
         return quadraticEducationFault;
     }
 
-    public void setQuadraticEducationFaultInfo(QuadraticEducationFault quadraticEducationFault) {
+    public void setQuadraticEducationFault(QuadraticEducationFault quadraticEducationFault) {
         this.quadraticEducationFault = quadraticEducationFault;
     }
 }

@@ -4,8 +4,8 @@ import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 
 @SoapFault(faultCode = FaultCode.CUSTOM,
-        customFaultCode = "{" + QuadraticEducationNoSolutionException.NAMESPACE_URI + "}QuadraticEducationNoSolutionException")
-public class QuadraticEducationNoSolutionException extends Exception {
+        customFaultCode = "{" + QuadraticEducationNoSolutionException.NAMESPACE_URI + "}NO_SOLUTION")
+public class QuadraticEducationNoSolutionException extends QuadraticEducationException {
 
     private static final long serialVersionUID = 1L;
     public static final String NAMESPACE_URI = "http://math.ws.divanov";

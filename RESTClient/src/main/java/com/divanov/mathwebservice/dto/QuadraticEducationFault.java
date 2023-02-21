@@ -18,8 +18,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Formula" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="Discriminant" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="formula" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="d" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -31,15 +31,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "formula",
-    "discriminant"
+    "d"
 })
-@XmlRootElement(name = "QuadraticEducationFault")
+@XmlRootElement(name = "quadraticEducationFault")
 public class QuadraticEducationFault {
 
-    @XmlElement(name = "Formula", required = true)
+    @XmlElement(required = true)
     protected String formula;
-    @XmlElement(name = "Discriminant")
-    protected double discriminant;
+    protected double d;
 
     /**
      * Gets the value of the formula property.
@@ -66,19 +65,19 @@ public class QuadraticEducationFault {
     }
 
     /**
-     * Gets the value of the discriminant property.
+     * Gets the value of the d property.
      * 
      */
-    public double getDiscriminant() {
-        return discriminant;
+    public double getD() {
+        return d;
     }
 
     /**
-     * Sets the value of the discriminant property.
+     * Sets the value of the d property.
      * 
      */
-    public void setDiscriminant(double value) {
-        this.discriminant = value;
+    public void setD(double value) {
+        this.d = value;
     }
 
 }
