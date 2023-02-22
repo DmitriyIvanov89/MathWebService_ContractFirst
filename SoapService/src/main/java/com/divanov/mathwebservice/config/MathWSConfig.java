@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.config;
 
-import com.divanov.mathwebservice.dto.ObjectFactory;
+import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;

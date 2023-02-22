@@ -1,8 +1,8 @@
 package com.divanov.mathwebservice.exception;
 
-import com.divanov.mathwebservice.dto.QuadraticEducationFault;
+import com.divanov.mathwebservice.gen.QuadraticEducationFault;
 
-public class QuadraticEducationException extends RuntimeException {
+public class QuadraticEducationException extends Exception {
 
     private static final long serialVersionUID = 1L;
     private QuadraticEducationFault quadraticEducationFault;

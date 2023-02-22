@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.mathwebservice.dto.ObjectFactory;
+import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.MathServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

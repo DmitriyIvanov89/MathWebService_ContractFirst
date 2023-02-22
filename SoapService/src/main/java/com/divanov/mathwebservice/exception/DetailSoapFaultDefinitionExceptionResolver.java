@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.exception;
 
-import com.divanov.mathwebservice.dto.QuadraticEducationFault;
+import com.divanov.mathwebservice.gen.QuadraticEducationFault;
 import org.springframework.ws.soap.SoapFault;
 import org.springframework.ws.soap.SoapFaultDetail;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;

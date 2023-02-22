@@ -1,8 +1,8 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.dto.ObjectFactory;
-import com.divanov.mathwebservice.dto.QuadraticEducationFault;
-import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
+import com.divanov.mathwebservice.gen.ObjectFactory;
+import com.divanov.mathwebservice.gen.QuadraticEducationFault;
+import com.divanov.mathwebservice.gen.QuadraticEducationResponse;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class MathServiceImpl implements MathService {
     @Autowired
     private ObjectFactory objectFactory;
 
-    public QuadraticEducationResponse solveQuadraticEducation(double param_A, double param_B, double param_C) throws QuadraticEducationNoSolutionException {
+    public QuadraticEducationResponse solveQuadraticEducation(double param_A, double param_B, double param_C) throws QuadraticEducationException {
         QuadraticEducationResponse response = objectFactory.createQuadraticEducationResponse();
         if (param_A != 0) {
             if (param_B == 0 || param_C == 0) {
@@ -55,7 +55,7 @@ public class MathServiceImpl implements MathService {
     private void solveCompleteQuadraticEducation(QuadraticEducationResponse response,
                                                  double param_A,
                                                  double param_B,
-                                                 double param_C) {
+                                                 double param_C) throws QuadraticEducationException {
         response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
         if (response.getDiscriminant() > 0) {
             response.setFormula(generateEducationFormula(param_A, param_B, param_C));
