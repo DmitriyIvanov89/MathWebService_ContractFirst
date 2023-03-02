@@ -1,7 +1,7 @@
 package com.divanov.mathwebservice.controller;
 
 import com.divanov.mathwebservice.client.MathPortSoap11Impl;
-import com.divanov.mathwebservice.dto.*;
+import com.divanov.mathwebservice.generated.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
