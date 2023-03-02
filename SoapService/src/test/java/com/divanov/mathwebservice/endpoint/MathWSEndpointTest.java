@@ -59,7 +59,7 @@ class MathWSEndpointTest {
         expectedFault.setFormula("5,0x^2 + 3,0x + 7,0 = 0");
         expectedFault.setDiscriminant(-131.0);
 
-        assertEquals(expectedFault, expectedException.getQuadraticEducationFault());
+        assertEquals(expectedFault, expectedException.getFaultInfo());
     }
 
     @Test

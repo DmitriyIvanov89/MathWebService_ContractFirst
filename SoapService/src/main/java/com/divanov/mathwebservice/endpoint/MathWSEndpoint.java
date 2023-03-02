@@ -1,8 +1,9 @@
 package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.mathwebservice.dto.QuadraticEducationRequest;
-import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.gen.QuadraticEducationRequest;
+import com.divanov.mathwebservice.gen.QuadraticEducationRequestParams;
+import com.divanov.mathwebservice.gen.SolutionQuadraticEducationResponse;
 import com.divanov.mathwebservice.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -26,7 +27,7 @@ public class MathWSEndpoint {
 
     @PayloadRoot(namespace = NAME_SPACE, localPart = "quadraticEducationRequest")
     @ResponsePayload
-    public QuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload QuadraticEducationRequest request) throws QuadraticEducationException {
-        return service.solveQuadraticEducation(request.getA(), request.getB(), request.getC());
+    public SolutionQuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload QuadraticEducationRequest request) {
+        return service.getSolutionQuadraticEducation(request.getRequest().getA(), request.getRequest().getB(), request.getRequest().getC());
     }
 }

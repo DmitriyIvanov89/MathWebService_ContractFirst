@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.config;
 
-import com.divanov.mathwebservice.dto.ObjectFactory;
+import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.endpoint.MathWSEndpoint;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
@@ -45,13 +45,13 @@ public class MathWSConfig extends WsConfigurerAdapter {
     }
 
     @Bean(name = "MathService")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema generalSchema) {
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setServiceName("MathService");
         wsdl11Definition.setPortTypeName("MathPort");
         wsdl11Definition.setTargetNamespace(MathWSEndpoint.NAME_SPACE);
+        wsdl11Definition.setSchema(schema);
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
-        wsdl11Definition.setSchema(schema());
         return wsdl11Definition;
     }
 
@@ -65,19 +65,19 @@ public class MathWSConfig extends WsConfigurerAdapter {
         return new ObjectFactory();
     }
 
-    @Bean
-    public SoapFaultMappingExceptionResolver exceptionResolver() {
-        SoapFaultMappingExceptionResolver exceptionResolver = new DetailSoapFaultDefinitionExceptionResolver();
-
-        SoapFaultDefinition faultDefinition = new SoapFaultDefinition();
-        faultDefinition.setFaultCode(SoapFaultDefinition.SERVER);
-        exceptionResolver.setDefaultFault(faultDefinition);
-
-        Properties errorMappings = new Properties();
-        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
-        errorMappings.setProperty(QuadraticEducationException.class.getName(), SoapFaultDefinition.SERVER.toString());
-        exceptionResolver.setExceptionMappings(errorMappings);
-        exceptionResolver.setOrder(1);
-        return exceptionResolver;
-    }
+//    @Bean
+//    public SoapFaultMappingExceptionResolver exceptionResolver() {
+//        SoapFaultMappingExceptionResolver exceptionResolver = new DetailSoapFaultDefinitionExceptionResolver();
+//
+//        SoapFaultDefinition faultDefinition = new SoapFaultDefinition();
+//        faultDefinition.setFaultCode(SoapFaultDefinition.SERVER);
+//        exceptionResolver.setDefaultFault(faultDefinition);
+//
+//        Properties errorMappings = new Properties();
+//        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
+//        errorMappings.setProperty(QuadraticEducationException.class.getName(), SoapFaultDefinition.SERVER.toString());
+//        exceptionResolver.setExceptionMappings(errorMappings);
+//        exceptionResolver.setOrder(1);
+//        return exceptionResolver;
+//    }
 }

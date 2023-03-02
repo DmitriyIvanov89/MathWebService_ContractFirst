@@ -1,11 +1,7 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
-import com.divanov.mathwebservice.exception.QuadraticEducationException;
-import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
+import com.divanov.mathwebservice.gen.SolutionQuadraticEducationResponse;
 
 public interface MathService {
-    QuadraticEducationResponse solveQuadraticEducation(double a, double b, double c)
-            throws
-            QuadraticEducationException;
+    SolutionQuadraticEducationResponse getSolutionQuadraticEducation(double a, double b, double c);
 }

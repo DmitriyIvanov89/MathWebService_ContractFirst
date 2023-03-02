@@ -1,10 +1,6 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.dto.ObjectFactory;
-
-import com.divanov.mathwebservice.dto.QuadraticEducationFault;
-import com.divanov.mathwebservice.dto.QuadraticEducationResponse;
-import com.divanov.mathwebservice.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.gen.*;
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +21,11 @@ public class MathServiceImpl implements MathService {
     }
 
     @Override
-    public QuadraticEducationResponse solveQuadraticEducation(double param_A, double param_B, double param_C) throws QuadraticEducationException {
-        QuadraticEducationResponse response = objectFactory.createQuadraticEducationResponse();
+    public SolutionQuadraticEducationResponse getSolutionQuadraticEducation(double param_A, double param_B, double param_C) {
+        SolutionQuadraticEducationResponse response = objectFactory.createSolutionQuadraticEducationResponse();
+        QuadraticEducationResponse responseDetail = objectFactory.createQuadraticEducationResponse();
+        ResponseInfo responseInfo = objectFactory.createResponseInfo();
+
         if (param_A == 0) {
             System.err.println("Throw new QuadraticEducationNoSolutionException");
             throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
@@ -39,49 +38,46 @@ public class MathServiceImpl implements MathService {
         return response;
     }
 
-    private void solveIncompleteQuadraticEducation(QuadraticEducationResponse response,
+    private void solveIncompleteQuadraticEducation(SolutionQuadraticEducationResponse response,
                                                    double param_A,
                                                    double param_B,
-                                                   double param_C) throws QuadraticEducationNoSolutionException {
+                                                   double param_C) {
         if (param_B == 0 && param_C == 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
-            response.setX1(0.0);
+            response.getResponse().getInfo().setFormula(generateEducationFormula(param_A, param_B, param_C));
+            response.getResponse().setX1(0.0);
         } else if (param_B == 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
+            response.getResponse().getInfo().setFormula(generateEducationFormula(param_A, param_B, param_C));
             if (-(param_C / param_A) >= 0) {
-                response.setX1(Math.sqrt(-(param_C / param_A)));
-                response.setX2(-(Math.sqrt(-(param_C / param_A))));
+                response.getResponse().setX1(Math.sqrt(-(param_C / param_A)));
+                response.getResponse().setX2(-(Math.sqrt(-(param_C / param_A))));
             } else {
                 System.err.println("Throw new QuadraticEducationNoSolutionException");
                 throw new QuadraticEducationNoSolutionException(NO_REAL_ROOTS);
             }
         } else {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
-            response.setX1(0.0);
-            response.setX2(-(param_B / param_A));
+            response.getResponse().getInfo().setFormula(generateEducationFormula(param_A, param_B, param_C));
+            response.getResponse().setX1(0.0);
+            response.getResponse().setX2(-(param_B / param_A));
         }
     }
 
-    private void solveCompleteQuadraticEducation(QuadraticEducationResponse response,
+    private void solveCompleteQuadraticEducation(SolutionQuadraticEducationResponse response,
                                                  double param_A,
                                                  double param_B,
-                                                 double param_C) throws QuadraticEducationException {
-        response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
-        if (response.getDiscriminant() > 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
-            response.setX1((-param_B + Math.sqrt(response.getDiscriminant())) / (2 * param_A));
-            response.setX2((-param_B - Math.sqrt(response.getDiscriminant())) / (2 * param_A));
+                                                 double param_C) {
+        response.getResponse().getInfo().setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
+        if (response.getResponse().getInfo().getDiscriminant() > 0) {
+            response.getResponse().getInfo().setFormula(generateEducationFormula(param_A, param_B, param_C));
+            response.getResponse().setX1((-param_B + Math.sqrt(response.getResponse().getInfo().getDiscriminant())) / (2 * param_A));
+            response.getResponse().setX2((-param_B - Math.sqrt(response.getResponse().getInfo().getDiscriminant())) / (2 * param_A));
             return;
-        } else if (response.getDiscriminant() == 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
-            response.setX1(-param_B / (2 * param_A));
+        } else if (response.getResponse().getInfo().getDiscriminant() == 0) {
+            response.getResponse().getInfo().setFormula(generateEducationFormula(param_A, param_B, param_C));
+            response.getResponse().setX1(-param_B / (2 * param_A));
             return;
         }
         System.err.println("Throw new QuadraticEducationException");
-        QuadraticEducationFault quadraticEducationFault = objectFactory.createQuadraticEducationFault();
-        quadraticEducationFault.setFormula(generateEducationFormula(param_A, param_B, param_C));
-        quadraticEducationFault.setDiscriminant(response.getDiscriminant());
-        throw new QuadraticEducationException(ERROR_DISCRIMINANT_VALUE, quadraticEducationFault);
+        response.getResponse().getInfo().setFormula(generateEducationFormula(param_A, param_B, param_C));
     }
 
     private static String generateEducationFormula(double a, double b, double c) {
