@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
+ * TO DO :
  * create test with invalid validation request params
  */
 
@@ -55,7 +56,7 @@ class MathWSEndpointTest {
         expectedFault.setFormula("5,0x^2 + 3,0x + 7,0 = 0");
         expectedFault.setDiscriminant(-131.0);
 
-        assertEquals(expectedFault, expectedException.getQuadraticEducationFault());
+        assertEquals(expectedFault, expectedException.getFaultInfo());
     }
 
     @Test
@@ -87,15 +88,6 @@ class MathWSEndpointTest {
         assertEquals(createResponse("4,0x^2 + -9,0 = 0", 0, 1.5, -1.5),
                 mathWSEndpoint.getQuadraticEducationSolution(createRequest(4, 0, -9)));
     }
-
-//    @Test
-//    void shouldReturnValidationException() {
-//        RequestValidationException expectedException = assertThrows(RequestValidationException.class, () ->
-//                mathWSEndpoint.getQuadraticEducationSolution(createRequest()));
-//
-//        assertEquals("Xsd schema validation errors: [-1, -1]: cvc-datatype-valid.1.2.1: 'as$' is not a valid value for 'double'. -- [-1, -1]: cvc-type.3.1.3: The value 'as$' of element 'math:B' is not valid.",
-//                expectedException.getMessage());
-//    }
 
     private QuadraticEducationRequest createRequest(double a, double b, double c) {
         QuadraticEducationRequest request = objectFactory.createQuadraticEducationRequest();

@@ -9,8 +9,13 @@
     <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
 
     <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://math.ws.divanov']">
-        <jaxb:bindings node="xs:element[@name='QuadraticEducationResponse']//xs:element[@name='D']">
+        <jaxb:bindings node="xs:element[@name='quadraticEducationResponse']//xs:element[@name='d']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
     </jaxws:bindings>
+    <!--<jaxws:bindings node="wsdl:definitions/wsdl:portType[@name='MathPort']/wsdl:operation[@name='quadraticEducation']/wsdl:fault[@name='quadraticEducationFaultBean']">
+        <class name="QuadraticEducationException">
+            <javadoc>Exception generated during any operation with the service.</javadoc>
+        </class>
+    </jaxws:bindings>-->
 </jaxws:bindings>
