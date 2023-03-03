@@ -2,8 +2,13 @@ package com.divanov.mathwebservice.config;
 
 ;
 import com.divanov.mathwebservice.client.MathPortSoap11Impl;
+<<<<<<< HEAD
 import com.divanov.mathwebservice.generated.MathService;
 import com.divanov.mathwebservice.generated.ObjectFactory;
+=======
+import com.divanov.mathwebservice.dto.MathService;
+import com.divanov.mathwebservice.dto.ObjectFactory;
+>>>>>>> fc3d050d9d5a7fa00c535335ff69abfa8e297c78
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
