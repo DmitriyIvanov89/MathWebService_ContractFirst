@@ -13,9 +13,4 @@
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
     </jaxws:bindings>
-    <!--<jaxws:bindings node="wsdl:definitions/wsdl:portType[@name='MathPort']/wsdl:operation[@name='quadraticEducation']/wsdl:fault[@name='quadraticEducationFaultBean']">
-        <class name="QuadraticEducationException">
-            <javadoc>Exception generated during any operation with the service.</javadoc>
-        </class>
-    </jaxws:bindings>-->
 </jaxws:bindings>

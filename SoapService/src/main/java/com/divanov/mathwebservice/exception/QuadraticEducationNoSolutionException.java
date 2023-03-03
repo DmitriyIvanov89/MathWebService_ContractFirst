@@ -4,7 +4,7 @@ import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 
 @SoapFault(faultCode = FaultCode.CUSTOM,
-        customFaultCode = "{" + QuadraticEducationNoSolutionException.NAMESPACE_URI + "}QuadraticEducationNoSolutionException")
+        customFaultCode = "{" + QuadraticEducationNoSolutionException.NAMESPACE_URI + "}NO_SOLUTION")
 public class QuadraticEducationNoSolutionException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;

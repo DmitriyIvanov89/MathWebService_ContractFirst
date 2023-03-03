@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
 
-    <xs:element name="quadraticEducationRequest">
+    <xs:element name="solveQuadraticEducationRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="a" minOccurs="1" maxOccurs="1" type="xs:double"/>
@@ -12,7 +12,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="quadraticEducationResponse">
+    <xs:element name="solveQuadraticEducationResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
@@ -23,7 +23,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="quadraticEducationFault">
+    <xs:element name="faultDetail">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>

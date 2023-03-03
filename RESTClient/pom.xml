@@ -66,10 +66,10 @@
                             <sourceRoot>src/main/java/com/divanov/mathwebservice/generated</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>src/main/resources/myService.wsdl</wsdl>
-                                    <bindingFiles>
-                                        <bindingFile>src/main/resources/mathWSClient.xjb</bindingFile>
-                                    </bindingFiles>
+                                    <wsdl>src/main/resources/test.wsdl</wsdl>
+<!--                                    <bindingFiles>-->
+<!--                                        <bindingFile>src/main/resources/mathWSClient.xjb</bindingFile>-->
+<!--                                    </bindingFiles>-->
                                     <extraargs>
                                         <extraarg>-impl</extraarg>
 <!--                                        <extraarg>-xjc-Xts</extraarg>-->
