@@ -4,7 +4,7 @@ import com.divanov.mathwebservice.gen.FaultDetail;
 
 import javax.xml.ws.WebFault;
 
-@WebFault(name = "faultDetail")
+@WebFault
 public class SolveQuadraticEducationException extends Exception {
 
     private FaultDetail detail;

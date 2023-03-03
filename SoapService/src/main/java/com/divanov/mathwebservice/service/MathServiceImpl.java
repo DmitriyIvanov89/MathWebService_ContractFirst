@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.jws.WebMethod;
 
 @Service
-public class MathServiceImpl implements MathService {
+public class MathServiceImpl implements IMathService {
     private static final String ERROR_PARAM_A = "The leading coefficient can't be equals 0";
     private static final String ERROR_DISCRIMINANT_VALUE = "Discriminant can't be less than 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
