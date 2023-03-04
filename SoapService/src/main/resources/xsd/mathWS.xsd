@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
-
-    <xs:element name="quadraticEducationRequest">
+    <xs:element name="solveQuadraticEducationRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="request" type="ns:quadraticEducationRequestParams"/>
+                <xs:element name="a" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                <xs:element name="b" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                <xs:element name="c" minOccurs="1" maxOccurs="1" type="xs:double"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="solutionQuadraticEducationResponse">
+    <xs:element name="solveQuadraticEducationResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="response" type="ns:quadraticEducationResponse"/>
+                <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                <xs:element name="x1" minOccurs="0" maxOccurs="1" type="xs:double"/>
+                <xs:element name="x2" minOccurs="0" maxOccurs="1" type="xs:double"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="quadraticEducationRequestParams">
-        <xs:sequence>
-            <xs:element name="a" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            <xs:element name="b" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            <xs:element name="c" minOccurs="1" maxOccurs="1" type="xs:double"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="quadraticEducationResponse">
-        <xs:sequence>
-            <xs:element name="info" minOccurs="1" type="ns:responseInfo"/>
-            <xs:element name="x1" minOccurs="0" maxOccurs="1" type="xs:double"/>
-            <xs:element name="x2" minOccurs="0" maxOccurs="1" type="xs:double"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="responseInfo">
-        <xs:sequence>
-            <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
-            <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="faultDetail">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>

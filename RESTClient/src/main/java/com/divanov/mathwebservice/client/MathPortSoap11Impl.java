@@ -1,7 +1,10 @@
 package com.divanov.mathwebservice.client;
 
+<<<<<<< HEAD
 import com.divanov.mathwebservice.generated.*;
 import org.apache.cxf.binding.soap.SoapFault;
+=======
+>>>>>>> 6cd713248a87e914ee87c21dae6e24827b296e01
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
@@ -21,17 +24,14 @@ import javax.wsdl.WSDLException;
         endpointInterface = "com.divanov.mathwebservice.dto.MathPort")
 
 public class MathPortSoap11Impl implements MathPort {
-//    @Override
-//    public QuadraticEducationResponse quadraticEducation(QuadraticEducationRequest quadraticEducationRequest) {
-//        QuadraticEducationResponse response = new QuadraticEducationResponse();
+
+//    private final MathService service;
 //
-//        try {
-//            response = (QuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(quadraticEducationRequest);
-//        } catch (SoapFaultClientException e) {
-//            System.err.println(e.getSoapFault());
-//        }
-//        return response;
+//    @Autowired
+//    public MathPortSoap11Impl(MathService service) {
+//        this.service = service;
 //    }
+<<<<<<< HEAD
 
     private final MathService service;
 
@@ -60,4 +60,22 @@ public class MathPortSoap11Impl implements MathPort {
         }
         return response;
     }
+=======
+//
+//    public MathService getService() {
+//        return service;
+//    }
+//
+//    @Override
+//    public QuadraticEducationResponse quadraticEducation(QuadraticEducationRequest request) throws QuadraticEducationFault_Exception {
+//        QuadraticEducationResponse response = null;
+//
+//        try {
+//            response = getService().getMathPortSoap11().quadraticEducation(request);
+//        } catch (QuadraticEducationFault_Exception ex) {
+//            System.err.println(ex.getMessage());
+//        }
+//        return response;
+//    }
+>>>>>>> 6cd713248a87e914ee87c21dae6e24827b296e01
 }
