@@ -2,20 +2,18 @@
 <jaxws:bindings
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-    wsdlLocation="http://localhost:8080/services/MathService.wsdl"
+    wsdlLocation="http://localhost:8080/services/math.wsdl"
     xmlns="http://java.sun.com/xml/ns/jaxws"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
     <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
 
     <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://math.ws.divanov']">
-        <jaxb:bindings node="xs:element[@name='quadraticEducationResponse']//xs:element[@name='d']">
+        <jaxb:bindings node="xs:element[@name='solveQuadraticEducationResponse']//xs:element[@name='d']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
     </jaxws:bindings>
-    <!--<jaxws:bindings node="wsdl:definitions/wsdl:portType[@name='MathPort']/wsdl:operation[@name='quadraticEducation']/wsdl:fault[@name='quadraticEducationFaultBean']">
-        <class name="QuadraticEducationException">
-            <javadoc>Exception generated during any operation with the service.</javadoc>
-        </class>
-    </jaxws:bindings>-->
+    <jaxb:bindings node="//xs:complexType[@name='faultDetail']//xs:element[@name='d']">
+                <jaxb:property name="Discriminant"/>
+    </jaxb:bindings>
 </jaxws:bindings>
