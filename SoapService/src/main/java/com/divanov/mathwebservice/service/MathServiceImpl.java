@@ -80,7 +80,7 @@ public class MathServiceImpl implements IMathService {
             response.setX1(-param_B / (2 * param_A));
             return;
         }
-        System.err.println("Throw new QuadraticEducationException");
+        System.err.println("DiscriminantValueException");
         FaultDetail detail = getObjectFactory().createFaultDetail();
         detail.setFormula(generateEducationFormula(param_A, param_B, param_C));
         detail.setDiscriminant(response.getDiscriminant());

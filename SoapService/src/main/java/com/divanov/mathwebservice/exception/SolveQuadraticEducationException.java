@@ -4,34 +4,30 @@ import com.divanov.mathwebservice.gen.FaultDetail;
 
 import javax.xml.ws.WebFault;
 
-@WebFault
+@WebFault(name = "solveQuadraticEducationException")
 public class SolveQuadraticEducationException extends Exception {
 
-    private FaultDetail detail;
+    private FaultDetail detailInfo;
 
     public SolveQuadraticEducationException(String message) {
         super(message);
     }
 
     public SolveQuadraticEducationException(FaultDetail detail) {
-        this.detail = detail;
+        this.detailInfo = detail;
     }
 
     public SolveQuadraticEducationException(String message, FaultDetail detail) {
         super(message);
-        this.detail = detail;
+        this.detailInfo = detail;
     }
 
     public SolveQuadraticEducationException(String message, Throwable cause, FaultDetail detail) {
         super(message, cause);
-        this.detail = detail;
+        this.detailInfo = detail;
     }
 
     public FaultDetail getDetail() {
-        return detail;
-    }
-
-    public void setDetail(FaultDetail detail) {
-        this.detail = detail;
+        return detailInfo;
     }
 }

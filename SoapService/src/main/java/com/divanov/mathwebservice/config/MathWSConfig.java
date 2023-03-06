@@ -3,6 +3,7 @@ package com.divanov.mathwebservice.config;
 import com.divanov.mathwebservice.endpoint.MathWSEndpoint;
 import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
 import com.divanov.mathwebservice.gen.ObjectFactory;
+import com.divanov.mathwebservice.service.CustomWsdl11Definition;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -46,12 +47,13 @@ public class MathWSConfig extends WsConfigurerAdapter {
 
     @Bean(name = "math")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
-        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        DefaultWsdl11Definition wsdl11Definition = new CustomWsdl11Definition();
         wsdl11Definition.setServiceName("MathService");
         wsdl11Definition.setPortTypeName("MathServicePort");
         wsdl11Definition.setTargetNamespace(MathWSEndpoint.NAME_SPACE);
         wsdl11Definition.setSchema(mathSchema());
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
+        wsdl11Definition.setFaultSuffix("solveQuadraticEducationException");
         return wsdl11Definition;
     }
 

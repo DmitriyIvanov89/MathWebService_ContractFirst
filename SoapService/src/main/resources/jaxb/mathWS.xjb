@@ -8,7 +8,7 @@
         <jaxb:bindings node="//xs:element[@name='solveQuadraticEducationResponse']//xs:element[@name='d']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
-        <jaxb:bindings node="//xs:element[@name='faultDetail']//xs:element[@name='d']">
+        <jaxb:bindings node="//xs:complexType[@name='faultDetail']//xs:element[@name='d']">
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
     </jaxb:bindings>
