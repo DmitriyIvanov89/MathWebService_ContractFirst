@@ -1,5 +1,6 @@
 package com.divanov.mathwebservice.client;
 
+import com.divanov.mathwebservice.gen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
@@ -17,28 +18,27 @@ import javax.jws.WebService;
         wsdlLocation = "http://localhost:8080/services/MathService.wsdl",
         endpointInterface = "com.divanov.mathwebservice.dto.MathPort")
 
-public class MathPortSoap11Impl implements MathPort {
+public class MathPortSoap11Impl implements MathService {
+    private final MathServiceService service;
 
-//    private final MathService service;
-//
-//    @Autowired
-//    public MathPortSoap11Impl(MathService service) {
-//        this.service = service;
-//    }
-//
-//    public MathService getService() {
-//        return service;
-//    }
-//
-//    @Override
-//    public QuadraticEducationResponse quadraticEducation(QuadraticEducationRequest request) throws QuadraticEducationFault_Exception {
-//        QuadraticEducationResponse response = null;
-//
-//        try {
-//            response = getService().getMathPortSoap11().quadraticEducation(request);
-//        } catch (QuadraticEducationFault_Exception ex) {
-//            System.err.println(ex.getMessage());
-//        }
-//        return response;
-//    }
+    @Autowired
+    public MathPortSoap11Impl(MathServiceService service) {
+        this.service = service;
+    }
+
+    public MathServiceService getService() {
+        return service;
+    }
+
+    @Override
+    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest solveQuadraticEducationRequest) {
+        SolveQuadraticEducationResponse response = new SolveQuadraticEducationResponse();
+
+        try {
+            response = getService().getMathServiceSoap11().solveQuadraticEducation(solveQuadraticEducationRequest);
+        } catch (SolveQuadraticEducationException e) {
+            System.err.println(e.getMessage());
+        }
+        return response;
+    }
 }

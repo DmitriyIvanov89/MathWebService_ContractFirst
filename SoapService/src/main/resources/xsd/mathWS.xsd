@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
-
     <xs:element name="solveQuadraticEducationRequest">
         <xs:complexType>
             <xs:sequence>
@@ -17,15 +16,15 @@
             <xs:sequence>
                 <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
                 <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
-                <xs:element name="x1" minOccurs="1" maxOccurs="1" type="xs:double"/>
+                <xs:element name="x1" minOccurs="0" maxOccurs="1" type="xs:double"/>
                 <xs:element name="x2" minOccurs="0" maxOccurs="1" type="xs:double"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="discriminantValueLessZeroException" type="ns:faultDetail"/>
+    <xs:element name="solveQuadraticEducationException" type="ns:solveQuadraticEducationExceptionDetail"/>
 
-    <xs:complexType name="faultDetail">
+    <xs:complexType name="solveQuadraticEducationExceptionDetail">
         <xs:sequence>
             <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
             <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>

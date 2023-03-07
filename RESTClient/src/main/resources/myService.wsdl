@@ -15,13 +15,13 @@
                     <xs:sequence>
                         <xs:element maxOccurs="1" minOccurs="1" name="formula" type="xs:string"/>
                         <xs:element maxOccurs="1" minOccurs="1" name="d" type="xs:double"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="x1" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="x1" type="xs:double"/>
                         <xs:element maxOccurs="1" minOccurs="0" name="x2" type="xs:double"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="discriminantValueLessZeroException" type="ns:faultDetail"/>
-            <xs:complexType name="faultDetail">
+            <xs:element name="solveQuadraticEducationException" type="ns:solveQuadraticEducationExceptionDetail"/>
+            <xs:complexType name="solveQuadraticEducationExceptionDetail">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="1" name="formula" type="xs:string"/>
                     <xs:element maxOccurs="1" minOccurs="1" name="d" type="xs:double"/>
@@ -35,13 +35,17 @@
     <wsdl:message name="solveQuadraticEducationRequest">
         <wsdl:part element="tns:solveQuadraticEducationRequest" name="solveQuadraticEducationRequest"> </wsdl:part>
     </wsdl:message>
-    <wsdl:portType name="MathServicePort">
+    <wsdl:message name="solveQuadraticEducationException">
+        <wsdl:part element="tns:solveQuadraticEducationException" name="solveQuadraticEducationException"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="MathService">
         <wsdl:operation name="solveQuadraticEducation">
             <wsdl:input message="tns:solveQuadraticEducationRequest" name="solveQuadraticEducationRequest"> </wsdl:input>
             <wsdl:output message="tns:solveQuadraticEducationResponse" name="solveQuadraticEducationResponse"> </wsdl:output>
+            <wsdl:fault message="tns:solveQuadraticEducationException" name="solveQuadraticEducationException"> </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="MathServicePortSoap11" type="tns:MathServicePort">
+    <wsdl:binding name="MathServiceSoap11" type="tns:MathService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="solveQuadraticEducation">
             <soap:operation soapAction=""/>
@@ -51,10 +55,13 @@
             <wsdl:output name="solveQuadraticEducationResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="solveQuadraticEducationException">
+                <soap:fault name="solveQuadraticEducationException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="MathService">
-        <wsdl:port binding="tns:MathServicePortSoap11" name="MathServicePortSoap11">
+    <wsdl:service name="MathServiceService">
+        <wsdl:port binding="tns:MathServiceSoap11" name="MathServiceSoap11">
             <soap:address location="http://localhost:8080/services/MathServiceEndpoint"/>
         </wsdl:port>
     </wsdl:service>

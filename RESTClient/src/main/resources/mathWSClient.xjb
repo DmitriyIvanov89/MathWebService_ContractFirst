@@ -13,7 +13,7 @@
             <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
         <jaxb:bindings node="//xs:complexType[@name='faultDetail']//xs:element[@name='d']">
-                    <jaxb:property name="Discriminant"/>
+            <jaxb:property name="Discriminant"/>
         </jaxb:bindings>
     </jaxws:bindings>
 </jaxws:bindings>

@@ -1,8 +1,9 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.exception.DiscriminantValueLessZeroException;
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
-import com.divanov.mathwebservice.gen.FaultDetail;
+import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
+import com.divanov.mathwebservice.gen.ObjectFactory;
+import com.divanov.mathwebservice.gen.SolveQuadraticEducationExceptionDetail;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
@@ -29,7 +30,7 @@ public class MathServiceImpl implements IMathService {
     }
 
     @Override
-    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest request) throws DiscriminantValueLessZeroException {
+    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest request) throws SolveQuadraticEducationException {
         SolveQuadraticEducationResponse response = getObjectFactory().createSolveQuadraticEducationResponse();
         if (request.getA() != 0) {
             if (request.getB() == 0 || request.getC() == 0) {
@@ -42,10 +43,11 @@ public class MathServiceImpl implements IMathService {
         throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
     }
 
+
     private void solveIncompleteQuadraticEducation(SolveQuadraticEducationResponse response,
                                                    double param_A,
                                                    double param_B,
-                                                   double param_C) throws QuadraticEducationNoSolutionException {
+                                                   double param_C) {
         if (param_B == 0 && param_C == 0) {
             response.setFormula(generateEducationFormula(param_A, param_B, param_C));
             response.setX1(0.0);
@@ -67,7 +69,7 @@ public class MathServiceImpl implements IMathService {
     private void solveCompleteQuadraticEducation(SolveQuadraticEducationResponse response,
                                                  double param_A,
                                                  double param_B,
-                                                 double param_C) throws DiscriminantValueLessZeroException {
+                                                 double param_C) throws SolveQuadraticEducationException {
         response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
         if (response.getDiscriminant() > 0) {
             response.setFormula(generateEducationFormula(param_A, param_B, param_C));
@@ -79,10 +81,11 @@ public class MathServiceImpl implements IMathService {
             response.setX1(-param_B / (2 * param_A));
             return;
         }
-        FaultDetail detail = getObjectFactory().createFaultDetail();
+        System.err.println("SolveQuadraticEducationException");
+        SolveQuadraticEducationExceptionDetail detail = getObjectFactory().createSolveQuadraticEducationExceptionDetail();
         detail.setFormula(generateEducationFormula(param_A, param_B, param_C));
         detail.setDiscriminant(response.getDiscriminant());
-        throw new DiscriminantValueLessZeroException(ERROR_DISCRIMINANT_VALUE, detail);
+        throw new SolveQuadraticEducationException(ERROR_DISCRIMINANT_VALUE, detail);
     }
 
     private static String generateEducationFormula(double a, double b, double c) {
