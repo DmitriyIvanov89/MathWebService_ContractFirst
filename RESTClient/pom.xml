@@ -63,7 +63,7 @@
                         <id>generate-sources</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <sourceRoot>src/main/java/com/divanov/mathwebservice/generated</sourceRoot>
+                            <sourceRoot>src/main/java/com/divanov/mathwebservice/gen</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>src/main/resources/test.wsdl</wsdl>

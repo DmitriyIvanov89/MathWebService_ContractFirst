@@ -1,14 +1,13 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
+import com.divanov.mathwebservice.exception.DiscriminantValueLessZeroException;
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
-import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.gen.FaultDetail;
+import com.divanov.mathwebservice.gen.ObjectFactory;
+import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.jws.WebMethod;
 
 @Service
 public class MathServiceImpl implements IMathService {
@@ -30,14 +29,13 @@ public class MathServiceImpl implements IMathService {
     }
 
     @Override
-    @WebMethod
-    public SolveQuadraticEducationResponse solveQuadraticEducation(double param_A, double param_B, double param_C) throws SolveQuadraticEducationException {
+    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest request) throws DiscriminantValueLessZeroException {
         SolveQuadraticEducationResponse response = getObjectFactory().createSolveQuadraticEducationResponse();
-        if (param_A != 0) {
-            if (param_B == 0 || param_C == 0) {
-                solveIncompleteQuadraticEducation(response, param_A, param_B, param_C);
+        if (request.getA() != 0) {
+            if (request.getB() == 0 || request.getC() == 0) {
+                solveIncompleteQuadraticEducation(response, request.getA(), request.getB(), request.getC());
             } else {
-                solveCompleteQuadraticEducation(response, param_A, param_B, param_C);
+                solveCompleteQuadraticEducation(response, request.getA(), request.getB(), request.getC());
             }
             return response;
         }
@@ -69,7 +67,7 @@ public class MathServiceImpl implements IMathService {
     private void solveCompleteQuadraticEducation(SolveQuadraticEducationResponse response,
                                                  double param_A,
                                                  double param_B,
-                                                 double param_C) throws SolveQuadraticEducationException {
+                                                 double param_C) throws DiscriminantValueLessZeroException {
         response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
         if (response.getDiscriminant() > 0) {
             response.setFormula(generateEducationFormula(param_A, param_B, param_C));
@@ -84,7 +82,7 @@ public class MathServiceImpl implements IMathService {
         FaultDetail detail = getObjectFactory().createFaultDetail();
         detail.setFormula(generateEducationFormula(param_A, param_B, param_C));
         detail.setDiscriminant(response.getDiscriminant());
-        throw new SolveQuadraticEducationException(ERROR_DISCRIMINANT_VALUE, detail);
+        throw new DiscriminantValueLessZeroException(ERROR_DISCRIMINANT_VALUE, detail);
     }
 
     private static String generateEducationFormula(double a, double b, double c) {

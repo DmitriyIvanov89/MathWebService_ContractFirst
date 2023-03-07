@@ -14,8 +14,8 @@ public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMapping
 
     @Override
     protected void customizeFault(Object endpoint, Exception ex, SoapFault fault) {
-        if (ex instanceof SolveQuadraticEducationException) {
-            FaultDetail detail = ((SolveQuadraticEducationException) ex).getDetail();
+        if (ex instanceof DiscriminantValueLessZeroException) {
+            FaultDetail detail = ((DiscriminantValueLessZeroException) ex).getFaultInfo();
             SoapFaultDetail soapFaultDetail = fault.addFaultDetail();
             soapFaultDetail.addFaultDetailElement(FORMULA).addText(detail.getFormula());
             soapFaultDetail.addFaultDetailElement(DISCRIMINANT).addText(String.valueOf(detail.getDiscriminant()));

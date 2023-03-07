@@ -23,12 +23,13 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="faultDetail">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
-                <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xs:element name="discriminantValueLessZeroException" type="ns:faultDetail"/>
+
+    <xs:complexType name="faultDetail">
+        <xs:sequence>
+            <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
 </xs:schema>

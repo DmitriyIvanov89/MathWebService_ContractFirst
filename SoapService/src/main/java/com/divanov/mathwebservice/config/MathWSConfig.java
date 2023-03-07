@@ -1,7 +1,7 @@
 package com.divanov.mathwebservice.config;
 
 import com.divanov.mathwebservice.endpoint.MathWSEndpoint;
-import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
+import com.divanov.mathwebservice.exception.DiscriminantValueLessZeroException;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
@@ -50,7 +50,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
         wsdl11Definition.setServiceName("MathService");
         wsdl11Definition.setPortTypeName("MathServicePort");
         wsdl11Definition.setTargetNamespace(MathWSEndpoint.NAME_SPACE);
-        wsdl11Definition.setSchema(mathSchema());
+        wsdl11Definition.setSchema(schema);
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
         return wsdl11Definition;
     }
@@ -75,7 +75,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
 
         Properties errorMappings = new Properties();
         errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
-        errorMappings.setProperty(SolveQuadraticEducationException.class.getName(), SoapFaultDefinition.SERVER.toString());
+        errorMappings.setProperty(DiscriminantValueLessZeroException.class.getName(), SoapFaultDefinition.SERVER.toString());
         exceptionResolver.setExceptionMappings(errorMappings);
         exceptionResolver.setOrder(1);
         return exceptionResolver;

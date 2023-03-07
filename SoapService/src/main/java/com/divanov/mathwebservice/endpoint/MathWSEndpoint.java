@@ -1,9 +1,8 @@
 package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
+import com.divanov.mathwebservice.exception.DiscriminantValueLessZeroException;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
-import com.divanov.mathwebservice.service.IMathService;
 import com.divanov.mathwebservice.service.MathServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -26,10 +25,10 @@ public class MathWSEndpoint {
         return mathServiceImpl;
     }
 
-    @PayloadRoot(namespace = NAME_SPACE, localPart = "quadraticEducationRequest")
+    @PayloadRoot(namespace = NAME_SPACE, localPart = "solveQuadraticEducationRequest")
     @ResponsePayload
-    public SolveQuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload SolveQuadraticEducationRequest request) throws SolveQuadraticEducationException {
-        return mathServiceImpl.solveQuadraticEducation(request.getA(), request.getB(), request.getC());
+    public SolveQuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload SolveQuadraticEducationRequest request) throws DiscriminantValueLessZeroException {
+        return mathServiceImpl.solveQuadraticEducation(request);
     }
 }
 

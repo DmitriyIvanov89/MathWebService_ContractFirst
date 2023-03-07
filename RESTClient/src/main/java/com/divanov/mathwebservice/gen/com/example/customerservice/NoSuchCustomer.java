@@ -1,24 +1,23 @@
 
-package org.apache.hello_world_soap_http.types;
+package com.example.customerservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for NoSuchCustomer complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType&gt;
+ * &lt;complexType name="NoSuchCustomer"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="responseType" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="customerName" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,37 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "responseType"
+@XmlType(name = "NoSuchCustomer", propOrder = {
+    "customerName"
 })
-@XmlRootElement(name = "greetMeResponse")
-public class GreetMeResponse {
+public class NoSuchCustomer {
 
-    @XmlElement(required = true)
-    protected String responseType;
+    @XmlElement(required = true, nillable = true)
+    protected String customerName;
 
     /**
-     * Gets the value of the responseType property.
+     * Gets the value of the customerName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getResponseType() {
-        return responseType;
+    public String getCustomerName() {
+        return customerName;
     }
 
     /**
-     * Sets the value of the responseType property.
+     * Sets the value of the customerName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setResponseType(String value) {
-        this.responseType = value;
+    public void setCustomerName(String value) {
+        this.customerName = value;
     }
 
 }
