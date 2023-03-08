@@ -53,7 +53,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
         wsdl11Definition.setTargetNamespace(MathWSEndpoint.NAME_SPACE);
         wsdl11Definition.setSchema(mathSchema());
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
-        wsdl11Definition.setFaultSuffix("solveQuadraticEducationException");
+        wsdl11Definition.setFaultSuffix("Exception");
         return wsdl11Definition;
     }
 
