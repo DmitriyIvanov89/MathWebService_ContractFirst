@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.client;
 
-import com.divanov.mathwebservice.generated.*;
+import com.divanov.mathwebservice.gen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
@@ -18,15 +18,15 @@ import javax.jws.WebService;
         wsdlLocation = "http://localhost:8080/services/MathService.wsdl",
         endpointInterface = "com.divanov.mathwebservice.dto.MathPort")
 
-public class MathPortSoap11Impl implements MathServicePort {
-    private final MathService service;
+public class MathPortSoap11Impl implements MathService {
+    private final MathServiceService service;
 
     @Autowired
-    public MathPortSoap11Impl(MathService service) {
+    public MathPortSoap11Impl(MathServiceService service) {
         this.service = service;
     }
 
-    public MathService getService() {
+    public MathServiceService getService() {
         return service;
     }
 
@@ -35,9 +35,9 @@ public class MathPortSoap11Impl implements MathServicePort {
         SolveQuadraticEducationResponse response = new SolveQuadraticEducationResponse();
 
         try {
-            response = getService().getMathServicePortSoap11().solveQuadraticEducation(solveQuadraticEducationRequest);
-        } catch (CommonFault ex) {
-            System.err.println(ex.getFaultInfo().getFormula());
+            response = getService().getMathServiceSoap11().solveQuadraticEducation(solveQuadraticEducationRequest);
+        } catch (SolveQuadraticEducationException e) {
+            System.err.println(e.getMessage());
         }
         return response;
     }

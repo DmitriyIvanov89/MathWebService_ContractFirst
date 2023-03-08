@@ -1,71 +1,67 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://math.ws.divanov" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
     <wsdl:types>
-        <xs:schema xmlns:ns="http://math.ws.divanov"
-                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                   elementFormDefault="qualified"
-                   targetNamespace="http://math.ws.divanov">
-            <xs:element name="QuadraticEducationRequest">
+        <xs:schema xmlns:ns="http://math.ws.divanov" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://math.ws.divanov">
+            <xs:element name="solveQuadraticEducationRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="1" minOccurs="1" name="A" type="xs:double"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="B" type="xs:double"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="C" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="a" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="b" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="c" type="xs:double"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="QuadraticEducationResponse">
+            <xs:element name="solveQuadraticEducationResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="1" minOccurs="1" name="Formula" type="xs:string"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="D" type="xs:double"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="X1" type="xs:double"/>
-                        <xs:element maxOccurs="1" minOccurs="0" name="X2" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="formula" type="xs:string"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="d" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="x1" type="xs:double"/>
+                        <xs:element maxOccurs="1" minOccurs="0" name="x2" type="xs:double"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="QuadraticEducationFault">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="1" minOccurs="1" name="Formula" type="xs:string"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="Discriminant" type="xs:double"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="solveQuadraticEducationException" type="ns:solveQuadraticEducationExceptionDetail"/>
+            <xs:complexType name="solveQuadraticEducationExceptionDetail">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="1" name="formula" type="xs:string"/>
+                    <xs:element maxOccurs="1" minOccurs="1" name="d" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
     </wsdl:types>
-    <wsdl:message name="QuadraticEducationRequest">
-        <wsdl:part element="tns:QuadraticEducationRequest" name="QuadraticEducationRequest"> </wsdl:part>
+    <wsdl:message name="solveQuadraticEducationResponse">
+        <wsdl:part element="tns:solveQuadraticEducationResponse" name="solveQuadraticEducationResponse"> </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="QuadraticEducationFault">
-        <wsdl:part element="tns:QuadraticEducationFault" name="QuadraticEducationFault"> </wsdl:part>
+    <wsdl:message name="solveQuadraticEducationRequest">
+        <wsdl:part element="tns:solveQuadraticEducationRequest" name="solveQuadraticEducationRequest"> </wsdl:part>
     </wsdl:message>
-    <wsdl:message name="QuadraticEducationResponse">
-        <wsdl:part element="tns:QuadraticEducationResponse" name="QuadraticEducationResponse"> </wsdl:part>
+    <wsdl:message name="solveQuadraticEducationException">
+        <wsdl:part element="tns:solveQuadraticEducationException" name="solveQuadraticEducationException"> </wsdl:part>
     </wsdl:message>
-    <wsdl:portType name="MathPort">
-        <wsdl:operation name="QuadraticEducation">
-            <wsdl:input message="tns:QuadraticEducationRequest" name="QuadraticEducationRequest"> </wsdl:input>
-            <wsdl:output message="tns:QuadraticEducationResponse" name="QuadraticEducationResponse"> </wsdl:output>
-            <wsdl:fault message="tns:QuadraticEducationFault" name="QuadraticEducationFault"> </wsdl:fault>
+    <wsdl:portType name="MathService">
+        <wsdl:operation name="solveQuadraticEducation">
+            <wsdl:input message="tns:solveQuadraticEducationRequest" name="solveQuadraticEducationRequest"> </wsdl:input>
+            <wsdl:output message="tns:solveQuadraticEducationResponse" name="solveQuadraticEducationResponse"> </wsdl:output>
+            <wsdl:fault message="tns:solveQuadraticEducationException" name="solveQuadraticEducationException"> </wsdl:fault>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="MathPortSoap11" type="tns:MathPort">
+    <wsdl:binding name="MathServiceSoap11" type="tns:MathService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="QuadraticEducation">
+        <wsdl:operation name="solveQuadraticEducation">
             <soap:operation soapAction=""/>
-            <wsdl:input name="QuadraticEducationRequest">
+            <wsdl:input name="solveQuadraticEducationRequest">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="QuadraticEducationResponse">
+            <wsdl:output name="solveQuadraticEducationResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="QuadraticEducationFault">
-                <soap:fault name="QuadraticEducationFault" use="literal"/>
+            <wsdl:fault name="solveQuadraticEducationException">
+                <soap:fault name="solveQuadraticEducationException" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="MathService">
-        <wsdl:port binding="tns:MathPortSoap11" name="MathPortSoap11">
+    <wsdl:service name="MathServiceService">
+        <wsdl:port binding="tns:MathServiceSoap11" name="MathServiceSoap11">
             <soap:address location="http://localhost:8080/services/MathServiceEndpoint"/>
         </wsdl:port>
     </wsdl:service>

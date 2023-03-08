@@ -47,13 +47,14 @@ public class MathWSConfig extends WsConfigurerAdapter {
 
     @Bean(name = "math")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
-        DefaultWsdl11Definition wsdl11Definition = new CustomWsdl11Definition();
-        wsdl11Definition.setServiceName("MathService");
-        wsdl11Definition.setPortTypeName("MathServicePort");
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+//        wsdl11Definition.setServiceName("MathService");
+        wsdl11Definition.setPortTypeName("MathService");
         wsdl11Definition.setTargetNamespace(MathWSEndpoint.NAME_SPACE);
-        wsdl11Definition.setSchema(mathSchema());
+        wsdl11Definition.setSchema(schema);
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
         wsdl11Definition.setFaultSuffix("Exception");
+
         return wsdl11Definition;
     }
 

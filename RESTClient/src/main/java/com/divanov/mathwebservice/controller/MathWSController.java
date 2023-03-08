@@ -1,7 +1,8 @@
 package com.divanov.mathwebservice.controller;
 
+import com.divanov.mathwebservice.client.MathClient;
 import com.divanov.mathwebservice.client.MathPortSoap11Impl;
-import com.divanov.mathwebservice.generated.*;
+import com.divanov.mathwebservice.gen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,23 @@ public class MathWSController {
         request.setA(a);
         request.setB(b);
         request.setC(c);
-
         return mathPortSoap11.solveQuadraticEducation(request);
+
     }
+//    @Autowired
+//    private MathClient client;
+//
+//    @Autowired
+//    private ObjectFactory objectFactory;
+//
+//    @GetMapping
+//    public SolveQuadraticEducationResponse getResult(@RequestParam Double a,
+//                                                     @RequestParam Double b,
+//                                                     @RequestParam Double c) {
+//        SolveQuadraticEducationRequest request = objectFactory.createSolveQuadraticEducationRequest();
+//        request.setA(a);
+//        request.setB(b);
+//        request.setC(c);
+//        return client.getSolveQuadraticEducation(request);
+//    }
 }

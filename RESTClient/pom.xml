@@ -63,16 +63,17 @@
                         <id>generate-sources</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <sourceRoot>src/main/java/com/divanov/mathwebservice/generated</sourceRoot>
+<!--                            <sourceRoot>${basedir}/src/main/java/com/divanov/mathwebservice/gen</sourceRoot>-->
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>src/main/resources/test.wsdl</wsdl>
-<!--                                    <bindingFiles>-->
-<!--                                        <bindingFile>src/main/resources/mathWSClient.xjb</bindingFile>-->
-<!--                                    </bindingFiles>-->
+                                    <wsdl>${basedir}/src/main/resources/myService.wsdl</wsdl>
+                                    <bindingFiles>
+                                        <bindingFile>${basedir}/src/main/resources/mathWSClient.xjb</bindingFile>
+                                    </bindingFiles>
                                     <extraargs>
-                                        <extraarg>-impl</extraarg>
-<!--                                        <extraarg>-xjc-Xts</extraarg>-->
+<!--                                        <extraarg>-impl</extraarg>-->
+                                        <extraarg>-p</extraarg>
+                                        <extraarg>com.divanov.mathwebservice.gen</extraarg>
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
@@ -83,6 +84,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>jaxb2-maven-plugin</artifactId>-->
+            <!--                <version>2.5.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>xjc</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>xjc</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <xjbSources>src/main/resources/jaxb</xjbSources>-->
+            <!--                            <sources>-->
+            <!--                                <source>src/main/resources/xsd</source>-->
+            <!--                            </sources>-->
+            <!--                            <outputDirectory>${basedir}/src/main/java/</outputDirectory>-->
+            <!--                            <packageName>com.divanov.mathwebservice.gen</packageName>-->
+            <!--                            <clearOutputDir>false</clearOutputDir>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 </project>
