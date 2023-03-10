@@ -1,0 +1,13 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:Fault>
+            <faultcode>SOAP-ENV:Server</faultcode>
+            <faultstring xml:lang="en">Discriminant can't be less than 0</faultstring>
+            <detail>
+                <formula>5,0x^2 + 3,0x + 7,0 = 0</formula>
+                <discriminant>-131.0</discriminant>
+            </detail>
+        </SOAP-ENV:Fault>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

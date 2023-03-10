@@ -1,6 +1,7 @@
 package com.divanov.mathwebservice.exception;
 
 
+import com.divanov.mathwebservice.gen.SolveQuadraticEducationException;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationExceptionDetail;
 import org.springframework.ws.soap.SoapFault;
 import org.springframework.ws.soap.SoapFaultDetail;
@@ -16,7 +17,7 @@ public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMapping
     @Override
     protected void customizeFault(Object endpoint, Exception ex, SoapFault fault) {
         if (ex instanceof SolveQuadraticEducationException) {
-            SolveQuadraticEducationExceptionDetail detail = ((SolveQuadraticEducationException) ex).getDetail();
+            SolveQuadraticEducationExceptionDetail detail = ((SolveQuadraticEducationException) ex).getDetailInfo();
             SoapFaultDetail soapFaultDetail = fault.addFaultDetail();
             soapFaultDetail.addFaultDetailElement(FORMULA).addText(detail.getFormula());
             soapFaultDetail.addFaultDetailElement(DISCRIMINANT).addText(String.valueOf(detail.getDiscriminant()));

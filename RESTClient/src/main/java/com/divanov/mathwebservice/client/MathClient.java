@@ -1,15 +1,15 @@
 package com.divanov.mathwebservice.client;
 
-import com.divanov.mathwebservice.gen.MathService;
-import com.divanov.mathwebservice.gen.SolveQuadraticEducationException;
-import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
-import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
+import com.divanov.mathwebservice.gen.*;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
-public class MathClient extends WebServiceGatewaySupport implements MathService {
+public class MathClient extends WebServiceGatewaySupport {
+    @Autowired
+    private ObjectFactory objectFactory;
 
-    @Override
-    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest solveQuadraticEducationRequest) throws SolveQuadraticEducationException {
-        return (SolveQuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(solveQuadraticEducationRequest);
+    public SolveQuadraticEducationResponse getSolveQuadraticEducation(SolveQuadraticEducationRequest request) {
+        return (SolveQuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
     }
 }

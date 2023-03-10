@@ -20,7 +20,13 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="solveQuadraticEducationException" type="ns:solveQuadraticEducationExceptionDetail"/>
+            <xs:element name="solveQuadraticEducationException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="detailInfo" type="ns:solveQuadraticEducationExceptionDetail"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:complexType name="solveQuadraticEducationExceptionDetail">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="1" name="formula" type="xs:string"/>
