@@ -32,17 +32,7 @@ public class MathWSEndpoint {
     @PayloadRoot(namespace = NAME_SPACE, localPart = "solveQuadraticEducationRequest")
     @ResponsePayload
     public SolveQuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload SolveQuadraticEducationRequest request) {
-        SolveQuadraticEducationResponse response = objectFactory.createSolveQuadraticEducationResponse();
-
-        try {
-            response = mathServiceImpl.solveQuadraticEducation(request);
-        } catch (SolveQuadraticEducationException e) {
-            SolveQuadraticEducationExceptionDetail detail = objectFactory.createSolveQuadraticEducationExceptionDetail();
-            detail.setFormula(response.getFormula());
-            detail.setDiscriminant(response.getDiscriminant());
-            throw new SolveQuadraticEducationException("Message", detail);
-        }
-        return response;
+        return getMathServiceImpl().solveQuadraticEducation(request);
     }
 }
 

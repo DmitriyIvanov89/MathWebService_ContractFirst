@@ -42,16 +42,14 @@ public class MathServiceImpl implements IMathService {
         throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
     }
 
-
     private void solveIncompleteQuadraticEducation(SolveQuadraticEducationResponse response,
                                                    double param_A,
                                                    double param_B,
                                                    double param_C) {
+        response.setFormula(generateEducationFormula(param_A, param_B, param_C));
         if (param_B == 0 && param_C == 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
             response.setX1(0.0);
         } else if (param_B == 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
             if (-(param_C / param_A) >= 0) {
                 response.setX1(Math.sqrt(-(param_C / param_A)));
                 response.setX2(-(Math.sqrt(-(param_C / param_A))));
@@ -59,7 +57,6 @@ public class MathServiceImpl implements IMathService {
                 throw new QuadraticEducationNoSolutionException(NO_REAL_ROOTS);
             }
         } else {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
             response.setX1(0.0);
             response.setX2(-(param_B / param_A));
         }
@@ -70,17 +67,18 @@ public class MathServiceImpl implements IMathService {
                                                  double param_B,
                                                  double param_C) {
         response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
+        response.setFormula(generateEducationFormula(param_A, param_B, param_C));
         if (response.getDiscriminant() > 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
             response.setX1((-param_B + Math.sqrt(response.getDiscriminant())) / (2 * param_A));
             response.setX2((-param_B - Math.sqrt(response.getDiscriminant())) / (2 * param_A));
-            return;
         } else if (response.getDiscriminant() == 0) {
-            response.setFormula(generateEducationFormula(param_A, param_B, param_C));
             response.setX1(-param_B / (2 * param_A));
-            return;
+        } else {
+            SolveQuadraticEducationExceptionDetail detail = getObjectFactory().createSolveQuadraticEducationExceptionDetail();
+            detail.setFormula(response.getFormula());
+            detail.setDiscriminant(response.getDiscriminant());
+            throw new SolveQuadraticEducationException(ERROR_DISCRIMINANT_VALUE, detail);
         }
-        System.err.println("SolveQuadraticEducationException from Impl class");
     }
 
     private static String generateEducationFormula(double a, double b, double c) {

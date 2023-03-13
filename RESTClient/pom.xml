@@ -66,14 +66,14 @@
 <!--                            <sourceRoot>${basedir}/src/main/java/com/divanov/mathwebservice/gen</sourceRoot>-->
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>${basedir}/src/main/resources/myService.wsdl</wsdl>
-                                    <bindingFiles>
-                                        <bindingFile>${basedir}/src/main/resources/mathWSClient.xjb</bindingFile>
-                                    </bindingFiles>
+                                    <wsdl>${basedir}/src/main/resources/test.wsdl</wsdl>
+<!--                                    <bindingFiles>-->
+<!--                                        <bindingFile>${basedir}/src/main/resources/mathWSClient.xjb</bindingFile>-->
+<!--                                    </bindingFiles>-->
                                     <extraargs>
 <!--                                        <extraarg>-impl</extraarg>-->
                                         <extraarg>-p</extraarg>
-                                        <extraarg>com.divanov.mathwebservice.gen</extraarg>
+                                        <extraarg>com.divanov.mathwebservice.gen3</extraarg>
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>

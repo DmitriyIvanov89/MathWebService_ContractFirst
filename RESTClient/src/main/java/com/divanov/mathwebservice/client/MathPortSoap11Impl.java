@@ -12,11 +12,11 @@ import javax.jws.WebService;
  */
 
 @WebService(
-        serviceName = "MathService",
+        serviceName = "MathServiceService",
         portName = "MathPortSoap11",
         targetNamespace = "http://math.ws.divanov",
-        wsdlLocation = "http://localhost:8080/services/MathService.wsdl",
-        endpointInterface = "com.divanov.mathwebservice.dto.MathPort")
+        wsdlLocation = "http://localhost:8080/services/math.wsdl",
+        endpointInterface = "com.divanov.mathwebservice.gen.MathService")
 
 public class MathPortSoap11Impl implements MathService {
     private final MathServiceService service;
@@ -31,13 +31,13 @@ public class MathPortSoap11Impl implements MathService {
     }
 
     @Override
-    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest solveQuadraticEducationRequest) {
+    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest solveQuadraticEducationRequest) throws SolveQuadraticEducationException {
         SolveQuadraticEducationResponse response = new SolveQuadraticEducationResponse();
 
         try {
             response = getService().getMathServiceSoap11().solveQuadraticEducation(solveQuadraticEducationRequest);
-        } catch (SolveQuadraticEducationException e) {
-            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            throw new SolveQuadraticEducationException(e.getMessage());
         }
         return response;
     }

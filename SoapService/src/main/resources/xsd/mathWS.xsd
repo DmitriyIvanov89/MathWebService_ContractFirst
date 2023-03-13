@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
-    <xs:element name="solveQuadraticEducationRequest">
-        <xs:complexType>
+    
+    <xs:element name="solveQuadraticEducationRequest" type="ns:SolveQuadraticEducationRequest"/>
+    
+    <xs:element name="solveQuadraticEducationResponse" type="ns:SolveQuadraticEducationResponse"/>
+    
+    <xs:element name="solveQuadraticEducationException" type="ns:Fault"/>
+    
+    <xs:complexType name="SolveQuadraticEducationRequest">
             <xs:sequence>
                 <xs:element name="a" minOccurs="1" maxOccurs="1" type="xs:double"/>
                 <xs:element name="b" minOccurs="1" maxOccurs="1" type="xs:double"/>
                 <xs:element name="c" minOccurs="1" maxOccurs="1" type="xs:double"/>
             </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    </xs:complexType>
+    
 
-    <xs:element name="solveQuadraticEducationResponse">
-        <xs:complexType>
+        <xs:complexType name="SolveQuadraticEducationResponse">
             <xs:sequence>
                 <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
                 <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
@@ -20,11 +25,8 @@
                 <xs:element name="x2" minOccurs="0" maxOccurs="1" type="xs:double"/>
             </xs:sequence>
         </xs:complexType>
-    </xs:element>
 
-    <xs:element name="solveQuadraticEducationException" type="ns:solveQuadraticEducationExceptionDetail"/>
-
-    <xs:complexType name="solveQuadraticEducationExceptionDetail">
+    <xs:complexType name="Fault">
         <xs:sequence>
             <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
             <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>

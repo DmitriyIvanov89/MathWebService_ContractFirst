@@ -19,13 +19,12 @@ public class MathWSController {
     @GetMapping
     public SolveQuadraticEducationResponse getResult(@RequestParam double a,
                                                      @RequestParam double b,
-                                                     @RequestParam double c) {
+                                                     @RequestParam double c) throws SolveQuadraticEducationException {
         SolveQuadraticEducationRequest request = objectFactory.createSolveQuadraticEducationRequest();
         request.setA(a);
         request.setB(b);
         request.setC(c);
         return mathPortSoap11.solveQuadraticEducation(request);
-
     }
 //    @Autowired
 //    private MathClient client;
