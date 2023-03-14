@@ -1,14 +1,13 @@
 package com.divanov.mathwebservice.config;
 
 import com.divanov.mathwebservice.client.MathClient;
-import com.divanov.mathwebservice.client.MathPortSoap11Impl;
+//import com.divanov.mathwebservice.client.MathPortSoap11Impl;
 import com.divanov.mathwebservice.gen.MathServiceService;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 //import com.divanov.mathwebservice.interceptors.MathFaultInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 @Configuration
 public class SoapClientConfig {
@@ -19,10 +18,10 @@ public class SoapClientConfig {
         return new MathServiceService();
     }
 
-    @Bean
-    public MathPortSoap11Impl mathPortSoap11() {
-        return new MathPortSoap11Impl(service());
-    }
+//    @Bean
+//    public MathPortSoap11Impl mathPortSoap11() {
+//        return new MathPortSoap11Impl(service());
+//    }
 
     @Bean
     public ObjectFactory objectFactory() {
@@ -40,25 +39,9 @@ public class SoapClientConfig {
     @Bean
     public MathClient mathClient(Jaxb2Marshaller marshaller) {
         MathClient mathClient = new MathClient();
-        mathClient.setDefaultUri("http://localhost:8080/services");
+        mathClient.setDefaultUri("http://localhost:8080/services/MathServiceEndpoint");
         mathClient.setMarshaller(marshaller);
         mathClient.setUnmarshaller(marshaller);
         return mathClient;
     }
-
-//    public MathFaultInterceptor interceptor() {
-//        return new MathFaultInterceptor();
-//    }
-
-//    @Bean
-//    public MathClient mathClient(Jaxb2Marshaller marshaller) {
-//        MathClient client = new MathClient();
-//        client.setDefaultUri("http://localhost:8080/services/MathServiceEndpoint");
-//        client.setMarshaller(marshaller);
-//        client.setUnmarshaller(marshaller);
-//        MathFaultInterceptor interceptor = new MathFaultInterceptor();
-//        ClientInterceptor[] interceptors = new ClientInterceptor[] {(ClientInterceptor) interceptor()};
-//        client.setInterceptors();
-//        return client;
-//    }
 }
