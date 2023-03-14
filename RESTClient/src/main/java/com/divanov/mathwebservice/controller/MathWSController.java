@@ -3,6 +3,7 @@ package com.divanov.mathwebservice.controller;
 //import com.divanov.mathwebservice.client.MathClient;
 //import com.divanov.mathwebservice.client.MathPortSoap11Impl;
 import com.divanov.mathwebservice.client.SoapConnector;
+import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
 import org.apache.neethi.PolicyRegistryImpl;
@@ -17,24 +18,22 @@ import javax.xml.bind.JAXBElement;
 @RequestMapping("/api/calc")
 public class MathWSController {
 
-<<<<<<< HEAD
-    @Autowired
-    private MathPortSoap11Impl mathPortSoap11;
-
-    @Autowired
-    private ObjectFactory objectFactory;
-
-    @GetMapping
-    public SolveQuadraticEducationResponse getResult(@RequestParam double a,
-                                                     @RequestParam double b,
-                                                     @RequestParam double c) throws SolveQuadraticEducationException {
-        SolveQuadraticEducationRequest request = objectFactory.createSolveQuadraticEducationRequest();
-        request.setA(a);
-        request.setB(b);
-        request.setC(c);
-        return mathPortSoap11.solveQuadraticEducation(request);
-    }
-=======
+//    @Autowired
+//    private MathPortSoap11Impl mathPortSoap11;
+//
+//    @Autowired
+//    private ObjectFactory objectFactory;
+//
+//    @GetMapping
+//    public SolveQuadraticEducationResponse getResult(@RequestParam double a,
+//                                                     @RequestParam double b,
+//                                                     @RequestParam double c) throws SolveQuadraticEducationException {
+//        SolveQuadraticEducationRequest request = objectFactory.createSolveQuadraticEducationRequest();
+//        request.setA(a);
+//        request.setB(b);
+//        request.setC(c);
+//        return mathPortSoap11.solveQuadraticEducation(request);
+//    }
     //    @Autowired
 //    private MathPortSoap11Impl mathPortSoap11;
 //
@@ -52,7 +51,6 @@ public class MathWSController {
 //
 //        return mathPortSoap11.solveQuadraticEducation(request);
 //    }
->>>>>>> 6b18c27dbaab18990d2a8a36ec9241b8da1e6e1b
 //    @Autowired
 //    private MathClient client;
 //
@@ -85,5 +83,4 @@ public class MathWSController {
 
         return soapConnector.invokeService(request);
     }
-
 }
