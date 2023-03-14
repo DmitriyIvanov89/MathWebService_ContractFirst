@@ -1,14 +1,21 @@
-package com.divanov.mathwebservice.client;
-
-import com.divanov.mathwebservice.gen.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-
-public class MathClient extends WebServiceGatewaySupport {
-    @Autowired
-    private ObjectFactory objectFactory;
-
-    public SolveQuadraticEducationResponse getSolveQuadraticEducation(SolveQuadraticEducationRequest request) {
-        return (SolveQuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
-    }
-}
+//package com.divanov.mathwebservice.client;
+//
+//import com.divanov.mathwebservice.gen.*;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
+//
+//import javax.xml.bind.JAXBElement;
+//
+//public class MathClient extends WebServiceGatewaySupport {
+//    @Autowired
+//    private ObjectFactory objectFactory;
+//
+//    public ObjectFactory getObjectFactory() {
+//        return objectFactory;
+//    }
+//
+//    public JAXBElement<SolveQuadraticEducationResponse> getSolveQuadraticEducation(SolveQuadraticEducationRequest request) {
+//        SolveQuadraticEducationResponse response = (SolveQuadraticEducationResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+//        return getObjectFactory().createSolveQuadraticEducationResponse(response);
+//    }
+//}

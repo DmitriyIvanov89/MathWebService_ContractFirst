@@ -3,34 +3,51 @@
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 
     <wsdl:types>
+<<<<<<< HEAD
 
         <xsd:schema targetNamespace="urn:fault.sample"
                     xmlns:tns="urn:fault.sample" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
             <xsd:element name="op" type="tns:Op"/>
 
+=======
+        <xsd:schema targetNamespace="urn:fault.sample"
+                    xmlns:tns="urn:fault.sample" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:element name="op" type="tns:Op"/>
+>>>>>>> 6b18c27dbaab18990d2a8a36ec9241b8da1e6e1b
             <xsd:complexType name="Op">
                 <xsd:sequence>
                     <xsd:element name="in" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
+<<<<<<< HEAD
 
             <xsd:element name="opResponse" type="tns:OpResponse"/>
 
+=======
+            <xsd:element name="opResponse" type="tns:OpResponse"/>
+>>>>>>> 6b18c27dbaab18990d2a8a36ec9241b8da1e6e1b
             <xsd:complexType name="OpResponse">
                 <xsd:sequence>
                     <xsd:element name="out" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
+<<<<<<< HEAD
 
             <xsd:element name="faultElement" type="tns:Fault"/>
 
+=======
+            <xsd:element name="faultElement" type="tns:Fault"/>
+>>>>>>> 6b18c27dbaab18990d2a8a36ec9241b8da1e6e1b
             <xsd:complexType name="Fault">
                 <xsd:sequence>
                     <xsd:element name="code" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b18c27dbaab18990d2a8a36ec9241b8da1e6e1b
         </xsd:schema>
     </wsdl:types>
 

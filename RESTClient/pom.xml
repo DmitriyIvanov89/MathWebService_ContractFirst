@@ -63,7 +63,7 @@
                         <id>generate-sources</id>
                         <phase>generate-sources</phase>
                         <configuration>
-<!--                            <sourceRoot>${basedir}/src/main/java/com/divanov/mathwebservice/gen</sourceRoot>-->
+                            <!--                            <sourceRoot>${basedir}/src/main/java/com/divanov/mathwebservice/gen</sourceRoot>-->
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/test.wsdl</wsdl>
@@ -71,7 +71,7 @@
 <!--                                        <bindingFile>${basedir}/src/main/resources/mathWSClient.xjb</bindingFile>-->
 <!--                                    </bindingFiles>-->
                                     <extraargs>
-<!--                                        <extraarg>-impl</extraarg>-->
+                                        <!--                                        <extraarg>-impl</extraarg>-->
                                         <extraarg>-p</extraarg>
                                         <extraarg>com.divanov.mathwebservice.gen3</extraarg>
                                     </extraargs>
