@@ -4,7 +4,7 @@
 
     <xs:element name="solveQuadraticEducationRequest" type="ns:SolveQuadraticEducationRequest"/>
     <xs:element name="solveQuadraticEducationResponse" type="ns:SolveQuadraticEducationResponse"/>
-    <xs:element name="faultElement" type="ns:Fault"/>
+    <xs:element name="solveQuadraticEducationException" type="ns:FaultDetail"/>
 
     <xs:complexType name="SolveQuadraticEducationRequest">
         <xs:sequence>
@@ -23,7 +23,7 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="Fault">
+    <xs:complexType name="FaultDetail">
         <xs:sequence>
             <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
             <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>

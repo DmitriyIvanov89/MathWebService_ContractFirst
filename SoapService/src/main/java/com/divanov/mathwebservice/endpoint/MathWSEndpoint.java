@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.mathwebservice.exception.NoValidDiscriminantValueException;
+import com.divanov.mathwebservice.exception.*;
 import com.divanov.mathwebservice.gen.*;
 import com.divanov.mathwebservice.service.IMathService;
 //import com.divanov.mathwebservice.service.MathServiceImpl;
@@ -33,7 +33,7 @@ public class MathWSEndpoint {
 
     @PayloadRoot(namespace = NAME_SPACE, localPart = "solveQuadraticEducationRequest")
     @ResponsePayload
-    public SolveQuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload SolveQuadraticEducationRequest request) throws NoValidDiscriminantValueException {
+    public SolveQuadraticEducationResponse getQuadraticEducationSolution(@RequestPayload SolveQuadraticEducationRequest request) throws SolveQuadraticEducationException {
         return getService().solveQuadraticEducation(request);
     }
 }
