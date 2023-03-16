@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ISO-8859-5"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+           attributeFormDefault="unqualified">
+    <xs:simpleType name="empty">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="CIT_REQUEST">
+        <xs:annotation>
+            <xs:documentation>Ответ на отмену кассовой операции</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SYSTEM">
+                    <xs:annotation>
+                        <xs:documentation>Системный тег</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="BP_ID" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Идентификатор бизнес-процесса в РБО или ИБСО</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="CIT_Version" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Внутренняя версия подсистемы</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="ERR" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Диагностика ошибки, для обработки отклика</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="FORMAT" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Формат сообщения (всегда значение XML)</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required" fixed="XML"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="INTERFACE_RET" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Код результата обработки (0 - ОК, else - код ошибки)
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="MAIN_ID" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Идентификатор исходного сообщения</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="MSG_ID" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Идентификатор сообщения</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="SYNC" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Признак синхронного обмена</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="SYS_ID" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Идентификатор системы, создавшей запрос</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="TAR_ID" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Идентификатор системы-получателя</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Version" nillable="false" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Версия библиотеки разбора сообщений</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DATA">
+                    <xs:annotation>
+                        <xs:documentation>Данные</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ResultCode" minOccurs="1" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Код результата выполнения операции
+                                        0 – нет ошибок
+                                        Числовой код ошибки – при наличии ошибки
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="Value" use="required">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:integer">
+                                                <xs:enumeration value="0"/>
+                                                <xs:enumeration value="1"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Error" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Блок информации об ошибке
+                                        Блок содержится в ответе, если были ошибки выполнения операции.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="BEGIN_" minOccurs="1" maxOccurs="1">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="ErrorCode" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Код ошибки</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:attribute name="Value" use="required">
+                                                                <xs:simpleType>
+                                                                    <xs:restriction base="xs:string">
+                                                                        <xs:maxLength value="4"/>
+                                                                    </xs:restriction>
+                                                                </xs:simpleType>
+                                                            </xs:attribute>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="ErrorMessage" minOccurs="1" maxOccurs="1">
+                                                        <xs:annotation>
+                                                            <xs:documentation>Текст ошибки</xs:documentation>
+                                                        </xs:annotation>
+                                                        <xs:complexType>
+                                                            <xs:attribute name="Value" use="required">
+                                                                <xs:simpleType>
+                                                                    <xs:restriction base="xs:string">
+                                                                        <xs:maxLength value="2000"/>
+                                                                    </xs:restriction>
+                                                                </xs:simpleType>
+                                                            </xs:attribute>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -2,32 +2,22 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
 
-    <xs:element name="solveQuadraticEducationRequest" type="ns:SolveQuadraticEducationRequest"/>
-    <xs:element name="solveQuadraticEducationResponse" type="ns:SolveQuadraticEducationResponse"/>
-    <xs:element name="solveQuadraticEducationException" type="ns:FaultDetail"/>
+    <xs:element name="solveQuadraticEducationRequest">
+        <xs:complexType>
+            <xs:attribute name="a" use="required" type="xs:double"/>
+            <xs:attribute name="b" use="required" type="xs:double"/>
+            <xs:attribute name="c" use="required" type="xs:double"/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:complexType name="SolveQuadraticEducationRequest">
-        <xs:sequence>
-            <xs:element name="a" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            <xs:element name="b" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            <xs:element name="c" minOccurs="1" maxOccurs="1" type="xs:double"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="solveQuadraticEducationResponse">
+        <xs:complexType>
+            <xs:attribute name="formula" use="required" type="xs:string"/>
+            <xs:attribute name="d" use="required" type="xs:double"/>
+            <xs:attribute name="x1" use="required" type="xs:double"/>
+            <xs:attribute name="x2" use="optional" type="xs:double"/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:complexType name="SolveQuadraticEducationResponse">
-        <xs:sequence>
-            <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
-            <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            <xs:element name="x1" minOccurs="1" maxOccurs="1" type="xs:double"/>
-            <xs:element name="x2" minOccurs="0" maxOccurs="1" type="xs:double"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="FaultDetail">
-        <xs:sequence>
-            <xs:element name="formula" minOccurs="1" maxOccurs="1" type="xs:string"/>
-            <xs:element name="d" minOccurs="1" maxOccurs="1" type="xs:double"/>
-        </xs:sequence>
-    </xs:complexType>
 
 </xs:schema>
