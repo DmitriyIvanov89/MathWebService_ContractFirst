@@ -1,42 +1,32 @@
 package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.mathwebservice.exception.*;
-import com.divanov.mathwebservice.gen.*;
-import com.divanov.mathwebservice.service.IMathService;
+import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
+import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
+import com.divanov.mathwebservice.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import javax.xml.bind.JAXBElement;
 
 @Endpoint
 public class MathWSEndpoint {
-    public static final String NAME_SPACE = "http://math.ws.divanov";
-
-    private final IMathService service;
-    private final ObjectFactory objectFactory;
+    private final MathService service;
 
     @Autowired
-    public MathWSEndpoint(IMathService service) {
+    public MathWSEndpoint(MathService service) {
         this.service = service;
-        this.objectFactory = new ObjectFactory();
     }
 
-    public IMathService getService() {
+    public MathService getService() {
         return service;
     }
 
-    public ObjectFactory getObjectFactory() {
-        return objectFactory;
-    }
-
-    @PayloadRoot(namespace = NAME_SPACE, localPart = "solveQuadraticEducationRequest")
+    @PayloadRoot(namespace = MathService.NAME_SPACE, localPart = "solveQuadraticEducationRequest")
     @ResponsePayload
-    public JAXBElement<SolveQuadraticEducationResponse> getQuadraticEducationSolution(@RequestPayload SolveQuadraticEducationRequest request) throws SolveQuadraticEducationException {
-        SolveQuadraticEducationResponse response = service.solveQuadraticEducation(request);
-        return objectFactory.createSolveQuadraticEducationResponse(response);
+    public SolveQuadraticEducationResponse getSolutionQuadraticEducation(@RequestPayload SolveQuadraticEducationRequest request) {
+        return getService().solveQuadraticEducation(request.getA(), request.getB(), request.getC());
     }
 }
 

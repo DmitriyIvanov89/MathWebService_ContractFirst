@@ -3,7 +3,7 @@
     <soapenv:Body>
         <math:solveQuadraticEducationRequest>
             <math:a>5</math:a>
-            <math:b>3</math:b>
+            <math:b>33</math:b>
             <math:c>7</math:c>
         </math:solveQuadraticEducationRequest>
     </soapenv:Body>

@@ -1,9 +1,13 @@
 package com.divanov.mathwebservice.controller;
 
-//import com.divanov.mathwebservice.client.MathClient;
+import com.divanov.mathwebservice.client.MathClient;
 //import com.divanov.mathwebservice.client.MathPortSoap11Impl;
+<<<<<<< HEAD
 import com.divanov.mathwebservice.client.SoapConnector;
 import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
+=======
+//import com.divanov.mathwebservice.client.SoapConnector;
+>>>>>>> 0621b9d1d806f63a33dee08943842941346e06f0
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationRequest;
 import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
 import org.apache.neethi.PolicyRegistryImpl;
@@ -51,36 +55,40 @@ public class MathWSController {
 //
 //        return mathPortSoap11.solveQuadraticEducation(request);
 //    }
-//    @Autowired
-//    private MathClient client;
-//
-//    @Autowired
-//    private ObjectFactory objectFactory;
-//
-//    @GetMapping
-//    public JAXBElement<SolveQuadraticEducationResponse> getResult(@RequestParam Double a,
-//                                                                  @RequestParam Double b,
-//                                                                  @RequestParam Double c) {
-//        SolveQuadraticEducationRequest request = new SolveQuadraticEducationRequest();
-//        request.setA(a);
-//        request.setB(b);
-//        request.setC(c);
-//
-//        return client.getSolveQuadraticEducation(request);
-//    }
+    @Autowired
+    private MathClient client;
 
     @Autowired
-    private SoapConnector soapConnector;
+    private ObjectFactory objectFactory;
 
     @GetMapping
-    public SolveQuadraticEducationResponse getResult(@RequestParam Double a,
-                                                     @RequestParam Double b,
-                                                     @RequestParam Double c) throws SolveQuadraticEducationException {
+    public JAXBElement<SolveQuadraticEducationResponse> getResult(@RequestParam Double a,
+                                                                  @RequestParam Double b,
+                                                                  @RequestParam Double c) {
         SolveQuadraticEducationRequest request = new SolveQuadraticEducationRequest();
         request.setA(a);
         request.setB(b);
         request.setC(c);
 
-        return soapConnector.invokeService(request);
+        return client.getSolveQuadraticEducation(this.objectFactory.createSolveQuadraticEducationRequest(request));
     }
+<<<<<<< HEAD
+=======
+
+//    @Autowired
+//    private SoapConnector soapConnector;
+//
+//    @GetMapping
+//    public SolveQuadraticEducationResponse getResult(@RequestParam Double a,
+//                                                     @RequestParam Double b,
+//                                                     @RequestParam Double c) throws SolveQuadraticEducationException {
+//        SolveQuadraticEducationRequest request = new SolveQuadraticEducationRequest();
+//        request.setA(a);
+//        request.setB(b);
+//        request.setC(c);
+//
+//        return soapConnector.invokeService(request);
+//    }
+
+>>>>>>> 0621b9d1d806f63a33dee08943842941346e06f0
 }

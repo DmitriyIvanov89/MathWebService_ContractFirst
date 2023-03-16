@@ -1,38 +1,25 @@
 package com.divanov.mathwebservice.service;
 
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
-import com.divanov.mathwebservice.exception.SolveQuadraticEducationException;
-import com.divanov.mathwebservice.gen.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.divanov.mathwebservice.gen.ObjectFactory;
+import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MathServiceImpl implements IMathService {
+public class MathServiceImpl implements MathService {
     private static final String ERROR_PARAM_A = "The leading coefficient can't be equals 0";
     private static final String ERROR_DISCRIMINANT_VALUE = "Discriminant can't be less than 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
-    private ObjectFactory objectFactory;
-
-    @Autowired
-    public MathServiceImpl(ObjectFactory objectFactory) {
-        this.objectFactory = objectFactory;
-    }
-
-    public ObjectFactory getObjectFactory() {
-        return objectFactory;
-    }
-
-    public MathServiceImpl() {
-    }
+    private static final ObjectFactory FACTORY = new ObjectFactory();
 
     @Override
-    public SolveQuadraticEducationResponse solveQuadraticEducation(SolveQuadraticEducationRequest request) throws SolveQuadraticEducationException {
-        SolveQuadraticEducationResponse response = getObjectFactory().createSolveQuadraticEducationResponse();
-        if (request.getA() != 0) {
-            if (request.getB() == 0 || request.getC() == 0) {
-                solveIncompleteQuadraticEducation(response, request.getA(), request.getB(), request.getC());
+    public SolveQuadraticEducationResponse solveQuadraticEducation(double coefficient_A, double coefficient_B, double coefficient_C) {
+        SolveQuadraticEducationResponse response = FACTORY.createSolveQuadraticEducationResponse();
+        if (coefficient_A != 0) {
+            if (coefficient_B == 0 || coefficient_C == 0) {
+                solveIncompleteQuadraticEducation(response, coefficient_A, coefficient_B, coefficient_C);
             } else {
-                solveCompleteQuadraticEducation(response, request.getA(), request.getB(), request.getC());
+                solveCompleteQuadraticEducation(response, coefficient_A, coefficient_B, coefficient_C);
             }
             return response;
         }
@@ -62,7 +49,7 @@ public class MathServiceImpl implements IMathService {
     private void solveCompleteQuadraticEducation(SolveQuadraticEducationResponse response,
                                                  double param_A,
                                                  double param_B,
-                                                 double param_C) throws SolveQuadraticEducationException {
+                                                 double param_C) {
         response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
         response.setFormula(generateEducationFormula(param_A, param_B, param_C));
         if (response.getDiscriminant() > 0) {
@@ -71,10 +58,7 @@ public class MathServiceImpl implements IMathService {
         } else if (response.getDiscriminant() == 0) {
             response.setX1(-param_B / (2 * param_A));
         } else {
-            FaultDetail detail = new FaultDetail();
-            detail.setFormula(response.getFormula());
-            detail.setDiscriminant(response.getDiscriminant());
-            throw new SolveQuadraticEducationException(ERROR_DISCRIMINANT_VALUE, detail);
+            throw new QuadraticEducationNoSolutionException(ERROR_DISCRIMINANT_VALUE);
         }
     }
 
@@ -89,3 +73,4 @@ public class MathServiceImpl implements IMathService {
         return String.format("%.1fx^2 + %.1fx + %.1f = 0", a, b, c);
     }
 }
+
