@@ -25,8 +25,8 @@ import javax.xml.bind.JAXBException;
 import java.util.List;
 import java.util.Properties;
 
-@EnableWs
 @Configuration
+@EnableWs
 public class MathWSConfig extends WsConfigurerAdapter {
 
     @Override
