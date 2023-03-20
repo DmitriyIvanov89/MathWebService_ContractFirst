@@ -1,5 +1,6 @@
 package com.divanov.mathwebservice.service;
 
+import com.divanov.mathwebservice.exception.NoSolutionException;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
@@ -23,7 +24,7 @@ public class MathServiceImpl implements MathService {
             }
             return solution;
         }
-        throw new QuadraticEducationException(ERROR_PARAM_A);
+        throw new NoSolutionException(ERROR_PARAM_A);
     }
 
     private void solveIncompleteQuadraticEducation(SolutionQuadraticEducation response,
@@ -38,7 +39,7 @@ public class MathServiceImpl implements MathService {
                 response.setX1(Math.sqrt(-(param_C / param_A)));
                 response.setX2(-(Math.sqrt(-(param_C / param_A))));
             } else {
-                throw new QuadraticEducationException(NO_REAL_ROOTS);
+                throw new NoSolutionException(NO_REAL_ROOTS);
             }
         } else {
             response.setX1(0.0);
