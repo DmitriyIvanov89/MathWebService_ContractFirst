@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
+import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MathServiceImpl implements MathService {
     private static final String ERROR_PARAM_A = "The leading coefficient can't be equals 0";
-    private static final String ERROR_DISCRIMINANT_VALUE = "Discriminant can't be less than 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
     private static final ObjectFactory FACTORY = new ObjectFactory();
 
@@ -23,7 +22,7 @@ public class MathServiceImpl implements MathService {
             }
             return solution;
         }
-        throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
+        throw new QuadraticEducationException(ERROR_PARAM_A);
     }
 
     private void solveIncompleteQuadraticEducation(SolutionQuadraticEducation response,
@@ -38,7 +37,7 @@ public class MathServiceImpl implements MathService {
                 response.setX1(Math.sqrt(-(param_C / param_A)));
                 response.setX2(-(Math.sqrt(-(param_C / param_A))));
             } else {
-                throw new QuadraticEducationNoSolutionException(NO_REAL_ROOTS);
+                throw new QuadraticEducationException(NO_REAL_ROOTS);
             }
         } else {
             response.setX1(0.0);
@@ -58,7 +57,7 @@ public class MathServiceImpl implements MathService {
         } else if (response.getDiscriminant() == 0) {
             response.setX1(-param_B / (2 * param_A));
         } else {
-            throw new QuadraticEducationNoSolutionException(ERROR_DISCRIMINANT_VALUE);
+            throw new QuadraticEducationException(response.getDiscriminant());
         }
     }
 
