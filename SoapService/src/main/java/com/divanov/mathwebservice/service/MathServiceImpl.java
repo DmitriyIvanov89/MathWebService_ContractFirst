@@ -2,7 +2,7 @@ package com.divanov.mathwebservice.service;
 
 import com.divanov.mathwebservice.exception.QuadraticEducationNoSolutionException;
 import com.divanov.mathwebservice.gen.ObjectFactory;
-import com.divanov.mathwebservice.gen.SolveQuadraticEducationResponse;
+import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,20 +13,20 @@ public class MathServiceImpl implements MathService {
     private static final ObjectFactory FACTORY = new ObjectFactory();
 
     @Override
-    public SolveQuadraticEducationResponse solveQuadraticEducation(double coefficient_A, double coefficient_B, double coefficient_C) {
-        SolveQuadraticEducationResponse response = FACTORY.createSolveQuadraticEducationResponse();
+    public SolutionQuadraticEducation solveQuadraticEducation(double coefficient_A, double coefficient_B, double coefficient_C) {
+        SolutionQuadraticEducation solution = FACTORY.createSolutionQuadraticEducation();
         if (coefficient_A != 0) {
             if (coefficient_B == 0 || coefficient_C == 0) {
-                solveIncompleteQuadraticEducation(response, coefficient_A, coefficient_B, coefficient_C);
+                solveIncompleteQuadraticEducation(solution, coefficient_A, coefficient_B, coefficient_C);
             } else {
-                solveCompleteQuadraticEducation(response, coefficient_A, coefficient_B, coefficient_C);
+                solveCompleteQuadraticEducation(solution, coefficient_A, coefficient_B, coefficient_C);
             }
-            return response;
+            return solution;
         }
         throw new QuadraticEducationNoSolutionException(ERROR_PARAM_A);
     }
 
-    private void solveIncompleteQuadraticEducation(SolveQuadraticEducationResponse response,
+    private void solveIncompleteQuadraticEducation(SolutionQuadraticEducation response,
                                                    double param_A,
                                                    double param_B,
                                                    double param_C) {
@@ -46,7 +46,7 @@ public class MathServiceImpl implements MathService {
         }
     }
 
-    private void solveCompleteQuadraticEducation(SolveQuadraticEducationResponse response,
+    private void solveCompleteQuadraticEducation(SolutionQuadraticEducation response,
                                                  double param_A,
                                                  double param_B,
                                                  double param_C) {

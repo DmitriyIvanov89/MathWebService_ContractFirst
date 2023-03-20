@@ -50,6 +50,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("MathService");
         wsdl11Definition.setSchema(schema);
+        wsdl11Definition.setFaultSuffix("commonFault");
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
         return wsdl11Definition;
     }
