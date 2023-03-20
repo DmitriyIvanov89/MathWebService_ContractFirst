@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class MathServiceImpl implements MathService {
     private static final String ERROR_PARAM_A = "The leading coefficient can't be equals 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
+    private static final String DISCRIMINANT_INVALID_VALUE = "Discriminant can't be less than 0";
     private static final ObjectFactory FACTORY = new ObjectFactory();
 
     @Override
@@ -57,7 +58,7 @@ public class MathServiceImpl implements MathService {
         } else if (response.getDiscriminant() == 0) {
             response.setX1(-param_B / (2 * param_A));
         } else {
-            throw new QuadraticEducationException(response.getDiscriminant());
+            throw new QuadraticEducationException(DISCRIMINANT_INVALID_VALUE, response.getDiscriminant(), response.getFormula());
         }
     }
 

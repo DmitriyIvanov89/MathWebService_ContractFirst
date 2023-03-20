@@ -1,13 +1,32 @@
 package com.divanov.mathwebservice.exception;
 
-import java.text.MessageFormat;
-
 public class QuadraticEducationException extends MathServiceException {
-    public QuadraticEducationException(double discriminant) {
-        super(MessageFormat.format("Invalid discriminant value {0}", discriminant));
+    private String formula;
+    private double discriminant;
+
+    public QuadraticEducationException(String message, double discriminant, String formula) {
+        super(message);
+        this.formula = formula;
+        this.discriminant = discriminant;
     }
 
     public QuadraticEducationException(String message) {
         super(message);
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public void setFormula(String formula) {
+        this.formula = formula;
+    }
+
+    public double getDiscriminant() {
+        return discriminant;
+    }
+
+    public void setDiscriminant(double discriminant) {
+        this.discriminant = discriminant;
     }
 }
