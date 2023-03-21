@@ -9,11 +9,14 @@
     <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
 
     <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://math.ws.divanov']">
-        <jaxb:bindings node="xs:complexType[@name='SolveQuadraticEducationResponse']//xs:element[@name='d']">
-            <jaxb:property name="Discriminant"/>
+        <jaxb:bindings node="xs:complexType[@name='solutionQuadraticEducation']//xs:element[@name='d']">
+            <jaxb:property name="discriminant"/>
         </jaxb:bindings>
-        <jaxb:bindings node="//xs:complexType[@name='FaultDetail']//xs:element[@name='d']">
-            <jaxb:property name="Discriminant"/>
+        <jaxb:bindings node="xs:complexType[@name='solutionQuadraticEducation']//xs:element[@name='f']">
+            <jaxb:property name="formula"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="xs:complexType[@name='errorFault']">
+            <jaxb:class name="ErrorResponse"/>
         </jaxb:bindings>
     </jaxws:bindings>
 </jaxws:bindings>
