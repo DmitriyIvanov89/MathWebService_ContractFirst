@@ -1,7 +1,9 @@
 package com.divanov.mathwebservice.config;
 
-import com.divanov.mathwebservice.exception.DetailSoapFaultDefinitionExceptionResolver;
+import com.divanov.mathwebservice.service.DetailSoapFaultDefinitionExceptionResolver;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.service.MathService;
+import com.divanov.mathwebservice.service.ReflectionWsdl11Definition;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -45,10 +47,13 @@ public class MathWSConfig extends WsConfigurerAdapter {
 
     @Bean(name = "math")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
-        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        DefaultWsdl11Definition wsdl11Definition = new ReflectionWsdl11Definition();
         wsdl11Definition.setPortTypeName("MathService");
+        wsdl11Definition.setTargetNamespace(MathService.NAME_SPACE);
+        wsdl11Definition.setRequestSuffix("Request");
+        wsdl11Definition.setResponseSuffix("Response");
+        wsdl11Definition.setFaultSuffix("commonFault");
         wsdl11Definition.setSchema(schema);
-
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
         return wsdl11Definition;
     }
@@ -67,7 +72,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
         exceptionResolver.setDefaultFault(faultDefinition);
 
         Properties errorMappings = new Properties();
-        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
+//        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
         errorMappings.setProperty(QuadraticEducationException.class.getName(), SoapFaultDefinition.CLIENT.toString());
         exceptionResolver.setExceptionMappings(errorMappings);
         exceptionResolver.setOrder(1);
