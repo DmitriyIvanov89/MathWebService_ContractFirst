@@ -16,7 +16,7 @@ public class SoapConnector implements MathService {
     }
 
     @Override
-    public SolutionQuadraticEducation getSolveQuadraticEducation(QuadraticEducationRequestPayLoad getSolveQuadraticEducationRequest) throws CommonFault {
+    public SolutionQuadraticEducation getSolveQuadraticEducation(QuadraticEducationRequestPayLoad getSolveQuadraticEducationRequest) throws QuadraticEducationException {
         return getService().getMathServiceSoap11().getSolveQuadraticEducation(getSolveQuadraticEducationRequest);
     }
 }
