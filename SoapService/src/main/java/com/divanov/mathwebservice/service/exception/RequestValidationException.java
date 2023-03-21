@@ -1,4 +1,4 @@
-package com.divanov.mathwebservice.exception;
+package com.divanov.mathwebservice.service.exception;
 
 import com.divanov.mathwebservice.service.MathService;
 import org.springframework.ws.soap.server.endpoint.annotation.FaultCode;

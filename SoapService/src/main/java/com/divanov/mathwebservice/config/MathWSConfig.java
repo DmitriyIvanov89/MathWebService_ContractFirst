@@ -1,7 +1,7 @@
 package com.divanov.mathwebservice.config;
 
 import com.divanov.mathwebservice.service.DetailSoapFaultDefinitionExceptionResolver;
-import com.divanov.mathwebservice.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.MathService;
 import com.divanov.mathwebservice.service.ReflectionWsdl11Definition;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
