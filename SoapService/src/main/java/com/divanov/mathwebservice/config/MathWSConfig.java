@@ -52,7 +52,7 @@ public class MathWSConfig extends WsConfigurerAdapter {
         wsdl11Definition.setTargetNamespace(MathService.NAME_SPACE);
         wsdl11Definition.setRequestSuffix("Request");
         wsdl11Definition.setResponseSuffix("Response");
-        wsdl11Definition.setFaultSuffix("commonFault");
+        wsdl11Definition.setFaultSuffix("quadraticEducationException");
         wsdl11Definition.setSchema(schema);
         wsdl11Definition.setLocationUri("/services/MathServiceEndpoint");
         return wsdl11Definition;
@@ -72,8 +72,8 @@ public class MathWSConfig extends WsConfigurerAdapter {
         exceptionResolver.setDefaultFault(faultDefinition);
 
         Properties errorMappings = new Properties();
-//        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
-        errorMappings.setProperty(QuadraticEducationException.class.getName(), SoapFaultDefinition.CLIENT.toString());
+        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
+        errorMappings.setProperty(QuadraticEducationException.class.getName(), SoapFaultDefinition.SERVER.toString());
         exceptionResolver.setExceptionMappings(errorMappings);
         exceptionResolver.setOrder(1);
         return exceptionResolver;

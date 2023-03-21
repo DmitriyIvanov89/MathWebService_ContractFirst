@@ -1,8 +1,8 @@
 package com.divanov.mathwebservice.service;
 
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
-import com.divanov.mathwebservice.gen.ErrorResponse;
-import com.divanov.mathwebservice.gen.ObjectFactory;
+import com.divanov.mathwebservice.service.gen.ErrorResponse;
+import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import org.springframework.ws.soap.SoapFault;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 
@@ -27,7 +27,7 @@ public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMapping
             errorResponse.setDiscriminant(((QuadraticEducationException) ex).getDiscriminant());
         }
         try {
-            marshaller.marshal(objectFactory.createCommonFault(errorResponse), fault.addFaultDetail().getResult());
+            marshaller.marshal(objectFactory.createQuadraticEducationException(errorResponse), fault.addFaultDetail().getResult());
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }

@@ -1,8 +1,8 @@
 package com.divanov.mathwebservice.endpoint;
 
-import com.divanov.mathwebservice.gen.ObjectFactory;
-import com.divanov.mathwebservice.gen.QuadraticEducationRequestPayLoad;
-import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
+import com.divanov.mathwebservice.service.gen.ObjectFactory;
+import com.divanov.mathwebservice.service.gen.QuadraticEducationRequestPayLoad;
+import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
 import com.divanov.mathwebservice.service.MathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;

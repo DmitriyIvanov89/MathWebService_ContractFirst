@@ -52,7 +52,7 @@
                                 <source>src/main/resources/xsd</source>
                             </sources>
                             <outputDirectory>${basedir}/src/main/java/</outputDirectory>
-                            <packageName>com.divanov.mathwebservice.gen</packageName>
+                            <packageName>com.divanov.mathwebservice.service.gen</packageName>
                             <clearOutputDir>false</clearOutputDir>
                         </configuration>
                     </execution>

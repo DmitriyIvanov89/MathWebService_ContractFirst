@@ -2,9 +2,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            xmlns:ns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
 
-    <xs:element name="commonFault" type="ns:errorFault"/>
     <xs:element name="getSolveQuadraticEducationRequest" type="ns:quadraticEducationRequestPayLoad"/>
     <xs:element name="getSolveQuadraticEducationResponse" type="ns:solutionQuadraticEducation"/>
+    <xs:element name="quadraticEducationException" type="ns:errorFault"/>
 
     <xs:complexType name="quadraticEducationRequestPayLoad">
         <xs:sequence>

@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.service;
 
-import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
+import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
 
 public interface MathService {
     String NAME_SPACE = "http://math.ws.divanov";
