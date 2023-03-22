@@ -3,10 +3,17 @@ package com.divanov.mathwebservice.endpoint;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.gen.QuadraticEducationRequestPayLoad;
 import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import javax.xml.bind.*;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.stream.StreamSource;
+
+import java.io.StringReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,15 +27,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ContextConfiguration(classes = MathWSEndpointTestTestConfig.class)
 class MathWSEndpointTest {
     @Autowired
-    MathWSEndpoint mathWSEndpoint;
+    private MathWSEndpoint mathWSEndpoint;
 
     @Autowired
-    ObjectFactory objectFactory;
+    private ObjectFactory objectFactory;
 
     @Test
-    void shouldReturnResultWithDiscriminantGreaterThanZero(){
+    void shouldReturnResultWithDiscriminantGreaterThanZero() throws JAXBException {
         assertEquals(createResponse("2,0x^2 + -3,0x + 1,0 = 0", 1.0, 1.0, 0.5),
-                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(2, -3, 1)));
+                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(2, -3, 1)).getValue());
     }
 
     //    @Test

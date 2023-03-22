@@ -12,13 +12,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 
 /**
  * <p>Java class for errorFault complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="errorFault"&gt;
  *   &lt;complexContent&gt;
@@ -32,14 +33,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "errorFault", propOrder = {
-    "message",
-    "formula",
-    "discriminant"
+        "message",
+        "formula",
+        "discriminant"
 })
 public class ErrorResponse {
 
@@ -51,11 +50,9 @@ public class ErrorResponse {
 
     /**
      * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getMessage() {
         return message;
@@ -63,11 +60,9 @@ public class ErrorResponse {
 
     /**
      * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMessage(String value) {
         this.message = value;
@@ -75,11 +70,9 @@ public class ErrorResponse {
 
     /**
      * Gets the value of the formula property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     * {@link String }
      */
     public String getFormula() {
         return formula;
@@ -87,11 +80,9 @@ public class ErrorResponse {
 
     /**
      * Sets the value of the formula property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFormula(String value) {
         this.formula = value;
@@ -99,7 +90,6 @@ public class ErrorResponse {
 
     /**
      * Gets the value of the discriminant property.
-     * 
      */
     public double getDiscriminant() {
         return discriminant;
@@ -107,10 +97,26 @@ public class ErrorResponse {
 
     /**
      * Sets the value of the discriminant property.
-     * 
      */
     public void setDiscriminant(double value) {
         this.discriminant = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ErrorResponse that = (ErrorResponse) o;
+        return Double.compare(that.discriminant, discriminant) == 0 && message.equals(that.message) && formula.equals(that.formula);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(message, formula, discriminant);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Fault:\nmessage: %s\nformula: %s\ndiscriminant: %f\n", message, formula, discriminant);
+    }
 }
