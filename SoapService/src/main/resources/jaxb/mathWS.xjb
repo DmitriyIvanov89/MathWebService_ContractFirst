@@ -5,12 +5,12 @@
     xmlns:ns="http://math.ws.divanov">
     
     <jaxb:bindings schemaLocation="../xsd/mathWS.xsd">
-        <jaxb:bindings node="//xs:complexType[@name='solutionQuadraticEducation']//xs:element[@name='d']">
+        <!-- <jaxb:bindings node="//xs:complexType[@name='solutionQuadraticEducation']//xs:element[@name='d']">
             <jaxb:property name="discriminant"/>
         </jaxb:bindings>
         <jaxb:bindings node="//xs:complexType[@name='solutionQuadraticEducation']//xs:element[@name='f']">
             <jaxb:property name="formula"/>
-        </jaxb:bindings>
+        </jaxb:bindings> -->
         <jaxb:bindings node="//xs:complexType[@name='errorFault']">
              <jaxb:class name="ErrorResponse"/>
         </jaxb:bindings>
