@@ -123,7 +123,7 @@ public class SolutionQuadraticEducation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SolutionQuadraticEducation that = (SolutionQuadraticEducation) o;
-        return Double.compare(that.discriminant, discriminant) == 0 && Double.compare(that.x1, x1) == 0 && formula.equals(that.formula) && x2.equals(that.x2);
+        return Double.compare(that.discriminant, discriminant) == 0 && Double.compare(that.x1, x1) == 0 && Objects.equals(formula, that.formula) && Objects.equals(x2, that.x2);
     }
 
     @Override
