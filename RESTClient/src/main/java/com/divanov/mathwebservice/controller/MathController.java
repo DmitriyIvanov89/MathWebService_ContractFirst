@@ -16,9 +16,9 @@ public class MathController {
     private final ObjectFactory objectFactory;
 
     @Autowired
-    public MathController(SoapConnector soapConnector, ObjectFactory objectFactory) {
+    public MathController(SoapConnector soapConnector) {
         this.soapConnector = soapConnector;
-        this.objectFactory = objectFactory;
+        this.objectFactory = new ObjectFactory();
     }
 
     @GetMapping
