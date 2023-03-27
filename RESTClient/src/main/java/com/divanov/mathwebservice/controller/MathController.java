@@ -28,6 +28,7 @@ public class MathController {
         payLoad.setA(a);
         payLoad.setB(b);
         payLoad.setC(c);
+
         return service.getMathServiceSoap11().getSolveQuadraticEducation(payLoad);
 
     }
