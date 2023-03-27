@@ -1,6 +1,5 @@
 package com.divanov.mathwebservice.controller;
 
-import com.divanov.mathwebservice.client.SoapConnector;
 import com.divanov.mathwebservice.gen.*;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/calc")
 public class MathController {
-    private final SoapConnector soapConnector;
+    private final MathServiceService service;
     private final ObjectFactory objectFactory;
 
     @Autowired
-    public MathController(SoapConnector soapConnector) {
-        this.soapConnector = soapConnector;
+    public MathController(MathServiceService service) {
+        this.service = service;
         this.objectFactory = new ObjectFactory();
     }
 
@@ -29,9 +28,7 @@ public class MathController {
         payLoad.setA(a);
         payLoad.setB(b);
         payLoad.setC(c);
-        return soapConnector.getSolveQuadraticEducation(payLoad);
+        return service.getMathServiceSoap11().getSolveQuadraticEducation(payLoad);
 
     }
-
-
 }

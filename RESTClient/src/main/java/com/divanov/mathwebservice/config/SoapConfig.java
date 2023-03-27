@@ -1,6 +1,6 @@
 package com.divanov.mathwebservice.config;
 
-import com.divanov.mathwebservice.client.SoapConnector;
+
 import com.divanov.mathwebservice.gen.MathServiceService;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +16,6 @@ public class SoapConfig {
     @Bean
     public ObjectFactory objectFactory() {
         return new ObjectFactory();
-    }
-
-    @Bean
-    public SoapConnector soapConnector() {
-        return new SoapConnector(mathServiceService());
     }
 
 }
