@@ -2,10 +2,11 @@ package com.divanov.mathwebservice.controller;
 
 import com.divanov.mathwebservice.gen.MathService;
 import com.divanov.mathwebservice.gen.MathServiceService;
-import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
+import static org.mockito.Mockito.mock;
 
 @Configuration
 public class MathComponentTestConfig {
@@ -13,16 +14,11 @@ public class MathComponentTestConfig {
     @Bean
     @Primary
     public MathServiceService mathServiceService() {
-        return Mockito.mock(MathServiceService.class);
+        return mock(MathServiceService.class);
     }
 
     @Bean
-    public MathService mathService() {
-        return mathServiceService().getMathServiceSoap11();
-    }
-
-    @Bean
-    public MathController mathController(MathServiceService mathServiceService) {
+    public MathController mathController() {
         return new MathController(mathServiceService());
     }
 }
