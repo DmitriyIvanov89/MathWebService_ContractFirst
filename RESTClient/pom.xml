@@ -17,13 +17,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
             <version>${cxf.version}</version>
@@ -33,7 +26,6 @@
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
         </dependency>
-        <!-- Jetty is needed if you're are not using the CXFServlet -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-jetty</artifactId>
@@ -44,13 +36,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--        <dependency>-->
-<!--            <groupId>com.divanov</groupId>-->
-<!--            <artifactId>SoapService</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-
     </dependencies>
     <build>
         <finalName>ClientApp</finalName>
@@ -64,7 +49,7 @@
                         <id>generate-sources</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <!--                            <sourceRoot>${basedir}/src/main/java/com/divanov/mathwebservice/gen</sourceRoot>-->
+                            <sourceRoot>${basedir}/src/main/java</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/myService.wsdl</wsdl>
@@ -72,7 +57,6 @@
                                         <bindingFile>${basedir}/src/main/resources/mathWSClient.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
-                                        <!--                                        <extraarg>-impl</extraarg>-->
                                         <extraarg>-p</extraarg>
                                         <extraarg>com.divanov.mathwebservice.gen</extraarg>
                                     </extraargs>
@@ -85,28 +69,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>jaxb2-maven-plugin</artifactId>-->
-            <!--                <version>2.5.0</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>xjc</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>xjc</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <xjbSources>src/main/resources/jaxb</xjbSources>-->
-            <!--                            <sources>-->
-            <!--                                <source>src/main/resources/xsd</source>-->
-            <!--                            </sources>-->
-            <!--                            <outputDirectory>${basedir}/src/main/java/</outputDirectory>-->
-            <!--                            <packageName>com.divanov.mathwebservice.gen</packageName>-->
-            <!--                            <clearOutputDir>false</clearOutputDir>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
 </project>

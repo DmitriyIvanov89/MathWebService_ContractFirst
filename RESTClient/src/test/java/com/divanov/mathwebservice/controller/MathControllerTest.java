@@ -2,19 +2,19 @@ package com.divanov.mathwebservice.controller;
 
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = MathControllerTestConfig.class)
 class MathControllerTest {
 
     /**

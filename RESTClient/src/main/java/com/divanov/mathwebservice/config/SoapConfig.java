@@ -17,5 +17,4 @@ public class SoapConfig {
     public ObjectFactory objectFactory() {
         return new ObjectFactory();
     }
-
 }
