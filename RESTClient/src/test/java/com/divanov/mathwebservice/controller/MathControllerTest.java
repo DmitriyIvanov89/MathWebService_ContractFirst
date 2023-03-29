@@ -2,19 +2,16 @@ package com.divanov.mathwebservice.controller;
 
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MathControllerTestConfig.class)
+@SpringJUnitConfig
+@SpringBootTest
 class MathControllerTest {
 
     /**
@@ -39,6 +36,21 @@ class MathControllerTest {
                 () -> assertEquals(expectedResponse.getDiscriminant(), actualResponse.getDiscriminant()),
                 () -> assertEquals(expectedResponse.getX1(), actualResponse.getX1()),
                 () -> assertEquals(expectedResponse.getX2(), actualResponse.getX2())
+        );
+    }
+
+    @Test
+    void shouldReturnResponseWithOneRoot() throws QuadraticEducationException {
+        SolutionQuadraticEducation expectedResponse = createResponse("1,0x^2 + -6,0x + 9,0 = 0",
+                0.0, 3.0, null);
+
+        SolutionQuadraticEducation actualResponse = controller.getResult(1, -6, 9);
+
+        assertAll(
+                () -> assertEquals(expectedResponse.getFormula(), actualResponse.getFormula()),
+                () -> assertEquals(expectedResponse.getDiscriminant(), actualResponse.getDiscriminant()),
+                () -> assertEquals(expectedResponse.getX1(), actualResponse.getX1()),
+                () -> assertNull(actualResponse.getX2())
         );
     }
 
