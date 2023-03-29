@@ -1,16 +1,15 @@
-package com.divanov.mathwebservice.controller;
+package com.divanov.mathwebservice.controller.controller;
 
+import com.divanov.mathwebservice.controller.MathController;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringJUnitConfig
 @SpringBootTest
 class MathControllerTest {
 
