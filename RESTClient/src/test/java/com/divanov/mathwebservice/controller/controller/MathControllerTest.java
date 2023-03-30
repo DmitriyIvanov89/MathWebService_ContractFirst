@@ -10,7 +10,6 @@ import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.xml.ws.soap.SOAPFaultException;
-import org.apache.cxf.binding.soap.SoapFault;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,11 +77,46 @@ class MathControllerTest {
 
     @Test
     void shouldReturnNoRealRootsException() {
-        QuadraticEducationException actualException = assertThrows(
-                QuadraticEducationException.class, () -> controller.getResult(5, 3, 7)
+        SOAPFaultException actualException = assertThrows(
+                SOAPFaultException.class, () -> controller.getResult(4, 0, 30)
         );
 
-        assertEquals("Discriminant can't be less than 0", actualException.getMessage());
+        assertEquals("The education has no real roots", actualException.getMessage());
+    }
+
+    @Test
+    void shouldReturnInvalidADataException() {
+        SOAPFaultException actualException = assertThrows(
+                SOAPFaultException.class, () -> controller.getResult(0, -3, 1)
+        );
+
+        assertEquals("The leading coefficient can't be equals 0", actualException.getMessage());
+    }
+
+    @Test
+    void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationException {
+        SolutionQuadraticEducation expectedResponse = createResponse("2,0x^2 + -3,0x = 0", 0, 0, 1.5);
+        SolutionQuadraticEducation actualResponse = controller.getResult(2, -3, 0);
+
+        assertAll(
+                () -> assertEquals(expectedResponse.getFormula(), actualResponse.getFormula()),
+                () -> assertEquals(expectedResponse.getDiscriminant(), actualResponse.getDiscriminant()),
+                () -> assertEquals(expectedResponse.getX1(), actualResponse.getX1()),
+                () -> assertEquals(expectedResponse.getX2(), actualResponse.getX2())
+        );
+    }
+
+    @Test
+    void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationException {
+        SolutionQuadraticEducation expectedResponse = createResponse("4,0x^2 + -9,0 = 0", 0, 1.5, -1.5);
+        SolutionQuadraticEducation actualResponse = controller.getResult(4, 0, -9);
+
+        assertAll(
+                () -> assertEquals(expectedResponse.getFormula(), actualResponse.getFormula()),
+                () -> assertEquals(expectedResponse.getDiscriminant(), actualResponse.getDiscriminant()),
+                () -> assertEquals(expectedResponse.getX1(), actualResponse.getX1()),
+                () -> assertEquals(expectedResponse.getX2(), actualResponse.getX2())
+        );
     }
 
     private SolutionQuadraticEducation createResponse(String formula, double discriminant, double x1, Double x2) {

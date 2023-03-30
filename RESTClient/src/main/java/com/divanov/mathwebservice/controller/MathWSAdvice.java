@@ -2,11 +2,12 @@ package com.divanov.mathwebservice.controller;
 
 import com.divanov.mathwebservice.gen.ErrorResponse;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
-import org.apache.cxf.binding.soap.SoapFault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.xml.ws.soap.SOAPFaultException;
 
 @ControllerAdvice
 public class MathWSAdvice {
@@ -20,8 +21,8 @@ public class MathWSAdvice {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(SoapFault.class)
-    public ResponseEntity<String> handleSoapFault(SoapFault exception) {
+    @ExceptionHandler(SOAPFaultException.class)
+    public ResponseEntity<String> handleSoapFault(SOAPFaultException exception) {
         return new ResponseEntity<>("Message: " + exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
