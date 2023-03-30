@@ -20,7 +20,7 @@ public class MathWSAdvice {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(org.apache.cxf.binding.soap.SoapFault.class)
+    @ExceptionHandler(SoapFault.class)
     public ResponseEntity<String> handleSoapFault(SoapFault exception) {
         return new ResponseEntity<>("Message: " + exception.getMessage(), HttpStatus.BAD_REQUEST);
     }

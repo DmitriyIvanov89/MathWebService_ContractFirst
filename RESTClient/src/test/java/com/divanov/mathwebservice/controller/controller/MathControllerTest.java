@@ -1,12 +1,16 @@
 package com.divanov.mathwebservice.controller.controller;
 
 import com.divanov.mathwebservice.controller.MathController;
+import com.divanov.mathwebservice.gen.ErrorResponse;
 import com.divanov.mathwebservice.gen.ObjectFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
 import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.xml.ws.soap.SOAPFaultException;
+import org.apache.cxf.binding.soap.SoapFault;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,6 +55,34 @@ class MathControllerTest {
                 () -> assertEquals(expectedResponse.getX1(), actualResponse.getX1()),
                 () -> assertNull(actualResponse.getX2())
         );
+    }
+
+    @Test
+    void shouldReturnExceptionsWithDetails() {
+        ErrorResponse expectedErrorResponse = objectFactory.createErrorResponse();
+        expectedErrorResponse.setMessage("Discriminant can't be less than 0");
+        expectedErrorResponse.setDiscriminant(-131.0);
+        expectedErrorResponse.setFormula("5,0x^2 + 3,0x + 7,0 = 0");
+
+
+        QuadraticEducationException actualException = assertThrows(
+                QuadraticEducationException.class, () -> controller.getResult(5, 3, 7)
+        );
+
+        assertAll(
+                () -> assertEquals(expectedErrorResponse.getMessage(), actualException.getMessage()),
+                () -> assertEquals(expectedErrorResponse.getDiscriminant(), actualException.getFaultInfo().getDiscriminant()),
+                () -> assertEquals(expectedErrorResponse.getFormula(), actualException.getFaultInfo().getFormula())
+        );
+    }
+
+    @Test
+    void shouldReturnNoRealRootsException() {
+        QuadraticEducationException actualException = assertThrows(
+                QuadraticEducationException.class, () -> controller.getResult(5, 3, 7)
+        );
+
+        assertEquals("Discriminant can't be less than 0", actualException.getMessage());
     }
 
     private SolutionQuadraticEducation createResponse(String formula, double discriminant, double x1, Double x2) {
