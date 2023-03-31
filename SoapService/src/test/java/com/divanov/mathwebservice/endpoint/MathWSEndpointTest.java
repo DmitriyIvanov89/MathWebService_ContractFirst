@@ -2,26 +2,18 @@ package com.divanov.mathwebservice.endpoint;
 
 import com.divanov.mathwebservice.service.exception.NoSolutionException;
 import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
-import com.divanov.mathwebservice.service.gen.ErrorResponse;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.gen.QuadraticEducationRequestPayLoad;
 import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * TO DO :
- * create test with invalid validation request params
- */
-
-@SpringJUnitConfig
-@ContextConfiguration(classes = MathWSEndpointTestTestConfig.class)
+@SpringBootTest
 class MathWSEndpointTest {
+
     @Autowired
     private MathWSEndpoint mathWSEndpoint;
 
@@ -30,37 +22,41 @@ class MathWSEndpointTest {
 
     @Test
     void shouldReturnResultWithDiscriminantGreaterThanZero() {
-        assertEquals(createResponse("2,0x^2 + -3,0x + 1,0 = 0", 1.0, 1.0, 0.5),
-                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(2, -3, 1)).getValue());
+        SolutionQuadraticEducation actualResponse =
+                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(2, -3, 1)).getValue();
+
+        assertAll(
+                () -> assertEquals("2,0x^2 + -3,0x + 1,0 = 0", actualResponse.getFormula()),
+                () -> assertEquals(1.0, actualResponse.getDiscriminant()),
+                () -> assertEquals(1.0, actualResponse.getX1()),
+                () -> assertEquals(0.5, actualResponse.getX2())
+        );
     }
 
     @Test
     void shouldReturnResponseWithOneRoot() {
-        assertEquals(createResponse("1,0x^2 + -6,0x + 9,0 = 0", 0.0, 3.0, null),
-                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(1, -6, 9)).getValue());
-    }
+        SolutionQuadraticEducation actualResponse =
+                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(1, -6, 9)).getValue();
 
-    @Test
-    void shouldThrowQuadraticEducationExceptionDiscriminantLessThanZero() {
-        QuadraticEducationException expectedException = assertThrows(QuadraticEducationException.class, () -> {
-            mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(5, 3, 7));
-        });
-
-        assertEquals("Discriminant can't be less than 0", expectedException.getMessage());
+        assertAll(
+                () -> assertEquals("1,0x^2 + -6,0x + 9,0 = 0", actualResponse.getFormula()),
+                () -> assertEquals(0.0, actualResponse.getDiscriminant()),
+                () -> assertEquals(3.0, actualResponse.getX1()),
+                () -> assertNull(actualResponse.getX2())
+        );
     }
 
     @Test
     void shouldReturnQuadraticEducationFaultDetail() {
-        QuadraticEducationException expectedException = assertThrows(QuadraticEducationException.class, () -> {
+        QuadraticEducationException actualException = assertThrows(QuadraticEducationException.class, () -> {
             mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(5, 3, 7));
         });
 
-        ErrorResponse expectedFault = objectFactory.createErrorResponse();
-        expectedFault.setFormula("5,0x^2 + 3,0x + 7,0 = 0");
-        expectedFault.setDiscriminant(-131.0);
-
-        assertEquals(expectedException.getFormula(), expectedException.getFormula());
-        assertEquals(expectedFault.getDiscriminant(), expectedException.getDiscriminant());
+        assertAll(
+                () -> assertEquals("Discriminant can't be less than 0", actualException.getMessage()),
+                () -> assertEquals("5,0x^2 + 3,0x + 7,0 = 0", actualException.getFormula()),
+                () -> assertEquals(-131.0, actualException.getDiscriminant())
+        );
     }
 
     @Test
@@ -83,14 +79,28 @@ class MathWSEndpointTest {
 
     @Test
     void shouldReturnResponseIncompleteEducationWhenCEqualsZero() {
-        assertEquals(createResponse("4,0x^2 + -7,0x = 0", 0, 0.0, 1.75),
-                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(4, -7, 0)).getValue());
+        SolutionQuadraticEducation actualResponse =
+                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(4, -7, 0)).getValue();
+
+        assertAll(
+                () -> assertEquals("4,0x^2 + -7,0x = 0", actualResponse.getFormula()),
+                () -> assertEquals(0, actualResponse.getDiscriminant()),
+                () -> assertEquals(0.0, actualResponse.getX1()),
+                () -> assertEquals(1.75, actualResponse.getX2())
+        );
     }
 
     @Test
     void shouldReturnResponseIncompleteEducationWhenBEqualsZero() {
-        assertEquals(createResponse("4,0x^2 + -9,0 = 0", 0, 1.5, -1.5),
-                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(4, 0, -9)).getValue());
+        SolutionQuadraticEducation actualResponse =
+                mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(4, 0, -9)).getValue();
+
+        assertAll(
+                () -> assertEquals("4,0x^2 + -9,0 = 0", actualResponse.getFormula()),
+                () -> assertEquals(0, actualResponse.getDiscriminant()),
+                () -> assertEquals(1.5, actualResponse.getX1()),
+                () -> assertEquals(-1.5, actualResponse.getX2())
+        );
     }
 
     private QuadraticEducationRequestPayLoad createRequestPayLoad(double a, double b, double c) {

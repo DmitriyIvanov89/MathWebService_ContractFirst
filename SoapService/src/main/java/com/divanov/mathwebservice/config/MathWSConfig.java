@@ -4,6 +4,7 @@ import com.divanov.mathwebservice.service.DetailSoapFaultDefinitionExceptionReso
 import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.MathService;
 import com.divanov.mathwebservice.service.ReflectionWsdl11Definition;
+import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.validatorinterceptor.ValidationInterceptorMathWS;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -77,5 +78,10 @@ public class MathWSConfig extends WsConfigurerAdapter {
         exceptionResolver.setExceptionMappings(errorMappings);
         exceptionResolver.setOrder(1);
         return exceptionResolver;
+    }
+
+    @Bean
+    public ObjectFactory objectFactory() {
+        return new ObjectFactory();
     }
 }
