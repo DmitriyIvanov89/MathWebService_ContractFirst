@@ -2,6 +2,7 @@ package com.divanov.mathwebservice.controller.controller;
 
 import com.divanov.mathwebservice.controller.MathController;
 import com.divanov.mathwebservice.gen.ObjectFactory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
@@ -15,11 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MathControllerTest {
 
+    private ObjectFactory objectFactory;
+
     @Autowired
     MathController controller;
 
-    @Autowired
-    ObjectFactory objectFactory;
+    @BeforeEach
+    void init() {
+        this.objectFactory = new ObjectFactory();
+    }
 
     @Test
     void shouldReturnCorrectResponse() throws QuadraticEducationException {
