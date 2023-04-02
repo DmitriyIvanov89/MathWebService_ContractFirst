@@ -11,11 +11,11 @@ public class MathServiceImpl implements MathService {
     private static final String ERROR_PARAM_A = "The leading coefficient can't be equals 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
     private static final String DISCRIMINANT_INVALID_VALUE = "Discriminant can't be less than 0";
-    private static final ObjectFactory FACTORY = new ObjectFactory();
+    private final ObjectFactory objectFactory = new ObjectFactory();
 
     @Override
     public SolutionQuadraticEducation solveQuadraticEducation(double coefficient_A, double coefficient_B, double coefficient_C) {
-        SolutionQuadraticEducation solution = FACTORY.createSolutionQuadraticEducation();
+        SolutionQuadraticEducation solution = objectFactory.createSolutionQuadraticEducation();
         if (coefficient_A != 0) {
             if (coefficient_B == 0 || coefficient_C == 0) {
                 solveIncompleteQuadraticEducation(solution, coefficient_A, coefficient_B, coefficient_C);

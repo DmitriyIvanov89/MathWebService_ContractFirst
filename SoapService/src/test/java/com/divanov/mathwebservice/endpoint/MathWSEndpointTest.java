@@ -5,6 +5,7 @@ import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.gen.QuadraticEducationRequestPayLoad;
 import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,11 +15,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MathWSEndpointTest {
 
+    private ObjectFactory objectFactory;
+
     @Autowired
     private MathWSEndpoint mathWSEndpoint;
 
-    @Autowired
-    private ObjectFactory objectFactory;
+    @BeforeEach
+    void init() {
+        this.objectFactory = new ObjectFactory();
+    }
 
     @Test
     void shouldReturnResultWithDiscriminantGreaterThanZero() {

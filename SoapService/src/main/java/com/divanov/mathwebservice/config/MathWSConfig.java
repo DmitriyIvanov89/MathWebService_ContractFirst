@@ -80,8 +80,8 @@ public class MathWSConfig extends WsConfigurerAdapter {
         return exceptionResolver;
     }
 
-    @Bean
-    public ObjectFactory objectFactory() {
-        return new ObjectFactory();
-    }
+//    @Bean
+//    public ObjectFactory objectFactory() {
+//        return new ObjectFactory();
+//    }
 }

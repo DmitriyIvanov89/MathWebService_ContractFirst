@@ -46,16 +46,15 @@
                 <version>2.5.0</version>
                 <executions>
                     <execution>
-                        <id>xjc</id>
+                        <id>soap-supervision</id>
                         <goals>
                             <goal>xjc</goal>
                         </goals>
                         <configuration>
-                            <xjbSources>src/main/resources/jaxb</xjbSources>
+                            <xjbSources>${basedir}/src/main/resources/jaxb/mathWS.xjb</xjbSources>
                             <sources>
-                                <source>src/main/resources/xsd</source>
+                                <source>${basedir}/src/main/resources/xsd</source>
                             </sources>
-                            <outputDirectory>${basedir}/src/main/java/</outputDirectory>
                             <packageName>com.divanov.mathwebservice.service.gen</packageName>
                             <clearOutputDir>false</clearOutputDir>
                         </configuration>
