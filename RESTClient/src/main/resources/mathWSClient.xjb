@@ -5,7 +5,7 @@
     xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
     
-    <jaxws:bindings node="wsdl:definitions/wsdl:types/xsd:schema[1]">
+    <jaxws:bindings node="wsdl:definitions/wsdl:types/xs:schema[1]">
         
         <jxb:bindings node="//xs:complexType[@name='errorFault']">
             <jxb:class name="ErrorResponse"/>
