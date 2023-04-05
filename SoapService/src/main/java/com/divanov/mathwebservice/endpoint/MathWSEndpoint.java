@@ -4,6 +4,8 @@ import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.gen.QuadraticEducationRequestPayLoad;
 import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
 import com.divanov.mathwebservice.service.MathService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -15,6 +17,8 @@ import javax.xml.bind.JAXBElement;
 
 @Endpoint
 public class MathWSEndpoint {
+    private static final Logger log = LogManager.getLogger(MathWSEndpoint.class);
+
     private final MathService service;
     private final ObjectFactory objectFactory;
 
@@ -31,6 +35,7 @@ public class MathWSEndpoint {
     @PayloadRoot(namespace = MathService.NAME_SPACE, localPart = "getSolveQuadraticEducationRequest")
     @ResponsePayload
     public JAXBElement<SolutionQuadraticEducation> getSolutionQuadraticEducation(@RequestPayload QuadraticEducationRequestPayLoad payLoad) {
+        log.info("Send message:{},{},{}", payLoad.getA(), payLoad.getB(), payLoad.getC());
         SolutionQuadraticEducation solution = getService().solveQuadraticEducation(payLoad.getA(), payLoad.getB(), payLoad.getC());
         return objectFactory.createGetSolveQuadraticEducationResponse(solution);
     }

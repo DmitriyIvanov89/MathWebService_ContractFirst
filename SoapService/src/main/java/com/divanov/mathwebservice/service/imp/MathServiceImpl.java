@@ -1,5 +1,6 @@
-package com.divanov.mathwebservice.service;
+package com.divanov.mathwebservice.service.imp;
 
+import com.divanov.mathwebservice.service.MathService;
 import com.divanov.mathwebservice.service.exception.NoSolutionException;
 import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;

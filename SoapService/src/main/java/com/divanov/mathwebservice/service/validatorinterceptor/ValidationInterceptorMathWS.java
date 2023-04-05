@@ -1,8 +1,7 @@
-package com.divanov.mathwebservice.validatorinterceptor;
+package com.divanov.mathwebservice.service.validatorinterceptor;
 
 import com.divanov.mathwebservice.service.exception.RequestValidationException;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.ws.context.MessageContext;
@@ -14,15 +13,16 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ValidationInterceptorMathWS extends PayloadValidatingInterceptor {
-    private static final Logger log = LogManager.getRootLogger();
+    private static final Logger log = LogManager.getLogger(ValidationInterceptorMathWS.class);
+    private static final String LOG_ERROR_MESSAGE = "Xsd schema validation errors: {}";
 
     @Override
     protected boolean handleRequestValidationErrors(MessageContext messageContext, SAXParseException[] errors) {
         if (errors.length > 0) {
-            log.info("start logger");
             String validationsErrorString = Arrays.stream(errors)
                     .map(SAXException::getMessage)
                     .collect(Collectors.joining(" -- "));
+            log.error(LOG_ERROR_MESSAGE, validationsErrorString);
             throw new RequestValidationException("Xsd schema validation errors: " + validationsErrorString);
         }
         return true;
