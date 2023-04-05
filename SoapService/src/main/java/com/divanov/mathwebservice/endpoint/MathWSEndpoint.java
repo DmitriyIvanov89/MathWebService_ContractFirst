@@ -35,8 +35,13 @@ public class MathWSEndpoint {
     @PayloadRoot(namespace = MathService.NAME_SPACE, localPart = "getSolveQuadraticEducationRequest")
     @ResponsePayload
     public JAXBElement<SolutionQuadraticEducation> getSolutionQuadraticEducation(@RequestPayload QuadraticEducationRequestPayLoad payLoad) {
-        log.info("Send message:{},{},{}", payLoad.getA(), payLoad.getB(), payLoad.getC());
+
+        log.debug("Received request with params:a: {}, b: {}, c{}", payLoad.getA(), payLoad.getB(), payLoad.getC());
+
         SolutionQuadraticEducation solution = getService().solveQuadraticEducation(payLoad.getA(), payLoad.getB(), payLoad.getC());
+
+        log.debug("Send response:formula - {}, discriminant - {}", solution.getFormula(), solution.getDiscriminant());
+
         return objectFactory.createGetSolveQuadraticEducationResponse(solution);
     }
 }
