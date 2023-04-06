@@ -40,7 +40,10 @@ public class MathWSEndpoint {
 
         SolutionQuadraticEducation solution = getService().solveQuadraticEducation(payLoad.getA(), payLoad.getB(), payLoad.getC());
 
-        log.debug("Send response:formula - {}, discriminant - {}", solution.getFormula(), solution.getDiscriminant());
+        log.info("Send response:formula - {}, discriminant - {}", solution.getFormula(), solution.getDiscriminant());
+        log.warn("Send response:formula - {}, discriminant - {}", solution.getFormula(), solution.getDiscriminant());
+        log.error("Send response:formula - {}, discriminant - {}", solution.getFormula(), solution.getDiscriminant());
+        log.fatal("Send response:formula - {}, discriminant - {}", solution.getFormula(), solution.getDiscriminant());
 
         return objectFactory.createGetSolveQuadraticEducationResponse(solution);
     }
