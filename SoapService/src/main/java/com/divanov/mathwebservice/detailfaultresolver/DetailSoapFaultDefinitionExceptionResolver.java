@@ -1,6 +1,6 @@
-package com.divanov.mathwebservice.service;
+package com.divanov.mathwebservice.detailfaultresolver;
 
-import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.gen.ErrorResponse;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import org.springframework.ws.soap.SoapFault;

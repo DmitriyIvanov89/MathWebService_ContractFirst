@@ -1,4 +1,4 @@
-package com.divanov.mathwebservice.service;
+package com.divanov.mathwebservice.wsdldefinition;
 
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.ws.wsdl.wsdl11.ProviderBasedWsdl4jDefinition;

@@ -8,7 +8,7 @@
         </Console>
 
     </Appenders>
-    
+
     <Loggers>
 
         <Logger name="com.divanov.mathwebservice" level="debug" additivity="false">

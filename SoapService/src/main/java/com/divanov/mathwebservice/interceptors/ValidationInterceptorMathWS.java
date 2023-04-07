@@ -1,6 +1,6 @@
-package com.divanov.mathwebservice.service.validatorinterceptor;
+package com.divanov.mathwebservice.interceptors;
 
-import com.divanov.mathwebservice.service.exception.RequestValidationException;
+import com.divanov.mathwebservice.exception.RequestValidationException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

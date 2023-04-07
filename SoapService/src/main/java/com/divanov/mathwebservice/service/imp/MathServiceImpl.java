@@ -1,8 +1,8 @@
 package com.divanov.mathwebservice.service.imp;
 
 import com.divanov.mathwebservice.service.MathService;
-import com.divanov.mathwebservice.service.exception.NoSolutionException;
-import com.divanov.mathwebservice.service.exception.QuadraticEducationException;
+import com.divanov.mathwebservice.exception.NoSolutionException;
+import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
 import org.springframework.stereotype.Service;

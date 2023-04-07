@@ -1,4 +1,4 @@
-package com.divanov.mathwebservice.service.exception;
+package com.divanov.mathwebservice.exception;
 
 public class QuadraticEducationException extends MathServiceException {
     private String formula;
