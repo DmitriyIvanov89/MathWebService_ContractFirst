@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MathControllerTest {
 
     private ObjectFactory objectFactory;
+    private static final String EXCEPTION_MESSAGE_NO_REAL_ROOT = "Client received SOAP Fault from server: The education has no real roots Please see the server log to find more detail regarding exact cause of the failure.";
+    private static final String EXCEPTION_MESSAGE_COEFF_A = "Client received SOAP Fault from server: The leading coefficient can't be equals 0 Please see the server log to find more detail regarding exact cause of the failure.";
 
     @Autowired
     MathController controller;
@@ -69,7 +71,7 @@ class MathControllerTest {
                 SOAPFaultException.class, () -> controller.getResult(4, 0, 30)
         );
 
-        assertEquals("The education has no real roots", actualException.getMessage());
+        assertEquals(EXCEPTION_MESSAGE_NO_REAL_ROOT, actualException.getMessage());
     }
 
     @Test
@@ -78,7 +80,7 @@ class MathControllerTest {
                 SOAPFaultException.class, () -> controller.getResult(0, -3, 1)
         );
 
-        assertEquals("The leading coefficient can't be equals 0", actualException.getMessage());
+        assertEquals(EXCEPTION_MESSAGE_COEFF_A, actualException.getMessage());
     }
 
     @Test

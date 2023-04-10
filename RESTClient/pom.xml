@@ -44,9 +44,7 @@
                         <bindingFile>${basedir}/src/main/resources/mathWSClient.xjb</bindingFile>
                     </bindingFiles>
                     <packageName>com.divanov.mathwebservice.gen</packageName>
-                    <sourceDestDir>
-                        ${project.build.directory}/generated-sources/
-                    </sourceDestDir>
+                    <sourceDestDir>${project.build.directory}/generated-sources/</sourceDestDir>
                 </configuration>
             </plugin>
         </plugins>

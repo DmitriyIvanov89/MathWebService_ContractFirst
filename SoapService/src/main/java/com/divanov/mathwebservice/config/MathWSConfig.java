@@ -78,9 +78,4 @@ public class MathWSConfig extends WsConfigurerAdapter {
         exceptionResolver.setOrder(1);
         return exceptionResolver;
     }
-
-//    @Bean
-//    public ObjectFactory objectFactory() {
-//        return new ObjectFactory();
-//    }
 }

@@ -5,10 +5,14 @@ import com.divanov.mathwebservice.exception.NoSolutionException;
 import com.divanov.mathwebservice.exception.QuadraticEducationException;
 import com.divanov.mathwebservice.service.gen.ObjectFactory;
 import com.divanov.mathwebservice.service.gen.SolutionQuadraticEducation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MathServiceImpl implements MathService {
+    private static final Logger log = LogManager.getLogger(MathServiceImpl.class);
+
     private static final String ERROR_PARAM_A = "The leading coefficient can't be equals 0";
     private static final String NO_REAL_ROOTS = "The education has no real roots";
     private static final String DISCRIMINANT_INVALID_VALUE = "Discriminant can't be less than 0";
@@ -33,6 +37,7 @@ public class MathServiceImpl implements MathService {
                                                    double param_B,
                                                    double param_C) {
         response.setFormula(generateEducationFormula(param_A, param_B, param_C));
+        log.debug("Start solution incomplete quadratic education: {}", response.getFormula());
         if (param_B == 0 && param_C == 0) {
             response.setX1(0.0);
         } else if (param_B == 0) {
@@ -54,6 +59,7 @@ public class MathServiceImpl implements MathService {
                                                  double param_C) {
         response.setDiscriminant(Math.pow(param_B, 2) - 4 * param_A * param_C);
         response.setFormula(generateEducationFormula(param_A, param_B, param_C));
+        log.debug("Start solution complete quadratic education: {}", response.getFormula());
         if (response.getDiscriminant() > 0) {
             response.setX1((-param_B + Math.sqrt(response.getDiscriminant())) / (2 * param_A));
             response.setX2((-param_B - Math.sqrt(response.getDiscriminant())) / (2 * param_A));
