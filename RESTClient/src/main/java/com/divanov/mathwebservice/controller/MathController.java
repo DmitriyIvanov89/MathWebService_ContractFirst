@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/calc")
+@RequestMapping("/api")
 public class MathController {
     private final Logger log = LogManager.getLogger(MathController.class);
 
@@ -24,7 +24,7 @@ public class MathController {
         this.objectFactory = new ObjectFactory();
     }
 
-    @GetMapping
+    @GetMapping("/calc")
     public SolutionQuadraticEducation getResult(@RequestParam double a,
                                                 @RequestParam double b,
                                                 @RequestParam double c) throws QuadraticEducationException {
