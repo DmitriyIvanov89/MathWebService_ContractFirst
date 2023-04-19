@@ -9,8 +9,12 @@ $CXF_HOME/wsdl2java -p com.divanov.mathwebservice.gen -d src/main/java http://lo
 $CXF_HOME/wsdl2java -p com.divanov.mathwebservice.gen -d src/main/java -b ./src/main/resources/mathWSClient.xjb -client -impl http://localhost:8080/services/math.wsdl
 
 *************************************************************************
+insert
+
 export CXF_HOME="/home/jimbojack88/Загрузки/apache-cxf-3.5.3/bin"
-in etc/environment
+
+in /etc/environment
+source /etc/environment
 
 *************************************************************************
 mvn clean install
