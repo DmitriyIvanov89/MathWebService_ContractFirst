@@ -4,7 +4,6 @@
         <artifactId>MathWebService</artifactId>
         <groupId>com.divanov</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -50,6 +49,16 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            Чтобы использовать этот плагин для создания docker образа, name должен быть в [a-z0-9]-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <image>-->
+<!--                        <name>docker.io/pratikdas/${project.build.finalName}:v2</name>-->
+<!--                    </image>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
