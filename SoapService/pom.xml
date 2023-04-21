@@ -26,7 +26,7 @@
     </dependencies>
 
     <build>
-        <finalName>SoapService</finalName>
+        <finalName>soapservice</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -49,16 +49,20 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            Чтобы использовать этот плагин для создания docker образа, name должен быть в [a-z0-9]-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <image>-->
-<!--                        <name>docker.io/pratikdas/${project.build.finalName}:v2</name>-->
-<!--                    </image>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--            Чтобы использовать этот плагин для создания docker образа, name должен быть в [a-z0-9]-->
+                    <!--                    <image>-->
+                    <!--                        <name>docker.io/pratikdas/${project.build.finalName}:v3</name>-->
+                    <!--                    </image>-->
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
