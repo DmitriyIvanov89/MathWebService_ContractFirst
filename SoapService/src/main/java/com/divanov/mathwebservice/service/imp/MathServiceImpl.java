@@ -9,6 +9,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 @Service
 public class MathServiceImpl implements MathService {
     private static final Logger log = LogManager.getLogger(MathServiceImpl.class);
@@ -71,6 +75,8 @@ public class MathServiceImpl implements MathService {
     }
 
     private static String generateEducationFormula(double a, double b, double c) {
+        Locale.setDefault(Locale.US);
+
         if (b == 0 && c == 0) {
             return String.format("%.1fx^2 = 0", a);
         } else if (b == 0) {

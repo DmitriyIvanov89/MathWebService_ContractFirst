@@ -31,7 +31,7 @@ class MathWSEndpointTest {
                 mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(2, -3, 1)).getValue();
 
         assertAll(
-                () -> assertEquals("2,0x^2 + -3,0x + 1,0 = 0", actualResponse.getFormula()),
+                () -> assertEquals("2.0x^2 + -3.0x + 1.0 = 0", actualResponse.getFormula()),
                 () -> assertEquals(1.0, actualResponse.getDiscriminant()),
                 () -> assertEquals(1.0, actualResponse.getX1()),
                 () -> assertEquals(0.5, actualResponse.getX2())
@@ -44,7 +44,7 @@ class MathWSEndpointTest {
                 mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(1, -6, 9)).getValue();
 
         assertAll(
-                () -> assertEquals("1,0x^2 + -6,0x + 9,0 = 0", actualResponse.getFormula()),
+                () -> assertEquals("1.0x^2 + -6.0x + 9.0 = 0", actualResponse.getFormula()),
                 () -> assertEquals(0.0, actualResponse.getDiscriminant()),
                 () -> assertEquals(3.0, actualResponse.getX1()),
                 () -> assertNull(actualResponse.getX2())
@@ -59,7 +59,7 @@ class MathWSEndpointTest {
 
         assertAll(
                 () -> assertEquals("Discriminant can't be less than 0", actualException.getMessage()),
-                () -> assertEquals("5,0x^2 + 3,0x + 7,0 = 0", actualException.getFormula()),
+                () -> assertEquals("5.0x^2 + 3.0x + 7.0 = 0", actualException.getFormula()),
                 () -> assertEquals(-131.0, actualException.getDiscriminant())
         );
     }
@@ -88,7 +88,7 @@ class MathWSEndpointTest {
                 mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(4, -7, 0)).getValue();
 
         assertAll(
-                () -> assertEquals("4,0x^2 + -7,0x = 0", actualResponse.getFormula()),
+                () -> assertEquals("4.0x^2 + -7.0x = 0", actualResponse.getFormula()),
                 () -> assertEquals(0, actualResponse.getDiscriminant()),
                 () -> assertEquals(0.0, actualResponse.getX1()),
                 () -> assertEquals(1.75, actualResponse.getX2())
@@ -101,7 +101,7 @@ class MathWSEndpointTest {
                 mathWSEndpoint.getSolutionQuadraticEducation(createRequestPayLoad(4, 0, -9)).getValue();
 
         assertAll(
-                () -> assertEquals("4,0x^2 + -9,0 = 0", actualResponse.getFormula()),
+                () -> assertEquals("4.0x^2 + -9.0 = 0", actualResponse.getFormula()),
                 () -> assertEquals(0, actualResponse.getDiscriminant()),
                 () -> assertEquals(1.5, actualResponse.getX1()),
                 () -> assertEquals(-1.5, actualResponse.getX2())
