@@ -1,20 +1,22 @@
 version: "3.9"
 services:
-  soap-server:
-    build: ./SoapService
-    container_name: soap_service
-    ports:
-      - "8080:8080"
-    networks:
-      - my-network
-  rest-client:
+  rest_service:
     build: ./RESTClient
     container_name: rest_service
     ports:
       - "9090:9090"
     depends_on:
-      - soap-server
+      - soap_service
     networks:
-      - my-network
+      - proxynet
+  soap_service:
+    build: ./SoapService
+    container_name: soap_service
+    ports:
+      - "8080:8080"
+    networks:
+      - proxynet 
+    restart: always
 networks:
-  my-network:
+  proxynet:
+    name: custom_network

@@ -1,6 +1,9 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://math.ws.divanov" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://math.ws.divanov" targetNamespace="http://math.ws.divanov">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://math.ws.divanov"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://math.ws.divanov"
+                  targetNamespace="http://math.ws.divanov">
     <wsdl:types>
-        <xs:schema xmlns:ns="http://math.ws.divanov" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://math.ws.divanov">
+        <xs:schema xmlns:ns="http://math.ws.divanov" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   elementFormDefault="qualified" targetNamespace="http://math.ws.divanov">
             <xs:element name="getSolveQuadraticEducationRequest" type="ns:quadraticEducationRequestPayLoad"/>
             <xs:element name="getSolveQuadraticEducationResponse" type="ns:solutionQuadraticEducation"/>
             <xs:element name="quadraticEducationException" type="ns:errorFault"/>
@@ -29,19 +32,22 @@
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="getSolveQuadraticEducationRequest">
-        <wsdl:part element="tns:getSolveQuadraticEducationRequest" name="getSolveQuadraticEducationRequest"> </wsdl:part>
+        <wsdl:part element="tns:getSolveQuadraticEducationRequest" name="getSolveQuadraticEducationRequest"/>
     </wsdl:message>
     <wsdl:message name="getSolveQuadraticEducationResponse">
-        <wsdl:part element="tns:getSolveQuadraticEducationResponse" name="getSolveQuadraticEducationResponse"> </wsdl:part>
+        <wsdl:part element="tns:getSolveQuadraticEducationResponse"
+                   name="getSolveQuadraticEducationResponse"/>
     </wsdl:message>
     <wsdl:message name="quadraticEducationException">
-        <wsdl:part element="tns:quadraticEducationException" name="quadraticEducationException"> </wsdl:part>
+        <wsdl:part element="tns:quadraticEducationException" name="quadraticEducationException"/>
     </wsdl:message>
     <wsdl:portType name="MathService">
         <wsdl:operation name="getSolveQuadraticEducation">
-            <wsdl:input message="tns:getSolveQuadraticEducationRequest" name="getSolveQuadraticEducationRequest"> </wsdl:input>
-            <wsdl:output message="tns:getSolveQuadraticEducationResponse" name="getSolveQuadraticEducationResponse"> </wsdl:output>
-            <wsdl:fault message="tns:quadraticEducationException" name="quadraticEducationException"> </wsdl:fault>
+            <wsdl:input message="tns:getSolveQuadraticEducationRequest"
+                        name="getSolveQuadraticEducationRequest"/>
+            <wsdl:output message="tns:getSolveQuadraticEducationResponse"
+                         name="getSolveQuadraticEducationResponse"/>
+            <wsdl:fault message="tns:quadraticEducationException" name="quadraticEducationException"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="MathServiceSoap11" type="tns:MathService">
