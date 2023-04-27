@@ -5,10 +5,14 @@ import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @RestController
 @RequestMapping("/api")
@@ -19,8 +23,9 @@ public class MathController {
     private final ObjectFactory objectFactory;
 
     @Autowired
-    public MathController(MathServiceService service) {
-        this.service = service;
+    public MathController(@Value("${soap.wsdlLocation}") String wsdlLocation, MathServiceService service) throws MalformedURLException {
+        URL url = new URL(wsdlLocation);
+        this.service = new MathServiceService(url);
         this.objectFactory = new ObjectFactory();
     }
 
