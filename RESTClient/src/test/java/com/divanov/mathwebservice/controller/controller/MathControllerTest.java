@@ -16,6 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MathControllerTest {
 
+    /**
+     * Only if SoapService is running the tests are successful
+     * Need to mock SoapService
+     */
+
     private ObjectFactory objectFactory;
     private static final String EXCEPTION_MESSAGE_NO_REAL_ROOT = "Client received SOAP Fault from server: The education has no real roots Please see the server log to find more detail regarding exact cause of the failure.";
     private static final String EXCEPTION_MESSAGE_COEFF_A = "Client received SOAP Fault from server: The leading coefficient can't be equals 0 Please see the server log to find more detail regarding exact cause of the failure.";
