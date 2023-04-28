@@ -24,8 +24,7 @@ public class MathController {
 
     @Autowired
     public MathController(@Value("${soap.wsdlLocation}") String wsdlLocation, MathServiceService service) throws MalformedURLException {
-        URL url = new URL(wsdlLocation);
-        this.service = new MathServiceService(url);
+        this.service = new MathServiceService(new URL(wsdlLocation));
         this.objectFactory = new ObjectFactory();
     }
 
