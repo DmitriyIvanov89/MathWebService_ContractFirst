@@ -25,4 +25,14 @@ public class MathWSAdvice {
     public ResponseEntity<String> handleSoapFault(SOAPFaultException exception) {
         return new ResponseEntity<>("Message: " + exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handeIllegalArgumentException(IllegalArgumentException exception) {
+        return new ResponseEntity<>("Message: " + exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<String> handleNumberFormatException(NumberFormatException exception) {
+        return new ResponseEntity<>("Message: " + exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

@@ -5,39 +5,49 @@ import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api")
+@Validated
 public class MathController {
     private final Logger log = LogManager.getLogger(MathController.class);
 
-    private final MathServiceService service;
-    private final ObjectFactory objectFactory;
+    @Autowired
+    private MathServiceService service;
 
     @Autowired
-    public MathController(@Value("${soap.wsdlLocation}") String wsdlLocation, MathServiceService service) throws MalformedURLException {
-        this.service = new MathServiceService(new URL(wsdlLocation));
-        this.objectFactory = new ObjectFactory();
-    }
+    private ObjectFactory objectFactory;
 
     @GetMapping("/calc")
-    public SolutionQuadraticEducation getResult(@RequestParam double a,
-                                                @RequestParam double b,
-                                                @RequestParam double c) throws QuadraticEducationException {
-        QuadraticEducationRequestPayLoad payLoad = objectFactory.createQuadraticEducationRequestPayLoad();
-        payLoad.setA(a);
-        payLoad.setB(b);
-        payLoad.setC(c);
+    public SolutionQuadraticEducation getResult(@RequestParam(name = "a") String a,
+                                                @RequestParam(name = "b") String b,
+                                                @RequestParam(name = "c") String c) throws QuadraticEducationException, ParseException {
 
-        log.info("Start processing request with params: a = {}, b = {}, c = {}", payLoad.getA(), payLoad.getB(), payLoad.getC());
+        if (a.isEmpty() || b.isEmpty() || c.isEmpty()) {
+            throw new IllegalArgumentException("Request params can't be NaN");
+        }
+
+        QuadraticEducationRequestPayLoad payLoad = objectFactory.createQuadraticEducationRequestPayLoad();
+        NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
+        try {
+            payLoad.setA(format.parse(a).doubleValue());
+            payLoad.setB(format.parse(b).doubleValue());
+            payLoad.setC(format.parse(c).doubleValue());
+        } catch (ParseException ex) {
+            log.error("Wrong request parameters: a - {}, b - {}, c - {}", a, b, c);
+            throw new NumberFormatException("One or more parameters aren't numbers");
+        }
+
+        log.info("Start processing request with params: a - {}, b - {}, c - {}", payLoad.getA(), payLoad.getB(), payLoad.getC());
 
         return service.getMathServiceSoap11().getSolveQuadraticEducation(payLoad);
 
