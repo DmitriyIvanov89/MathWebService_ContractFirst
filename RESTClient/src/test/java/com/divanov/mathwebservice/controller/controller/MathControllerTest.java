@@ -40,7 +40,7 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnCorrectResponse() throws QuadraticEducationException, ParseException {
+    void shouldReturnCorrectResponse() throws QuadraticEducationException {
         SolutionQuadraticEducation actualResponse = controller.getResult("2", "-3", "1");
 
         assertAll(
@@ -52,7 +52,7 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnResponseWithOneRoot() throws QuadraticEducationException, ParseException {
+    void shouldReturnResponseWithOneRoot() throws QuadraticEducationException {
         SolutionQuadraticEducation actualResponse = controller.getResult("1", "-6", "9");
 
         assertAll(
@@ -95,7 +95,7 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationException, ParseException {
+    void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationException {
         SolutionQuadraticEducation actualResponse = controller.getResult("2", "-3", "0");
 
         assertAll(
@@ -107,7 +107,7 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationException, ParseException {
+    void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationException {
         SolutionQuadraticEducation actualResponse = controller.getResult("4", "0", "-9");
 
         assertAll(

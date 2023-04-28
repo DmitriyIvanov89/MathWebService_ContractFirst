@@ -17,7 +17,6 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/api")
-@Validated
 public class MathController {
     private final Logger log = LogManager.getLogger(MathController.class);
 
@@ -30,7 +29,7 @@ public class MathController {
     @GetMapping("/calc")
     public SolutionQuadraticEducation getResult(@RequestParam(name = "a") String a,
                                                 @RequestParam(name = "b") String b,
-                                                @RequestParam(name = "c") String c) throws QuadraticEducationException, ParseException {
+                                                @RequestParam(name = "c") String c) throws QuadraticEducationException {
 
         if (a.isEmpty() || b.isEmpty() || c.isEmpty()) {
             throw new IllegalArgumentException("Request params can't be NaN");
