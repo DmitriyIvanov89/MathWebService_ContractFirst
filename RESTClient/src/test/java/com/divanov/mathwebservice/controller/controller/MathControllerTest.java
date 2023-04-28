@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
+import java.text.ParseException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -19,14 +21,18 @@ class MathControllerTest {
     /**
      * Only if SoapService is running the tests are successful
      * Need to mock SoapService
+     * <p>
+     * Need to add tests with throw parse exception
      */
 
-    private ObjectFactory objectFactory;
     private static final String EXCEPTION_MESSAGE_NO_REAL_ROOT = "Client received SOAP Fault from server: The education has no real roots Please see the server log to find more detail regarding exact cause of the failure.";
     private static final String EXCEPTION_MESSAGE_COEFF_A = "Client received SOAP Fault from server: The leading coefficient can't be equals 0 Please see the server log to find more detail regarding exact cause of the failure.";
 
     @Autowired
-    MathController controller;
+    private MathController controller;
+
+    @Autowired
+    private ObjectFactory objectFactory;
 
     @BeforeEach
     void init() {
@@ -34,8 +40,8 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnCorrectResponse() throws QuadraticEducationException {
-        SolutionQuadraticEducation actualResponse = controller.getResult(2, -3, 1);
+    void shouldReturnCorrectResponse() throws QuadraticEducationException, ParseException {
+        SolutionQuadraticEducation actualResponse = controller.getResult("2", "-3", "1");
 
         assertAll(
                 () -> assertEquals("2.0x^2 + -3.0x + 1.0 = 0", actualResponse.getFormula()),
@@ -46,8 +52,8 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnResponseWithOneRoot() throws QuadraticEducationException {
-        SolutionQuadraticEducation actualResponse = controller.getResult(1, -6, 9);
+    void shouldReturnResponseWithOneRoot() throws QuadraticEducationException, ParseException {
+        SolutionQuadraticEducation actualResponse = controller.getResult("1", "-6", "9");
 
         assertAll(
                 () -> assertEquals("1.0x^2 + -6.0x + 9.0 = 0", actualResponse.getFormula()),
@@ -60,7 +66,7 @@ class MathControllerTest {
     @Test
     void shouldReturnExceptionsWithDetails() {
         QuadraticEducationException actualException = assertThrows(
-                QuadraticEducationException.class, () -> controller.getResult(5, 3, 7)
+                QuadraticEducationException.class, () -> controller.getResult("5", "3", "7")
         );
 
         assertAll(
@@ -73,7 +79,7 @@ class MathControllerTest {
     @Test
     void shouldReturnNoRealRootsException() {
         SOAPFaultException actualException = assertThrows(
-                SOAPFaultException.class, () -> controller.getResult(4, 0, 30)
+                SOAPFaultException.class, () -> controller.getResult("4", "0", "30")
         );
 
         assertEquals(EXCEPTION_MESSAGE_NO_REAL_ROOT, actualException.getMessage());
@@ -82,15 +88,15 @@ class MathControllerTest {
     @Test
     void shouldReturnInvalidADataException() {
         SOAPFaultException actualException = assertThrows(
-                SOAPFaultException.class, () -> controller.getResult(0, -3, 1)
+                SOAPFaultException.class, () -> controller.getResult("0", "-3", "1")
         );
 
         assertEquals(EXCEPTION_MESSAGE_COEFF_A, actualException.getMessage());
     }
 
     @Test
-    void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationException {
-        SolutionQuadraticEducation actualResponse = controller.getResult(2, -3, 0);
+    void shouldReturnResponseIncompleteEducationWhenCEqualsZero() throws QuadraticEducationException, ParseException {
+        SolutionQuadraticEducation actualResponse = controller.getResult("2", "-3", "0");
 
         assertAll(
                 () -> assertEquals("2.0x^2 + -3.0x = 0", actualResponse.getFormula()),
@@ -101,8 +107,8 @@ class MathControllerTest {
     }
 
     @Test
-    void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationException {
-        SolutionQuadraticEducation actualResponse = controller.getResult(4, 0, -9);
+    void shouldReturnResponseIncompleteEducationWhenBEqualsZero() throws QuadraticEducationException, ParseException {
+        SolutionQuadraticEducation actualResponse = controller.getResult("4", "0", "-9");
 
         assertAll(
                 () -> assertEquals("4.0x^2 + -9.0 = 0", actualResponse.getFormula()),
