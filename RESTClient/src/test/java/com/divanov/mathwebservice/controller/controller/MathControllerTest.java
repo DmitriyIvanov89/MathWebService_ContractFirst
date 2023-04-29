@@ -11,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
-import java.text.ParseException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
