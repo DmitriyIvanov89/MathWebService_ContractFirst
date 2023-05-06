@@ -19,11 +19,15 @@ import java.util.Locale;
 public class MathController {
     private final Logger log = LogManager.getLogger(MathController.class);
 
-    @Autowired
-    private MathServiceService service;
+    private final MathServiceService service;
+
+    private final ObjectFactory objectFactory;
 
     @Autowired
-    private ObjectFactory objectFactory;
+    public MathController(MathServiceService service) {
+        this.service = service;
+        objectFactory = new ObjectFactory();
+    }
 
     @GetMapping("/calc")
     public SolutionQuadraticEducation getResult(@RequestParam(name = "a") String a,

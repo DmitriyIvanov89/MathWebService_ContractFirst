@@ -5,87 +5,65 @@ import com.divanov.mathwebservice.gen.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.web.servlet.function.ServerResponse.status;
 
-//@RunWith(MockitoJUnitRunner.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MathWSControllerSecondTest {
 
     @Autowired
-    private ObjectFactory objectFactory;
-
-    @Autowired
-    private MathController controller;
-
-    @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    @Autowired
+    private ObjectFactory objectFactory;
+
+    @MockBean
     private MathServiceService mathServiceService;
+
+    private MathController controller;
 
     private MathService mathServiceMock;
 
+
     @Before
     public void init() {
-        MockitoAnnotations.openMocks(this);
         objectFactory = new ObjectFactory();
         mathServiceMock = Mockito.mock(MathService.class);
-    }
-
-    @Test
-    public void shouldReturnMathServiceMock() throws Exception {
         when(mathServiceService.getMathServiceSoap11()).thenReturn(mathServiceMock);
-        MathService mathService = mathServiceService.getMathServiceSoap11();
-
-        assertNotNull(mathService);
-    }
-
-    @Test
-    public void shouldReturnCorrectResponse() throws QuadraticEducationException {
-        QuadraticEducationRequestPayLoad payLoad = createPayLoad(2, -3, 1);
-        SolutionQuadraticEducation solution = createSolution("2.0x^2 + -3.0x + 1.0 = 0", 1.0, 1.0, 0.5);
-
-        when(mathServiceMock.getSolveQuadraticEducation(payLoad)).thenReturn(solution);
-        when(mathServiceService.getMathServiceSoap11()).thenReturn(mathServiceMock);
-
-        SolutionQuadraticEducation actualResponse = mathServiceService.getMathServiceSoap11().getSolveQuadraticEducation(payLoad);
-
-        assertAll(
-                () -> assertEquals(solution.getFormula(), actualResponse.getFormula()),
-                () -> assertEquals(solution.getDiscriminant(), actualResponse.getDiscriminant()),
-                () -> assertEquals(solution.getX1(), actualResponse.getX1()),
-                () -> assertEquals(solution.getX2(), actualResponse.getX2())
-        );
+        controller = new MathController(mathServiceService);
     }
 
     @Test
     public void shouldReturnCorrectResponseFromController() throws Exception {
         QuadraticEducationRequestPayLoad payLoad = createPayLoad(2, -3, 1);
         SolutionQuadraticEducation solution = createSolution("2.0x^2 + -3.0x + 1.0 = 0", 1.0, 1.0, 0.5);
-
+        
         when(mathServiceMock.getSolveQuadraticEducation(payLoad)).thenReturn(solution);
-        when(mathServiceService.getMathServiceSoap11()).thenReturn(mathServiceMock);
 
-        SolutionQuadraticEducation actualResponse = mathServiceService.getMathServiceSoap11().getSolveQuadraticEducation(payLoad);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/calc?a=2&b=-3&c=1")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/calc")
+                        .param("a", "2")
+                        .param("b", "-3")
+                        .param("c", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
