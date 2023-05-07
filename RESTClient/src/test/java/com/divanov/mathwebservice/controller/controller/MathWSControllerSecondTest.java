@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.xml.xpath.XPath;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.web.servlet.function.ServerResponse.status;
@@ -60,11 +62,33 @@ public class MathWSControllerSecondTest {
 
         when(mathServiceMock.getSolveQuadraticEducation(payLoad)).thenReturn(solution);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/calc")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/calc")
+                        .contentType(MediaType.TEXT_XML)
                         .param("a", "2")
                         .param("b", "-3")
-                        .param("c", "1"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                        .param("c", "1")
+                        .content("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:math=\"http://math.ws.divanov\">\n" +
+                                "    <soapenv:Header/>\n" +
+                                "    <soapenv:Body>\n" +
+                                "        <math:getSolveQuadraticEducationRequest>\n" +
+                                "            <math:a>2</math:a>\n" +
+                                "            <math:b>-3</math:b>\n" +
+                                "            <math:c>1</math:c>\n" +
+                                "        </math:getSolveQuadraticEducationRequest>\n" +
+                                "    </soapenv:Body>\n" +
+                                "</soapenv:Envelope>"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().xml("<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+                        "    <SOAP-ENV:Header/>\n" +
+                        "    <SOAP-ENV:Body>\n" +
+                        "        <ns2:getSolveQuadraticEducationResponse xmlns:ns2=\"http://math.ws.divanov\">\n" +
+                        "            <ns2:formula>2.0x^2 + -3.0x + 1.0 = 0</ns2:formula>\n" +
+                        "            <ns2:discriminant>1.0</ns2:discriminant>\n" +
+                        "            <ns2:x1>1.0</ns2:x1>\n" +
+                        "            <ns2:x2>0.5</ns2:x2>\n" +
+                        "        </ns2:getSolveQuadraticEducationResponse>\n" +
+                        "    </SOAP-ENV:Body>\n" +
+                        "</SOAP-ENV:Envelope>"));
     }
 
 
