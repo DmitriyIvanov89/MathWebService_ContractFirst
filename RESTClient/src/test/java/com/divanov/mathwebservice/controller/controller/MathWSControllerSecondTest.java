@@ -57,7 +57,7 @@ public class MathWSControllerSecondTest {
     public void shouldReturnCorrectResponseFromController() throws Exception {
         QuadraticEducationRequestPayLoad payLoad = createPayLoad(2, -3, 1);
         SolutionQuadraticEducation solution = createSolution("2.0x^2 + -3.0x + 1.0 = 0", 1.0, 1.0, 0.5);
-        
+
         when(mathServiceMock.getSolveQuadraticEducation(payLoad)).thenReturn(solution);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/calc")
