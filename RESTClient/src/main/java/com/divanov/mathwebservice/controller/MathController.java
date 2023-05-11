@@ -5,30 +5,33 @@ import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class MathController {
     private final Logger log = LogManager.getLogger(MathController.class);
 
-    private final MathServiceService service;
-
     private final ObjectFactory objectFactory;
+    private final MathServiceService service;
+    private final MathService port;
 
     @Autowired
     public MathController(MathServiceService service) {
         this.service = service;
+        port = service.getMathServiceSoap11();
         objectFactory = new ObjectFactory();
     }
 
-    @PostMapping(value = "/calc")
-    @ResponseBody
+    @GetMapping(value = "/calc")
     public SolutionQuadraticEducation getResult(@RequestParam(name = "a") String a,
                                                 @RequestParam(name = "b") String b,
                                                 @RequestParam(name = "c") String c) throws QuadraticEducationException {
@@ -50,7 +53,17 @@ public class MathController {
 
         log.info("Start processing request with params: a - {}, b - {}, c - {}", payLoad.getA(), payLoad.getB(), payLoad.getC());
 
-        return service.getMathServiceSoap11().getSolveQuadraticEducation(payLoad);
+        SolutionQuadraticEducation response = port.getSolveQuadraticEducation(payLoad);
 
+        if (response == null) {
+//            log.error("Response is nan");
+            throw new RuntimeException("Response is Nan");
+        }
+
+        return response;
+    }
+
+    public MathServiceService getService() {
+        return service;
     }
 }
