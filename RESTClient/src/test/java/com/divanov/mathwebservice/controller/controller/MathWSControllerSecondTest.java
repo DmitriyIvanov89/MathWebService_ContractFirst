@@ -6,7 +6,11 @@ import com.divanov.mathwebservice.gen.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,39 +20,43 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@ExtendWith(SpringExtension.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class MathWSControllerSecondTest {
-    @Autowired
-    private ObjectFactory objectFactory;
     @MockBean
     private MathServiceService mathServiceServiceMock;
-    private MathService mathServiceMock;
-    private MockMvc mockMvc;
     private MathController controller;
+    private ObjectFactory objectFactory;
+    private MockMvc mockMvc;
 
     @BeforeEach
-    public void init() {
-        mathServiceServiceMock = Mockito.mock(MathServiceService.class);
-        mathServiceMock = mathServiceServiceMock.getMathServiceSoap11();
+    void init() {
+        objectFactory = new ObjectFactory();
         controller = new MathController(mathServiceServiceMock);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
     @Test
     public void shouldReturnCorrectResponseFromController() throws Exception {
-        QuadraticEducationRequestPayLoad requestPayLoad = createPayLoad(2, -3, 1);
         SolutionQuadraticEducation expectedResponse = createSolution("2.0x^2 + -3.0x + 1.0 = 0", 1.0, 1.0, 0.5);
 
-        Mockito.doReturn(expectedResponse)
-                .when(mathServiceServiceMock.getMathServiceSoap11())
-                .getSolveQuadraticEducation(requestPayLoad);
+        Mockito.when(mathServiceServiceMock.getMathServiceSoap11()).thenReturn(new MathService() {
+            @Override
+            public SolutionQuadraticEducation getSolveQuadraticEducation(QuadraticEducationRequestPayLoad getSolveQuadraticEducationRequest) throws QuadraticEducationException {
+                return expectedResponse;
+            }
+        });
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/calc")
                         .param("a", "2")
                         .param("b", "-3")
                         .param("c", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
+        System.out.println("sdkgj");
     }
 
     private QuadraticEducationRequestPayLoad createPayLoad(double a, double b, double c) {

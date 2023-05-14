@@ -2,7 +2,6 @@ package com.divanov.mathwebservice.config;
 
 
 import com.divanov.mathwebservice.gen.MathServiceService;
-import com.divanov.mathwebservice.gen.ObjectFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +18,5 @@ public class SoapConfig {
             throw new IllegalArgumentException("wsdlLocation cannot be null or empty");
         }
         return new MathServiceService(new URL(wsdlLocation));
-    }
-
-    @Bean
-    public ObjectFactory objectFactory() {
-        return new ObjectFactory();
     }
 }
