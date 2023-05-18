@@ -115,13 +115,4 @@ class MathWSEndpointTest {
         payLoad.setC(c);
         return payLoad;
     }
-
-    private SolutionQuadraticEducation createResponse(String formula, double discriminant, double x1, Double x2) {
-        SolutionQuadraticEducation response = objectFactory.createSolutionQuadraticEducation();
-        response.setFormula(formula);
-        response.setDiscriminant(discriminant);
-        response.setX1(x1);
-        response.setX2(x2);
-        return response;
-    }
 }

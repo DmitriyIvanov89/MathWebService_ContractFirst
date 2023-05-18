@@ -5,6 +5,7 @@ import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.NumberFormat;
@@ -16,7 +17,7 @@ import java.util.Locale;
 public class MathController {
     private final Logger log = LogManager.getLogger(MathController.class);
     private final ObjectFactory objectFactory;
-    private MathServiceService service;
+    private final MathServiceService service;
 
     @Autowired
     public MathController(MathServiceService service) {
@@ -25,6 +26,7 @@ public class MathController {
     }
 
     @GetMapping(value = "/calc")
+    @ResponseBody
     public SolutionQuadraticEducation getResult(@RequestParam(name = "a") String a,
                                                 @RequestParam(name = "b") String b,
                                                 @RequestParam(name = "c") String c) throws QuadraticEducationException {
