@@ -10,7 +10,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.xml.soap.SOAPFault;
+import javax.xml.ws.soap.SOAPFaultException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -20,6 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = MathController.class)
 public class MathWSControllerSecondTest {
+
+    private static final String EXCEPTION_MESSAGE_NO_REAL_ROOT = "Client received SOAP Fault from server: The education has no real roots Please see the server log to find more detail regarding exact cause of the failure.";
+    private static final String EXCEPTION_MESSAGE_COEFF_A = "Client received SOAP Fault from server: The leading coefficient can't be equals 0 Please see the server log to find more detail regarding exact cause of the failure.";
     @Autowired
     MockMvc mockMvc;
     @MockBean
@@ -66,9 +73,33 @@ public class MathWSControllerSecondTest {
     }
 
     @Test
-    public void getResult_whenDiscriminantLessZero_thenThrowQuadraticEducationException() {
+    public void getResult_whenDiscriminantLessZero_thenThrowQuadraticEducationException() throws Exception {
+        String message = "Discriminant can't be less than 0";
+        ErrorResponse expectedError = objectFactory.createErrorResponse();
+        expectedError.setFormula("5.0x^2 + 3.0x + 7.0 = 0");
+        expectedError.setDiscriminant(-131.0);
 
+        when(mathServiceServiceMock.getMathServiceSoap11())
+                .thenReturn(getSolveQuadraticEducationRequest -> {
+                    throw new QuadraticEducationException(message, expectedError);
+                });
 
+        mockMvc.perform(get("/api/calc")
+                        .param("a", "5")
+                        .param("b", "3")
+                        .param("c", "7"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.formula").value(expectedError.getFormula()))
+                .andExpect(jsonPath("$.discriminant").value(expectedError.getDiscriminant()));
+    }
+
+    @Test
+    public void getResult_whenParamAEqualsZero_thenThrowException() {
+
+        when(mathServiceServiceMock.getMathServiceSoap11())
+                .thenReturn(getSolveQuadraticEducationRequest -> {
+                    throw new RuntimeException(EXCEPTION_MESSAGE_COEFF_A);
+                });
     }
 
     private QuadraticEducationRequestPayLoad createPayLoad(double a, double b, double c) {
