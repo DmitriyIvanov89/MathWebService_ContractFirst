@@ -5,7 +5,6 @@ import com.divanov.mathwebservice.gen.SolutionQuadraticEducation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.NumberFormat;

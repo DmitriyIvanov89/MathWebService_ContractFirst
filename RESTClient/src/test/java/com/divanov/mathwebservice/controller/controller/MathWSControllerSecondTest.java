@@ -10,14 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.xml.soap.SOAPFault;
-import javax.xml.ws.soap.SOAPFaultException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,13 +19,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = MathController.class)
 public class MathWSControllerSecondTest {
 
-    private static final String EXCEPTION_MESSAGE_NO_REAL_ROOT = "Client received SOAP Fault from server: The education has no real roots Please see the server log to find more detail regarding exact cause of the failure.";
-    private static final String EXCEPTION_MESSAGE_COEFF_A = "Client received SOAP Fault from server: The leading coefficient can't be equals 0 Please see the server log to find more detail regarding exact cause of the failure.";
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
     @MockBean
-    MathServiceService mathServiceServiceMock;
-    ObjectFactory objectFactory;
+    private MathServiceService mathServiceServiceMock;
+    private ObjectFactory objectFactory;
 
     @BeforeEach
     void init() {
@@ -90,24 +82,8 @@ public class MathWSControllerSecondTest {
                         .param("c", "7"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.formula").value(expectedError.getFormula()))
-                .andExpect(jsonPath("$.discriminant").value(expectedError.getDiscriminant()));
-    }
-
-    @Test
-    public void getResult_whenParamAEqualsZero_thenThrowException() {
-
-        when(mathServiceServiceMock.getMathServiceSoap11())
-                .thenReturn(getSolveQuadraticEducationRequest -> {
-                    throw new RuntimeException(EXCEPTION_MESSAGE_COEFF_A);
-                });
-    }
-
-    private QuadraticEducationRequestPayLoad createPayLoad(double a, double b, double c) {
-        QuadraticEducationRequestPayLoad payLoad = objectFactory.createQuadraticEducationRequestPayLoad();
-        payLoad.setA(a);
-        payLoad.setB(b);
-        payLoad.setC(c);
-        return payLoad;
+                .andExpect(jsonPath("$.discriminant").value(expectedError.getDiscriminant()))
+                .andDo(print());
     }
 
     private SolutionQuadraticEducation createSolution(String formula, double discriminant, double x1, Double x2) {
