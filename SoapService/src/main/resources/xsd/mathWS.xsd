@@ -25,7 +25,6 @@
 
     <xs:complexType name="errorFault">
         <xs:sequence>
-            <xs:element name="message" type="xs:string"/>
             <xs:element name="formula" type="xs:string"/>
             <xs:element name="discriminant" type="xs:double"/>
         </xs:sequence>
