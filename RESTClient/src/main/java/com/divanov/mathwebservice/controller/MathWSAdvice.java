@@ -2,6 +2,7 @@ package com.divanov.mathwebservice.controller;
 
 import com.divanov.mathwebservice.gen.ErrorResponse;
 import com.divanov.mathwebservice.gen.QuadraticEducationException;
+import com.divanov.mathwebservice.model.QuadraticEducationErrorResponseDetail;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,12 +14,12 @@ import javax.xml.ws.soap.SOAPFaultException;
 public class MathWSAdvice {
 
     @ExceptionHandler(QuadraticEducationException.class)
-    public ResponseEntity<ErrorResponse> handleQuadraticEducationException(QuadraticEducationException exception) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(exception.getMessage());
-        errorResponse.setFormula(exception.getFaultInfo().getFormula());
-        errorResponse.setDiscriminant(exception.getFaultInfo().getDiscriminant());
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<QuadraticEducationErrorResponseDetail> handleQuadraticEducationException(QuadraticEducationException exception) {
+        QuadraticEducationErrorResponseDetail detail = new QuadraticEducationErrorResponseDetail();
+        detail.setMessage(exception.getMessage());
+        detail.setFormula(exception.getFaultInfo().getFormula());
+        detail.setDiscriminant(String.valueOf(exception.getFaultInfo().getDiscriminant()));
+        return new ResponseEntity<>(detail, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(SOAPFaultException.class)

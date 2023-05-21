@@ -22,7 +22,6 @@ public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMapping
     protected void customizeFault(Object endpoint, Exception ex, SoapFault fault) {
         ErrorResponse errorResponse = new ErrorResponse();
         if (ex instanceof QuadraticEducationException) {
-            errorResponse.setMessage(ex.getMessage());
             errorResponse.setFormula(((QuadraticEducationException) ex).getFormula());
             errorResponse.setDiscriminant(((QuadraticEducationException) ex).getDiscriminant());
         }
