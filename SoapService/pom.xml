@@ -54,10 +54,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!--            Чтобы использовать этот плагин для создания docker образа, name должен быть в [a-z0-9]-->
-                    <!--                    <image>-->
-                    <!--                        <name>docker.io/pratikdas/${project.build.finalName}:v3</name>-->
-                    <!--                    </image>-->
                     <layers>
                         <enabled>true</enabled>
                     </layers>
