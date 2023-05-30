@@ -35,7 +35,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>RESTClient</finalName>
+        <finalName>RESTService</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

@@ -8,7 +8,6 @@ build-soap-service:
 	@echo "Starting build soap_service..."
 	cd SoapService/ && ./mvnw clean install
 	$(DOCKER_COMPOSE) build $(SOAP_SERVICE)
-	@echo "Finish build soap_service ..."
 
 run-soap-service:
 	@echo "Starting soap_service ..."
@@ -18,7 +17,6 @@ build-rest-service: wait-for-soap-service
 	@echo "Starting build rest_service..."
 	cd RESTClient/ && ./mvnw clean install
 	$(DOCKER_COMPOSE) build $(REST_SERVICE)
-	@echo "Finish build rest_service..."
 
 run-rest-service:
 	@echo "Starting soap_service ..."
@@ -34,32 +32,36 @@ clean:
 	cd SoapService/ && ./mvnw clean
 	cd RESTClient/ && ./mvnw clean
 
-stop-running-services:
+stop:
 	$(DOCKER_COMPOSE) stop
 
-start-builded-services:
+start:
 	$(DOCKER_COMPOSE) start
 
-build-local-services: build-soap-service-local run-soap-service-local build-rest-service-local run-rest-service-local
+all-local: build-soap-service-local run-soap-local build-rest-service-local run-rest-local
 
 build-soap-service-local:
 	@echo "Starting build soap_service..."
 	cd SoapService/ && ./mvnw clean install
 
-run-soap-service-local:
-	cd SoapService/ && nohup java -jar target/SoapService.jar &
+run-soap-local:
+	cd SoapService/ && nohup java -jar target/SoapService.jar > target/nohup.out &
 
 build-rest-service-local: wait-for-soap-service
 	@echo "Starting build rest_service..."
 	cd RESTClient/ && ./mvnw clean install
 
-run-rest-service-local:
-	cd RESTClient/ && nohup java -jar target/RESTClient.jar &
+run-rest-local:
+	cd RESTClient/ && nohup java -jar target/RESTService.jar > target/nohup.out &
 
-clean-services:
+stop-local:
+	pkill -f RESTService.jar
+	pkill -f SoapService.jar
+
+clean-local:
 	@echo "Starting clean soap_service..."
 	cd SoapService/ && ./mvnw clean
 	@echo "Starting clean rest_service..."
 	cd RESTClient/ && ./mvnw clean
 
-.PHONY: all build-soap-service run-soap-service build-rest-service run-rest-service wait-for-soap-service clean stop-running-services start-builded-services clean-services build-local-services build-soap-service-local run-soap-service-local build-rest-service-local run-rest-service-local
+.PHONY: all build-soap-service run-soap-service build-rest-service run-rest-service wait-for-soap-service clean stop start  all-local build-soap-service-local build-rest-service-local run-rest-local clean-local stop-local
