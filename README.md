@@ -1,70 +1,87 @@
-# Тестовое задание*
+# Test task*
 
-## 1 часть
+## Part 1
 
-Разработать SOAP сервис "Решение квадратного уравнения" вида A*X^2+B*X+C=0  через дискриминант.
-В запросе передаются переменные A, B, C, например:
+Develop a SOAP service "Quadratic Equation Solver" of the form a*x^2+b*x+c=0 using the discriminant.
+The variables a, b, c are passed in the request, for example:
 
 	<request>
-		<a>3</a>
-		<b>4</b>
-		<c>1</c>
+        <a>3</a>
+        <b>4</b>
+        <c>1</c>
 	</request>
 
-В ответ сервис возвращает общий вид уравнения и найденные корни, например:
+The service returns the general form of the equation and the roots found, for example:
 
 	<response>
-		<formula>3x^2+4x+1=0</formula>
-		<D>0</D>
-		<x1>0</x1>
-		<x2>0</x2>
+        <formula>3x^2+4x+1=0</formula>
+        <D>0</D>
+        <x1>0</x1>
+        <x2>0</x2>
 	</response>
 
-В случае если дискриминант меньше нуля создается исключение.
-У сервиса должно автоматически генерироваться описание в формате wsdl с xsd-схемами.
-В запросе элементы a,b,c - являются обязательными.
-В ответе элемент "x2" может отсутствовать если дискриминант равен 0.
-В случае исключения ответ с ошибкой должен содержать помимо сообщения об ошибке, элементы "formula, D".
+In case the discriminant is less than zero, an exception is thrown.
+The service should automatically generate a description in the wsdl format with xsd schemas.
+The elements a, b, c in the request are mandatory.
+The element "x2" may be absent in the response if the discriminant is equal to 0.
+In case of an exception, the error response should contain, in addition to the error message, the elements "formula, D".
 
-## 2 часть
+## Part 2
 
-Разработать веб-сервис, который при обращении на url:
+Develop a web service that, when accessed at url:
 
 	http://localhost:port/api/calc/?a=3&b=4&c=1 обращается к первому сервису за решением.
 
-SOAP клиент для сервиса создается, используя контракт wsdl из сервиса в 1 части.
-Ответ на запрос в формате JSON.
+A SOAP client for the service is created using the wsdl contract from the service in Part 1.
+The response to the request is in JSON format.
 
-Требования:
+Requirements:
 
-	1 проект = 2 модуля
+    1 project = 2 modules
 
-	maven/gradle
+    maven/gradle
 
-	Java8+, любой сервер приложений WildFly, Tomcat, etc..
+    Java8+, any application server WildFly, Tomcat, etc..
 
-	инструкция по сборке и запуску
+    build and run instructions
 
-плюсом будет:
+bonus:
 
-	наличие тестов, docker + docker-compose
+    presence of tests, docker + docker-compose
 
-*-грамматика и описание от источника
+*-grammar and description from the source
 
 
-## Деплой
+# Deployment
 
-Процесс развертывания максимально прост: Необходимое программное обеспечение:
+The deployment process is as simple as possible. The necessary software is:
 
-- terminal for running bash scripts
+    terminal for executing commands;
 
-- docker
+    docker;
 
-- docker-compose
+    docker-compose
 
-чтобы развернуть приложение необходимо перейти в корневую директорию 
-проекта и запустить команду :
+Building, running, and stopping the application is done using the make utility.
 
-$ make all
+Goals:
+
+    all - start the Soap and Rest services in docker compose;
+
+    stop - stop the services running in docker compose;
+
+    start - start the services(images) in docker compose;
+
+    clean - remove containers in docker compose;
+
+    all-local - build and start the services;
+
+    stop-local - stop the services;
+
+    clean-locl - clean the working directory of build files.
+
+Executing goals from Makefile:
+
+    $ make <goal>
 
 That's all.
