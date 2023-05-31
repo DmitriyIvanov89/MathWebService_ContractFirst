@@ -1,0 +1,17 @@
+project.basedir
+xjc -d src/main/java -p com.divanov.mathwebservice.service.gen ./src/main/resources/xsd/mathWS.xsd -b ./src/main/resources/jaxb/mathWS.xjb
+
+Warning!!! To successfully pass the tests, it is necessary to override equals() and hashCode() methods in the classes:
+SolutionQuadraticEducation, ErrorResponse
+
+testing service:
+
+curl --header "content-type: text/xml" -d @./src/main/resources/etalons/request_correct.xml http://localhost:8080/services/MathServiceEndpoint
+
+curl --header "content-type: text/xml" -d @./src/main/resources/etalons/request_errorValidationSchema.xml http://localhost:8080/services/MathServiceEndpoint
+
+curl --header "content-type: text/xml" -d @./src/main/resources/etalons/request_invalid_coef_a.xml http://localhost:8080/services/MathServiceEndpoint
+
+curl --header "content-type: text/xml" -d @./src/main/resources/etalons/request_no_solution.xml http://localhost:8080/services/MathServiceEndpoint
+
+curl --header "content-type: text/xml" -d @./src/main/resources/etalons/request_quadraticEducationException.xml http://localhost:8080/services/MathServiceEndpoint

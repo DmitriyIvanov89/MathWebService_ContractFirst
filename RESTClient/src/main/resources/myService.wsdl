@@ -1,0 +1,70 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://math.ws.divanov"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://math.ws.divanov"
+                  targetNamespace="http://math.ws.divanov">
+    <wsdl:types>
+        <xs:schema xmlns:ns="http://math.ws.divanov" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   elementFormDefault="qualified" targetNamespace="http://math.ws.divanov">
+            <xs:element name="getSolveQuadraticEducationRequest" type="ns:quadraticEducationRequestPayLoad"/>
+            <xs:element name="getSolveQuadraticEducationResponse" type="ns:solutionQuadraticEducation"/>
+            <xs:element name="quadraticEducationException" type="ns:errorFault"/>
+            <xs:complexType name="quadraticEducationRequestPayLoad">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="1" name="a" type="xs:double"/>
+                    <xs:element maxOccurs="1" minOccurs="1" name="b" type="xs:double"/>
+                    <xs:element maxOccurs="1" minOccurs="1" name="c" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="solutionQuadraticEducation">
+                <xs:sequence>
+                    <xs:element maxOccurs="1" minOccurs="1" name="formula" type="xs:string"/>
+                    <xs:element maxOccurs="1" minOccurs="1" name="discriminant" type="xs:double"/>
+                    <xs:element maxOccurs="1" minOccurs="1" name="x1" type="xs:double"/>
+                    <xs:element maxOccurs="1" minOccurs="0" name="x2" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="errorFault">
+                <xs:sequence>
+                    <xs:element name="message" type="xs:string"/>
+                    <xs:element name="formula" type="xs:string"/>
+                    <xs:element name="discriminant" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getSolveQuadraticEducationRequest">
+        <wsdl:part element="tns:getSolveQuadraticEducationRequest" name="getSolveQuadraticEducationRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getSolveQuadraticEducationResponse">
+        <wsdl:part element="tns:getSolveQuadraticEducationResponse"
+                   name="getSolveQuadraticEducationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="quadraticEducationException">
+        <wsdl:part element="tns:quadraticEducationException" name="quadraticEducationException"/>
+    </wsdl:message>
+    <wsdl:portType name="MathService">
+        <wsdl:operation name="getSolveQuadraticEducation">
+            <wsdl:input message="tns:getSolveQuadraticEducationRequest"
+                        name="getSolveQuadraticEducationRequest"/>
+            <wsdl:output message="tns:getSolveQuadraticEducationResponse"
+                         name="getSolveQuadraticEducationResponse"/>
+            <wsdl:fault message="tns:quadraticEducationException" name="quadraticEducationException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MathServiceSoap11" type="tns:MathService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getSolveQuadraticEducation">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getSolveQuadraticEducationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getSolveQuadraticEducationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MathServiceService">
+        <wsdl:port binding="tns:MathServiceSoap11" name="MathServiceSoap11">
+            <soap:address location="http://localhost:8080/services/MathServiceEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

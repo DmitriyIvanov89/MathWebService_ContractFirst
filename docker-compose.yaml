@@ -1,0 +1,17 @@
+version: '3'
+services:
+  soap_service:
+    build: ./SoapService
+    container_name: soap_service
+    ports:
+      - "8080:8080"
+    network_mode: "host"  
+    restart: always
+  rest_service:
+    build: ./RESTClient
+    container_name: rest_service
+    ports:
+      - "9090:9090"
+    depends_on:
+      - soap_service
+    network_mode: "host"

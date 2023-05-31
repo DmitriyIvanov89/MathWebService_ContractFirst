@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:math="http://math.ws.divanov">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <math:getSolveQuadraticEducationRequest>
+            <math:a>5</math:a>
+            <math:b>33</math:b>
+            <math:c>7</math:c>
+        </math:getSolveQuadraticEducationRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
